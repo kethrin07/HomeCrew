@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent: oklch(0.52 0.13 165);
+  --accent-link: oklch(0.46 0.12 165);
+  --accent-dark: oklch(0.36 0.10 165);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #eceef0;
+  color: #14171a;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: var(--accent-link);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--accent-dark);
+}
+
+/* Hatched media placeholder used throughout the design */
+.hatch {
+  background:
+    repeating-linear-gradient(
+      135deg,
+      rgba(20, 23, 26, 0.055) 0 7px,
+      rgba(20, 23, 26, 0) 7px 14px
+    ),
+    oklch(0.945 0.008 250);
+}
+
+/* Before/after range slider */
+.ba-range {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+.ba-range::-webkit-slider-runnable-track {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.7);
+}
+.ba-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid rgba(20, 23, 26, 0.14);
+  box-shadow: 0 2px 10px rgba(20, 23, 26, 0.28);
+  margin-top: -16px;
+}
+.ba-range::-moz-range-track {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.7);
+}
+.ba-range::-moz-range-thumb {
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(20, 23, 26, 0.14);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(20, 23, 26, 0.28);
+}
+
+.balance {
+  text-wrap: balance;
+}
+.pretty {
+  text-wrap: pretty;
+}
