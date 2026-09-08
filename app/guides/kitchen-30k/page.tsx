@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Placeholder } from "@/components/Placeholder";
-import { AskAvaPill } from "@/components/AskAvaPill";
 
 export const metadata: Metadata = {
   title: "What a $30,000 kitchen actually buys you in 2026 — HomeCrew Guides",
@@ -183,7 +182,6 @@ export default function GuidePage() {
         </div>
       </article>
 
-      <AskAvaPill />
       <div className="pb-[34px]" />
     </main>
   );

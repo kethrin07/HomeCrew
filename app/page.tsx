@@ -1,10 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Placeholder } from "@/components/Placeholder";
 import { AvaComposer } from "@/components/AvaComposer";
 import { BeforeAfter } from "@/components/BeforeAfter";
-import { AskAvaPill } from "@/components/AskAvaPill";
 
 const STEPS = [
   {
@@ -56,7 +56,7 @@ const TESTIMONIALS = [
       "I sent one message at 9pm and had two contractors booked for Thursday. That has never happened to me before.",
     name: "Priya N.",
     meta: "Bathroom · Austin",
-    avatar: "oklch(0.88 0.03 165)",
+    img: "/images/priya.png",
   },
   {
     stars: "★★★★★",
@@ -64,7 +64,7 @@ const TESTIMONIALS = [
       "First house, no idea what anything costs. The price bands stopped me getting talked into a $60k kitchen.",
     name: "Marcus T.",
     meta: "Kitchen · Columbus",
-    avatar: "oklch(0.84 0.04 200)",
+    img: "/images/marcus.png",
   },
   {
     stars: "★★★★☆",
@@ -72,7 +72,7 @@ const TESTIMONIALS = [
       "Wanted a human, got one — the agent handed me to a real coordinator when my roof turned out to be structural.",
     name: "Dana R.",
     meta: "Roofing · Portland",
-    avatar: "oklch(0.86 0.04 60)",
+    img: "/images/dana.png",
   },
 ];
 
@@ -238,7 +238,13 @@ export default function HomePage() {
                   {t.quote}
                 </p>
                 <div className="mt-auto flex items-center gap-[10px]">
-                  <div className="h-[30px] w-[30px] rounded-full" style={{ background: t.avatar }} />
+                  <Image
+                    src={t.img}
+                    alt={t.name}
+                    width={30}
+                    height={30}
+                    className="h-[30px] w-[30px] rounded-full object-cover"
+                  />
                   <div>
                     <div className="text-[13px] font-semibold leading-[1.3] text-ink">
                       {t.name}
@@ -319,8 +325,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      <AskAvaPill />
 
       {/* Dark CTA */}
       <section className="bg-ink px-5 py-14 sm:px-8 sm:py-[56px] lg:px-12">

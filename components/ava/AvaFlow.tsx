@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { avaReply, type Message } from "@/lib/ava";
 
@@ -112,7 +113,13 @@ export function AvaFlow({ seed }: { seed?: string }) {
         {/* Panel 1 — chat */}
         <section className="flex flex-col overflow-hidden rounded-[16px] border border-ink/10 bg-white">
           <div className="flex items-center gap-[10px] border-b border-line px-[18px] py-[14px]">
-            <div className="h-6 w-6 rounded-full bg-accent" />
+            <Image
+              src="/images/nora.png"
+              alt="Nora"
+              width={24}
+              height={24}
+              className="h-6 w-6 rounded-full object-cover"
+            />
             <div>
               <div className="text-[13px] font-semibold leading-[1.2] text-ink">Nora</div>
               <div className="mt-[2px] font-mono text-[10px] font-medium leading-[1.2] text-accent-link">

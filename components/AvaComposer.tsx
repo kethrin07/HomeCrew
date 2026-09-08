@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useAvaChat } from "@/lib/ava";
 
@@ -24,7 +25,13 @@ export function AvaComposer() {
   return (
     <div className="max-w-[510px] rounded-[18px] border-[1.5px] border-accent/40 bg-white p-[18px] shadow-composer">
       <div className="mb-[15px] flex items-center gap-[10px]">
-        <div className="h-[30px] w-[30px] flex-none rounded-full bg-accent" />
+        <Image
+          src="/images/nora.png"
+          alt="Nora"
+          width={30}
+          height={30}
+          className="h-[30px] w-[30px] flex-none rounded-full object-cover"
+        />
         <div className="text-[15.5px] font-bold leading-[1.25] tracking-[-.015em] text-ink">
           Nora books your expert appointment
         </div>
