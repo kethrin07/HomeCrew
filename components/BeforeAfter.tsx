@@ -10,9 +10,10 @@ export function BeforeAfter() {
   const [ba, setBa] = useState(52);
 
   return (
-    <section className="flex flex-col gap-[22px] px-8 pb-[66px] sm:px-12">
-      <div className="flex items-baseline gap-[14px]">
-        <h2 className="m-0 text-[38px] font-bold leading-[1.1] tracking-[-.03em] text-ink">
+    <section className="px-5 pb-14 sm:px-8 sm:pb-[66px] lg:px-12">
+      <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-[22px]">
+      <div className="flex flex-wrap items-baseline gap-x-[14px] gap-y-1">
+        <h2 className="m-0 text-[28px] font-bold leading-[1.1] tracking-[-.03em] text-ink sm:text-[34px] lg:text-[38px]">
           Before, and after
         </h2>
         <span className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.1em] text-ink/40">
@@ -21,7 +22,7 @@ export function BeforeAfter() {
       </div>
 
       <div
-        className="relative h-[420px] overflow-hidden rounded-[14px]"
+        className="relative h-[280px] overflow-hidden rounded-[14px] sm:h-[420px]"
         style={{
           background:
             "repeating-linear-gradient(135deg,rgba(20,23,26,.06) 0 8px,rgba(20,23,26,0) 8px 16px),oklch(0.9 0.012 60)",
@@ -53,6 +54,7 @@ export function BeforeAfter() {
           aria-label="Reveal the finished kitchen"
           className="ba-range absolute inset-x-0 bottom-1/2 m-0 w-full cursor-ew-resize"
         />
+      </div>
       </div>
     </section>
   );
