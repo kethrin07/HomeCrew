@@ -1,19 +1,21 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Karla, Oswald } from "next/font/google";
 import "./globals.css";
 import { NoraChat } from "@/components/NoraChat";
 
-const jakarta = Plus_Jakarta_Sans({
+// Humanist body face.
+const karla = Karla({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-jakarta",
+  weight: ["400", "500", "700"],
+  variable: "--font-body",
   display: "swap",
 });
 
-const mono = IBM_Plex_Mono({
+// Condensed uppercase display for headings, buttons, nav and labels.
+const oswald = Oswald({
   subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-mono",
+  weight: ["500", "600", "700"],
+  variable: "--font-display",
   display: "swap",
 });
 
@@ -29,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${jakarta.variable} ${mono.variable} scroll-smooth`}>
+    <html lang="en" className={`${karla.variable} ${oswald.variable} scroll-smooth`}>
       <body className="font-sans">
         {children}
         <NoraChat />

@@ -17,29 +17,23 @@ export function Header({ variant = "default" }: { variant?: "default" | "onDark"
       className={
         onDark
           ? "relative z-10 px-5 py-5 sm:px-8 lg:px-12"
-          : "border-b border-line px-5 py-[18px] sm:px-8 lg:px-12"
+          : "bg-ink px-5 py-[18px] sm:px-8 lg:px-12"
       }
     >
       <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between">
         <div className="flex items-center gap-5 sm:gap-[30px]">
           <Link
             href="/"
-            className={`text-[18px] font-extrabold leading-none tracking-[-.03em] ${
-              onDark ? "text-white hover:text-white" : "text-ink hover:text-ink"
-            }`}
+            className="text-[18px] font-extrabold leading-none tracking-[-.03em] text-white hover:text-white"
           >
             HomeCrew
           </Link>
-          <nav
-            className={`hidden gap-[22px] text-[13.5px] font-medium leading-none md:flex ${
-              onDark ? "text-white/80" : "text-ink/60"
-            }`}
-          >
+          <nav className="hidden gap-[22px] text-[13.5px] font-medium leading-none text-white/75 md:flex">
             {NAV.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
-                className={onDark ? "text-white/80 hover:text-white" : "text-ink/60 hover:text-ink"}
+                className="text-white/75 hover:text-white"
               >
                 {item.label}
               </Link>
@@ -49,19 +43,13 @@ export function Header({ variant = "default" }: { variant?: "default" | "onDark"
         <div className="flex items-center gap-3 sm:gap-4">
           <Link
             href="/ava"
-            className={`hidden text-[13.5px] font-medium leading-none sm:inline ${
-              onDark ? "text-white/80 hover:text-white" : "text-ink/60 hover:text-ink"
-            }`}
+            className="hidden text-[13.5px] font-medium leading-none text-white/75 hover:text-white sm:inline"
           >
             Sign in
           </Link>
           <Link
             href="/ava"
-            className={`rounded-lg px-[17px] py-[10px] text-[13px] font-semibold leading-none ${
-              onDark
-                ? "bg-white text-ink hover:text-ink"
-                : "bg-ink text-white hover:text-white"
-            }`}
+            className="rounded-lg bg-accent px-[17px] py-[10px] text-[13px] font-semibold leading-none text-white hover:text-white"
           >
             Get matched
           </Link>

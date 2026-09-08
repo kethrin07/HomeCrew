@@ -36,7 +36,7 @@ function PanelShell({ children }: { children: React.ReactNode }) {
  * Search `TODO(elevenlabs)` / `TODO(agent)` to connect them.
  */
 export function NoraChat() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<Mode>("home");
   const [msgs, setMsgs] = useState<Msg[]>([{ role: "nora", text: GREETING }]);
   const [input, setInput] = useState("");
@@ -112,7 +112,7 @@ export function NoraChat() {
         <button
           onClick={() => setOpen(true)}
           aria-label="Talk to Nora"
-          className="flex items-center gap-[11px] rounded-full bg-ink py-[10px] pl-3 pr-[18px] shadow-pill ring-1 ring-white/10"
+          className="flex items-center gap-[11px] rounded-full bg-olive-dark py-[10px] pl-3 pr-[18px] shadow-pill ring-1 ring-white/10"
         >
           <Image
             src="/images/nora.png"
@@ -203,7 +203,7 @@ export function NoraChat() {
       ) : (
         <PanelShell>
           {/* Header */}
-          <div className="flex items-center gap-2.5 bg-ink px-3.5 py-3">
+          <div className="flex items-center gap-2.5 bg-olive-dark px-3.5 py-3">
             <button
               onClick={() => setMode("home")}
               aria-label="Back"
@@ -221,7 +221,7 @@ export function NoraChat() {
                 height={34}
                 className="h-[34px] w-[34px] rounded-full object-cover"
               />
-              <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-ink bg-accent" />
+              <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-olive-dark bg-accent-soft" />
             </div>
             <div className="flex-1">
               <div className="text-[14px] font-semibold leading-tight text-white">Nora</div>
@@ -255,8 +255,8 @@ export function NoraChat() {
                 key={i}
                 className={
                   m.role === "user"
-                    ? "max-w-[85%] self-end rounded-[14px_14px_4px_14px] bg-accent px-3.5 py-2.5 text-[13.5px] leading-[1.5] text-white"
-                    : "max-w-[85%] self-start rounded-[14px_14px_14px_4px] bg-white px-3.5 py-2.5 text-[13.5px] leading-[1.5] text-ink shadow-card"
+                    ? "max-w-[85%] self-end rounded-[14px_14px_4px_14px] bg-olive-dark px-3.5 py-2.5 text-[13.5px] leading-[1.5] text-white"
+                    : "max-w-[85%] self-start rounded-[14px_14px_14px_4px] bg-canvas px-3.5 py-2.5 text-[13.5px] leading-[1.5] text-ink"
                 }
               >
                 {m.text}

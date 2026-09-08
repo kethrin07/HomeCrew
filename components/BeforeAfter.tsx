@@ -13,7 +13,7 @@ export function BeforeAfter() {
     <section className="px-5 pb-14 sm:px-8 sm:pb-[66px] lg:px-12">
       <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-[22px]">
       <div className="flex flex-wrap items-baseline gap-x-[14px] gap-y-1">
-        <h2 className="m-0 text-[28px] font-bold leading-[1.1] tracking-[-.03em] text-ink sm:text-[34px] lg:text-[38px]">
+        <h2 className="m-0 text-[28px] font-bold leading-[1.1] tracking-[-.01em] text-olive-dark sm:text-[34px] lg:text-[38px]">
           Before, and after
         </h2>
         <span className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.1em] text-ink/40">

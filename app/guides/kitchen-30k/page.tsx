@@ -9,11 +9,11 @@ export const metadata: Metadata = {
 };
 
 const BREAKDOWN = [
-  { label: "Cabinets", pct: 31, bar: "oklch(0.52 0.13 165)" },
-  { label: "Labour", pct: 24, bar: "oklch(0.58 0.11 165)" },
-  { label: "Counters", pct: 17, bar: "oklch(0.64 0.09 165)" },
-  { label: "Appliances", pct: 14, bar: "oklch(0.70 0.07 165)" },
-  { label: "Everything else", pct: 14, bar: "rgba(20,23,26,.25)" },
+  { label: "Cabinets", pct: 31, bar: "#c05a2c" },
+  { label: "Labour", pct: 24, bar: "#cf7748" },
+  { label: "Counters", pct: 17, bar: "#dc9068" },
+  { label: "Appliances", pct: 14, bar: "#e7ab8b" },
+  { label: "Everything else", pct: 14, bar: "rgba(42,32,24,.25)" },
 ];
 
 const KEEP_READING = [
@@ -45,7 +45,7 @@ export default function GuidePage() {
       {/* Title block */}
       <div className="flex flex-col items-center px-5 pb-[10px] pt-10 sm:px-[30px] sm:pt-[52px]">
         <div className="flex w-full max-w-[620px] flex-col gap-5">
-          <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.12em] text-accent-link">
+          <div className="font-mono text-[11.5px] font-medium uppercase leading-none tracking-[.12em] text-accent-link">
             Budgeting · 7 min read · Feb 2026
           </div>
           <h1 className="balance m-0 text-[32px] font-extrabold leading-[1.1] tracking-tighter2 text-ink sm:text-[44px] sm:leading-[1.08]">
@@ -56,12 +56,12 @@ export default function GuidePage() {
             broke down where the money went.
           </p>
           <div className="flex items-center gap-3 border-y border-ink/10 py-4">
-            <div className="h-[34px] w-[34px] rounded-full" style={{ background: "oklch(0.88 0.03 165)" }} />
+            <div className="h-[34px] w-[34px] rounded-full" style={{ background: "#d8b48c" }} />
             <div>
               <div className="text-[13.5px] font-semibold leading-[1.3] text-ink">
                 Renée Okafor
               </div>
-              <div className="text-[12.5px] font-normal leading-[1.3] text-ink/[.52]">
+              <div className="text-[13.5px] font-normal leading-[1.4] text-ink/[.6]">
                 Estimator, 11 years in residential build
               </div>
             </div>
@@ -165,7 +165,7 @@ export default function GuidePage() {
 
           {/* Keep reading */}
           <div className="mt-[26px] border-t border-ink/10 pt-[26px]">
-            <div className="mb-4 font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.12em] text-ink/[.42]">
+            <div className="mb-4 font-mono text-[11.5px] font-medium uppercase leading-none tracking-[.12em] text-ink/[.42]">
               Keep reading
             </div>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">

@@ -30,6 +30,28 @@ const STEPS = [
   },
 ];
 
+const TRUST = ["Licence checked", "Insured on file", "2-year warranty"];
+
+function trustIcon(i: number) {
+  if (i === 0)
+    return (
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M4 12l5 5L20 6" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+  if (i === 1)
+    return (
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 2.5l2.1 6.4h6.7l-5.4 4 2 6.4-5.4-4-5.4 4 2-6.4-5.4-4h6.7z" />
+      </svg>
+    );
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 2.5l7.5 3.2v5.5c0 4.5-3.1 8.2-7.5 9.3-4.4-1.1-7.5-4.8-7.5-9.3V5.7z" />
+    </svg>
+  );
+}
+
 const BLOG_TOPICS = [
   { tag: "Bathrooms", title: "What $15k covers in a bathroom remodel, fixture by fixture" },
   { tag: "Roofing", title: "Repair or replace? Five signs your roof is out of time" },
@@ -78,109 +100,129 @@ const TESTIMONIALS = [
 
 export default function HomePage() {
   return (
-    <main className="w-full overflow-hidden bg-white">
+    <main className="w-full overflow-hidden bg-surface">
       <Header />
 
       {/* Hero */}
       <section className="relative overflow-hidden bg-ink">
-        {/* Full-bleed kitchen walkthrough */}
-        <video
-          src="/videos/kitchen-walkthrough.mp4"
-          poster="/images/after.png"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+        {/* Dark photo hero */}
+        <Image
+          src="/images/kitch-reno.jpeg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="pointer-events-none object-cover"
         />
-        {/* Subtle dark scrim, heavier on the right, for a moodier video */}
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-ink/40" />
-        {/* White shading kept to the left to hold the text */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white from-0% via-white/75 via-30% to-transparent to-55%" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-ink/90 via-ink/70 to-ink/45" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/55 to-transparent" />
 
-        <div className="relative mx-auto flex min-h-[420px] w-full max-w-[1200px] items-center px-5 py-14 sm:min-h-[480px] sm:px-8 sm:py-20 lg:min-h-[520px] lg:px-12">
-          <div className="flex max-w-[540px] flex-col gap-6">
-            <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.12em] text-accent-link">
+        {/* Video label chip */}
+        <div className="absolute right-5 top-5 z-10 hidden sm:block lg:right-8">
+          <span className="rounded-full bg-ink/70 px-3 py-1.5 font-mono text-[9.5px] font-medium uppercase tracking-[.14em] text-white/70">
+            video — kitchen walkthrough, muted loop
+          </span>
+        </div>
+
+        <div className="relative mx-auto grid w-full max-w-[1200px] grid-cols-1 items-center gap-10 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-[1fr_minmax(0,520px)] lg:gap-14 lg:px-12 lg:py-24">
+          {/* Copy */}
+          <div className="flex flex-col gap-6">
+            <div className="font-mono text-[11px] font-medium uppercase leading-none tracking-[.2em] text-accent-soft">
               Matched in one conversation
             </div>
-            <h1 className="balance m-0 text-[34px] font-extrabold leading-[1.05] tracking-tighter2 text-ink sm:text-[46px] lg:text-[56px]">
+            <h1 className="balance m-0 text-[42px] font-semibold leading-[.98] tracking-[.005em] text-white sm:text-[58px] lg:text-[68px]">
               Tell us the project.
               <br />
               We&apos;ll bring the pros.
             </h1>
-            <p className="pretty m-0 max-w-[420px] text-[15.5px] font-normal leading-[1.6] text-ink/[.66] sm:text-[16.5px]">
+            <p className="pretty m-0 max-w-[420px] text-[16.5px] font-normal leading-[1.6] text-white/[.82] sm:text-[17.5px]">
               Nora lines up three licensed pros with real quotes — chat or call
               her right here. No forms, no call centre, no chasing.
             </p>
 
-            <HeroChat />
-
-            <div className="flex items-center gap-3">
-              <div className="flex">
-                <div className="h-7 w-7 rounded-full border-2 border-white" style={{ background: "oklch(0.88 0.03 165)" }} />
-                <div className="-ml-[9px] h-7 w-7 rounded-full border-2 border-white" style={{ background: "oklch(0.84 0.04 200)" }} />
-                <div className="-ml-[9px] h-7 w-7 rounded-full border-2 border-white" style={{ background: "oklch(0.86 0.04 60)" }} />
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[14px]">
+              <div className="flex items-center gap-2">
+                <span className="tracking-[.15em] text-accent-soft">★★★★★</span>
+                <span className="text-white/80">
+                  <strong className="font-semibold text-white">4.8</strong> from 12,400
+                  homeowners
+                </span>
               </div>
-              <div className="text-[13px] font-normal leading-[1.4] text-ink/[.62]">
-                <strong className="font-semibold text-ink">4.8</strong> from 12,400
-                homeowners
-              </div>
+              <span className="text-white/55">Licensed &amp; insured only</span>
             </div>
+          </div>
+
+          {/* Chat card */}
+          <div className="lg:justify-self-end">
+            <HeroChat />
           </div>
         </div>
       </section>
 
       {/* How it works */}
-      <section id="how" className="bg-white px-5 py-14 sm:px-8 sm:py-[74px] lg:px-12">
-        <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-10">
-          <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end sm:gap-12">
-            <div className="flex flex-col gap-[14px]">
-              <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.14em] text-accent-link">
-                How it works
-              </div>
-              <h2 className="balance m-0 max-w-[560px] text-[30px] font-bold leading-[1.1] tracking-[-.032em] text-ink sm:text-[38px] lg:text-[42px]">
-                Talk to Nora, meet an expert, and get a quote built for your home
-              </h2>
+      <section id="how" className="bg-olive px-5 py-12 sm:px-8 sm:py-[60px] lg:px-12">
+        <div className="mx-auto flex w-full max-w-[1080px] flex-col items-center gap-10">
+          {/* Centered header */}
+          <div className="flex flex-col items-center gap-4 text-center">
+            <div className="font-mono text-[12px] font-medium uppercase leading-none tracking-[.18em] text-accent-soft">
+              How it works
             </div>
-            <p className="m-0 max-w-[300px] text-[14.5px] font-normal leading-[1.65] text-ink/[.58]">
+            <h2 className="balance m-0 max-w-[640px] text-[26px] font-semibold leading-[1.1] tracking-[.005em] text-white sm:text-[32px] lg:text-[36px]">
+              Talk to Nora, meet an expert, and get a quote built for your home
+            </h2>
+            <p className="pretty m-0 max-w-[460px] text-[16px] font-normal leading-[1.6] text-white/80">
               A few minutes with Nora, an expert booked the same day, and a real
               quote in your hands. Nothing to fill in twice.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-[26px] md:grid-cols-3">
+          {/* Steps */}
+          <div className="grid w-full grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 md:gap-7">
             {STEPS.map((s) => (
-              <div key={s.n} className="flex flex-col gap-4">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-[30px] w-[30px] flex-none items-center justify-center rounded-full bg-accent font-mono text-[11.5px] font-medium leading-none text-white">
+              <div key={s.n} className="flex flex-col gap-3">
+                <Placeholder src={s.img} alt={s.media} className="h-[180px] rounded-xl" />
+                <div className="flex items-baseline gap-2">
+                  <span className="font-mono text-[14px] font-semibold leading-none text-accent-soft">
                     {s.n}
-                  </div>
-                  <div className="h-px flex-1 bg-ink/[.12]" />
+                  </span>
+                  <span className="font-mono text-[14px] font-semibold uppercase leading-none tracking-[.08em] text-accent-soft">
+                    {s.title}
+                  </span>
                 </div>
-                <Placeholder src={s.img} alt={s.media} className="h-[158px] rounded-xl" />
-                <div className="text-[21px] font-bold leading-[1.25] tracking-[-.022em] text-ink">
-                  {s.title}
-                </div>
-                <p className="pretty m-0 text-[15px] font-normal leading-[1.65] text-ink/[.62]">
+                <p className="pretty m-0 text-[15.5px] font-normal leading-[1.6] text-white/85">
                   {s.body}
                 </p>
               </div>
             ))}
           </div>
 
-          <div className="flex flex-col items-start justify-between gap-5 rounded-[14px] border border-ink/10 bg-surface px-5 py-5 sm:flex-row sm:items-center sm:gap-8 sm:px-[26px] sm:py-[22px]">
-            <div className="text-[15px] font-medium leading-[1.5] text-ink/[.72]">
+          {/* CTA */}
+          <div className="flex flex-col items-center gap-4">
+            <p className="m-0 max-w-[440px] text-center text-[15px] font-medium leading-[1.55] text-white/80">
               Book a time that suits you and get a written quote — no pressure to
               commit until you&apos;re ready.
-            </div>
+            </p>
             <Link
               href="/ava"
-              className="w-full flex-none rounded-[10px] bg-accent px-[22px] py-[14px] text-center text-[14.5px] font-semibold leading-[1.2] text-white hover:text-white sm:w-auto"
+              className="rounded-[10px] bg-accent px-7 py-4 text-[14px] font-semibold uppercase leading-none tracking-[.06em] text-white transition-transform hover:scale-[1.02] hover:text-white"
             >
               Start with Nora
             </Link>
+          </div>
+
+          {/* Trust badges */}
+          <div className="grid w-full max-w-[720px] grid-cols-1 gap-3.5 sm:grid-cols-3">
+            {TRUST.map((t, i) => (
+              <div
+                key={t}
+                className="flex items-center justify-center gap-2 rounded-xl bg-sand px-4 py-4 text-center"
+              >
+                <span className="text-accent">{trustIcon(i)}</span>
+                <span className="font-mono text-[13px] font-semibold uppercase leading-none tracking-[.1em] text-accent-dark">
+                  {t}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -191,10 +233,10 @@ export default function HomePage() {
       <section id="categories" className="px-5 pb-14 pt-14 sm:px-8 sm:pb-[66px] lg:px-12">
         <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-[22px]">
           <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-2">
-            <h2 className="m-0 text-[28px] font-bold leading-[1.1] tracking-[-.03em] text-ink sm:text-[34px] lg:text-[38px]">
+            <h2 className="m-0 text-[28px] font-bold leading-[1.1] tracking-[-.01em] text-olive-dark sm:text-[34px] lg:text-[38px]">
               Start where you are
             </h2>
-            <Link href="/#categories" className="text-[13.5px] font-semibold leading-none text-accent-link">
+            <Link href="/#categories" className="text-[14px] font-semibold leading-none text-accent-link">
               All 34 categories →
             </Link>
           </div>
@@ -206,11 +248,11 @@ export default function HomePage() {
                 className="overflow-hidden rounded-xl border border-line transition-shadow hover:shadow-card"
               >
                 <Placeholder src={c.img} alt={c.name} className="h-[132px]" />
-                <div className="px-4 py-[14px]">
+                <div className="bg-canvas px-4 py-[14px]">
                   <div className="text-[15.5px] font-semibold leading-[1.3] text-ink">
                     {c.name}
                   </div>
-                  <div className="mt-[6px] font-mono text-[11.5px] font-medium leading-none text-ink/45">
+                  <div className="mt-[6px] font-mono text-[12px] font-semibold leading-none tracking-[.04em] text-accent">
                     {c.range}
                   </div>
                 </div>
@@ -221,9 +263,9 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials */}
-      <section className="bg-surface px-5 py-14 sm:px-8 sm:py-[60px] lg:px-12">
+      <section className="bg-canvas px-5 py-14 sm:px-8 sm:py-[60px] lg:px-12">
         <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-[26px]">
-          <h2 className="m-0 text-[26px] font-bold leading-[1.1] tracking-[-.03em] text-ink sm:text-[30px] lg:text-[34px]">
+          <h2 className="m-0 text-[26px] font-bold leading-[1.1] tracking-[-.01em] text-olive-dark sm:text-[30px] lg:text-[34px]">
             What homeowners said
           </h2>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -235,22 +277,22 @@ export default function HomePage() {
                 <div className="font-mono text-[13px] font-medium leading-none tracking-[.08em] text-accent-link">
                   {t.stars}
                 </div>
-                <p className="m-0 text-[15px] font-normal leading-[1.6] text-ink/75">
+                <p className="m-0 text-[16px] font-normal leading-[1.6] text-ink/80">
                   {t.quote}
                 </p>
                 <div className="mt-auto flex items-center gap-[10px]">
                   <Image
                     src={t.img}
                     alt={t.name}
-                    width={30}
-                    height={30}
-                    className="h-[30px] w-[30px] rounded-full object-cover"
+                    width={34}
+                    height={34}
+                    className="h-[34px] w-[34px] rounded-full object-cover"
                   />
                   <div>
-                    <div className="text-[13px] font-semibold leading-[1.3] text-ink">
+                    <div className="text-[14px] font-semibold leading-[1.3] text-ink">
                       {t.name}
                     </div>
-                    <div className="text-[12px] font-normal leading-[1.3] text-ink/50">
+                    <div className="text-[13px] font-normal leading-[1.3] text-ink/60">
                       {t.meta}
                     </div>
                   </div>
@@ -262,20 +304,20 @@ export default function HomePage() {
       </section>
 
       {/* Guides */}
-      <section id="blog" className="px-5 py-14 sm:px-8 sm:py-[66px] lg:px-12">
+      <section id="blog" className="bg-canvas px-5 py-14 sm:px-8 sm:py-[66px] lg:px-12">
         <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-6">
           <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-2">
-            <h2 className="m-0 text-[28px] font-bold leading-[1.1] tracking-[-.03em] text-ink sm:text-[34px] lg:text-[38px]">
+            <h2 className="m-0 text-[28px] font-bold leading-[1.1] tracking-[-.01em] text-olive-dark sm:text-[34px] lg:text-[38px]">
               Read before you renovate
             </h2>
-            <Link href="/guides/kitchen-30k" className="text-[13.5px] font-semibold leading-none text-accent-link">
+            <Link href="/guides/kitchen-30k" className="text-[14px] font-semibold leading-none text-accent-link">
               All guides →
             </Link>
           </div>
           <div className="grid grid-cols-1 gap-[18px] md:grid-cols-[1.6fr_1fr_1fr]">
             <Link href="/guides/kitchen-30k" className="flex flex-col gap-[14px]">
               <Placeholder className="h-[200px] rounded-xl sm:h-[230px]" align="none" />
-              <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.1em] text-ink/[.42]">
+              <div className="font-mono text-[11.5px] font-medium uppercase leading-none tracking-[.1em] text-ink/[.42]">
                 Budgeting · 7 min
               </div>
               <div className="max-w-[440px] text-[22px] font-bold leading-[1.22] tracking-[-.025em] text-ink sm:text-[25px]">
@@ -284,7 +326,7 @@ export default function HomePage() {
             </Link>
             <div className="flex flex-col gap-3">
               <Placeholder className="h-[130px] rounded-xl" align="none" />
-              <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.1em] text-ink/[.42]">
+              <div className="font-mono text-[11.5px] font-medium uppercase leading-none tracking-[.1em] text-ink/[.42]">
                 Hiring · 5 min
               </div>
               <div className="text-[18px] font-bold leading-[1.3] tracking-[-.02em] text-ink">
@@ -293,7 +335,7 @@ export default function HomePage() {
             </div>
             <div className="flex flex-col gap-3">
               <Placeholder className="h-[130px] rounded-xl" align="none" />
-              <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.1em] text-ink/[.42]">
+              <div className="font-mono text-[11.5px] font-medium uppercase leading-none tracking-[.1em] text-ink/[.42]">
                 Permits · 4 min
               </div>
               <div className="text-[18px] font-bold leading-[1.3] tracking-[-.02em] text-ink">
@@ -304,7 +346,7 @@ export default function HomePage() {
 
           {/* More example blog topics */}
           <div className="mt-4 flex flex-col gap-[18px] border-t border-line pt-8">
-            <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.14em] text-accent-link">
+            <div className="font-mono text-[11.5px] font-medium uppercase leading-none tracking-[.14em] text-accent-link">
               More on the blog
             </div>
             <div className="grid grid-cols-1 gap-x-8 gap-y-[14px] sm:grid-cols-2 lg:grid-cols-3">
@@ -314,10 +356,10 @@ export default function HomePage() {
                   href="/guides/kitchen-30k"
                   className="group flex flex-col gap-[6px] border-t border-ink/[.06] pt-[14px]"
                 >
-                  <span className="font-mono text-[10px] font-medium uppercase leading-none tracking-[.1em] text-ink/40">
+                  <span className="font-mono text-[11.5px] font-medium uppercase leading-none tracking-[.1em] text-accent">
                     {t.tag}
                   </span>
-                  <span className="text-[15.5px] font-semibold leading-[1.35] tracking-[-.015em] text-ink transition-colors group-hover:text-accent-link">
+                  <span className="text-[16px] font-semibold leading-[1.4] tracking-[-.005em] text-ink transition-colors group-hover:text-accent-link">
                     {t.title}
                   </span>
                 </Link>
@@ -328,13 +370,13 @@ export default function HomePage() {
       </section>
 
       {/* Dark CTA */}
-      <section className="bg-ink px-5 py-14 sm:px-8 sm:py-[56px] lg:px-12">
+      <section className="bg-olive-dark px-5 py-14 sm:px-8 sm:py-[56px] lg:px-12">
         <div className="mx-auto flex w-full max-w-[1200px] flex-col items-start justify-between gap-8 sm:flex-row sm:items-center sm:gap-10">
           <div className="flex flex-col gap-3">
             <h2 className="m-0 max-w-[520px] text-[27px] font-bold leading-[1.12] tracking-[-.03em] text-white sm:text-[34px]">
               Still just thinking about it? Ask anyway.
             </h2>
-            <p className="m-0 max-w-[440px] text-[15px] font-normal leading-[1.6] text-white/[.66]">
+            <p className="m-0 max-w-[440px] text-[16.5px] font-normal leading-[1.6] text-white/[.78]">
               Nora will scope it, price it, and leave you alone until you&apos;re
               ready.
             </p>
@@ -342,7 +384,7 @@ export default function HomePage() {
           <div className="flex w-full flex-col gap-[10px] sm:w-auto sm:flex-none sm:flex-row">
             <Link
               href="/ava"
-              className="rounded-[10px] bg-white px-[22px] py-[15px] text-center text-[14.5px] font-semibold leading-none text-ink hover:text-ink"
+              className="rounded-[10px] bg-accent px-[22px] py-[15px] text-center text-[14.5px] font-semibold leading-none text-white hover:text-white"
             >
               Start a chat
             </Link>

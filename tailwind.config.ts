@@ -8,32 +8,49 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: "#14171a",
-        surface: "#f8f9fa",
-        canvas: "#eceef0",
-        line: "rgba(20,23,26,0.09)",
+        // HomeCrew Warm — cream / forest green / terracotta.
+        ink: "#23261f", // body ink (near-black)
+        surface: "#f6f1e6", // page cream
+        canvas: "#efe8d8", // deeper cream — blog band, card bodies, reply bubbles
+        sand: "#f3e7cf", // badge tiles
+        line: "rgba(35,38,31,0.12)",
         accent: {
-          DEFAULT: "oklch(0.52 0.13 165)",
-          link: "oklch(0.46 0.12 165)",
-          dark: "oklch(0.36 0.10 165)",
-          deep: "oklch(0.42 0.12 165)",
-          soft: "oklch(0.96 0.03 165)",
-          tint: "oklch(0.97 0.02 165)",
+          DEFAULT: "#b45a28", // terracotta
+          link: "#b45a28",
+          dark: "#8e4419", // dark terracotta
+          deep: "#8e4419",
+          soft: "#e0a87a", // warm tan (accents on dark)
+          tint: "#f0dcc9",
+        },
+        // Green band + deep green CTA.
+        olive: {
+          DEFAULT: "#4e6b47", // forest green (how-it-works band)
+          dark: "#3e5a38", // deep green (CTA, user bubbles, launcher, headings)
+          light: "#61805a", // media placeholders in the green band
+        },
+        brown: {
+          DEFAULT: "#57452f",
+          dark: "#3f301f",
+        },
+        taupe: {
+          DEFAULT: "#847b68",
+          dark: "#6d6552",
         },
       },
       fontFamily: {
-        sans: ["var(--font-jakarta)", "system-ui", "sans-serif"],
-        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
+        sans: ["var(--font-body)", "system-ui", "sans-serif"],
+        mono: ["var(--font-display)", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "system-ui", "sans-serif"],
       },
       letterSpacing: {
         tightest: "-.038em",
         tighter2: "-.035em",
       },
       boxShadow: {
-        composer: "0 22px 50px -22px rgba(20,23,26,.34)",
-        float: "0 24px 60px -20px rgba(0,0,0,.5)",
-        pill: "0 12px 34px -10px rgba(20,23,26,.55)",
-        card: "0 1px 3px rgba(20,23,26,.07)",
+        composer: "0 22px 50px -22px rgba(42,32,24,.34)",
+        float: "0 24px 60px -20px rgba(20,14,8,.5)",
+        pill: "0 12px 34px -10px rgba(42,32,24,.55)",
+        card: "0 1px 3px rgba(42,32,24,.08)",
       },
     },
   },
