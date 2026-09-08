@@ -36,7 +36,7 @@ function PanelShell({ children }: { children: React.ReactNode }) {
  * Search `TODO(elevenlabs)` / `TODO(agent)` to connect them.
  */
 export function NoraChat() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [mode, setMode] = useState<Mode>("home");
   const [msgs, setMsgs] = useState<Msg[]>([{ role: "nora", text: GREETING }]);
   const [input, setInput] = useState("");
