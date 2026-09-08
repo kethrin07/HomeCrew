@@ -153,14 +153,14 @@ export default function GuidePage() {
                 Want this priced for your kitchen?
               </div>
               <div className="mt-[6px] text-[14px] font-normal leading-[1.55] text-white/[.66]">
-                Ava uses your ZIP and square footage, not a national average.
+                Nora uses your ZIP and square footage, not a national average.
               </div>
             </div>
             <Link
               href="/ava"
               className="w-full flex-none rounded-[9px] bg-white px-5 py-[13px] text-center text-[13.5px] font-semibold leading-none text-ink hover:text-ink sm:w-auto"
             >
-              Ask Ava
+              Ask Nora
             </Link>
           </div>
 

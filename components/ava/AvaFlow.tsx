@@ -114,7 +114,7 @@ export function AvaFlow({ seed }: { seed?: string }) {
           <div className="flex items-center gap-[10px] border-b border-line px-[18px] py-[14px]">
             <div className="h-6 w-6 rounded-full bg-accent" />
             <div>
-              <div className="text-[13px] font-semibold leading-[1.2] text-ink">Ava</div>
+              <div className="text-[13px] font-semibold leading-[1.2] text-ink">Nora</div>
               <div className="mt-[2px] font-mono text-[10px] font-medium leading-[1.2] text-accent-link">
                 {typing ? "TYPING…" : "ONLINE"}
               </div>
@@ -141,7 +141,7 @@ export function AvaFlow({ seed }: { seed?: string }) {
 
               {typing ? (
                 <div className="max-w-[88%] self-start rounded-[14px_14px_14px_4px] bg-[#f1f3f4] px-[14px] py-[11px] text-[14.5px] font-normal leading-[1.5] text-ink/50">
-                  Ava is typing…
+                  Nora is typing…
                 </div>
               ) : null}
 
@@ -182,7 +182,7 @@ export function AvaFlow({ seed }: { seed?: string }) {
             </div>
             {voiceHint ? (
               <div className="font-mono text-[10.5px] font-medium leading-[1.4] text-accent-link">
-                Voice with Ava is coming soon — type for now.
+                Voice with Nora is coming soon — type for now.
               </div>
             ) : null}
           </div>
@@ -300,7 +300,7 @@ export function AvaFlow({ seed }: { seed?: string }) {
 
               <div className="flex flex-col gap-2 rounded-xl bg-surface p-[14px]">
                 <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.1em] text-ink/[.42]">
-                  What Ava passed on
+                  What Nora passed on
                 </div>
                 <div className="text-[13.5px] font-normal leading-[1.6] text-ink/[.68]">
                   {projectSummary} · {form.zip} · call {callTime.toLowerCase()}

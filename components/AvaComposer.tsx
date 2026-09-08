@@ -26,7 +26,7 @@ export function AvaComposer() {
       <div className="mb-[15px] flex items-center gap-[10px]">
         <div className="h-[30px] w-[30px] flex-none rounded-full bg-accent" />
         <div className="text-[15.5px] font-bold leading-[1.25] tracking-[-.015em] text-ink">
-          Ava books your expert appointment
+          Nora books your expert appointment
         </div>
       </div>
 
@@ -45,7 +45,7 @@ export function AvaComposer() {
           onClick={() => go()}
           className="flex-[2] rounded-[11px] bg-accent p-4 text-[15.5px] font-bold leading-[1.2] text-white"
         >
-          Ask Ava
+          Ask Nora
         </button>
         <button
           onClick={talk}

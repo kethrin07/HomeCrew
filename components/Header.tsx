@@ -1,9 +1,9 @@
 import Link from "next/link";
 
 const NAV = [
-  { label: "Projects", href: "/#projects" },
-  { label: "Find pros", href: "/#categories" },
-  { label: "Guides", href: "/guides/kitchen-30k" },
+  { label: "How it works", href: "/#how" },
+  { label: "Projects", href: "/#categories" },
+  { label: "Blog", href: "/#blog" },
 ];
 
 /**

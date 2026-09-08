@@ -16,9 +16,9 @@ import { Header } from "@/components/Header";
 import { AvaFlow } from "@/components/ava/AvaFlow";
 
 export const metadata: Metadata = {
-  title: "Ava — HomeCrew",
+  title: "Nora — HomeCrew",
   description:
-    "Ava collects the details and hands you to a real expert who calls you back within two hours.",
+    "Nora collects the details and hands you to a real expert who calls you back within two hours.",
 };
 
 export default async function AvaPage({

@@ -24,24 +24,31 @@ export function BeforeAfter() {
       <div
         className="relative h-[280px] overflow-hidden rounded-[14px] sm:h-[420px]"
         style={{
-          background:
-            "repeating-linear-gradient(135deg,rgba(20,23,26,.06) 0 8px,rgba(20,23,26,0) 8px 16px),oklch(0.9 0.012 60)",
+          backgroundImage: "url('/images/after.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
-        <span className="absolute bottom-4 left-4 rounded bg-white/85 px-2 py-[5px] font-mono text-[10px] font-medium uppercase leading-none tracking-[.06em] text-ink/50">
-          before — original kitchen
+        <span className="absolute bottom-4 right-4 rounded bg-white/85 px-2 py-[5px] font-mono text-[10px] font-medium uppercase leading-none tracking-[.06em] text-ink/50">
+          after — 6 weeks, $42k
         </span>
 
         <div
           className="absolute inset-0 overflow-hidden border-r-2 border-white"
-          style={{
-            width: `${ba}%`,
-            background:
-              "repeating-linear-gradient(135deg,rgba(20,23,26,.06) 0 8px,rgba(20,23,26,0) 8px 16px),oklch(0.93 0.02 165)",
-          }}
+          style={{ width: `${ba}%` }}
         >
+          {/* Full-width so the "before" image stays aligned with "after" as the clip shrinks. */}
+          <div
+            className="absolute inset-y-0 left-0"
+            style={{
+              width: `${(100 / ba) * 100}%`,
+              backgroundImage: "url('/images/before.png')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
           <span className="absolute left-4 top-4 rounded bg-white/85 px-2 py-[5px] font-mono text-[10px] font-medium uppercase leading-none tracking-[.06em] text-ink/50">
-            after — 6 weeks, $42k
+            before — original kitchen
           </span>
         </div>
 

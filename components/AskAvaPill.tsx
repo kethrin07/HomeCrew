@@ -14,7 +14,7 @@ export function AskAvaPill() {
         <div className="h-8 w-8 flex-none rounded-full bg-accent" />
         <div>
           <div className="text-[13.5px] font-semibold leading-[1.2] text-white">
-            Ask Ava
+            Ask Nora
           </div>
           <div className="mt-[3px] font-mono text-[9.5px] font-medium leading-[1.3] tracking-[.1em] text-white/[.58]">
             CHAT OR VOICE

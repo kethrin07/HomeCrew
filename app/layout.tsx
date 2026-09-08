@@ -19,7 +19,7 @@ const mono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: "HomeCrew — Tell us the project. We'll bring the pros.",
   description:
-    "Describe what you want done and Ava lines up three licensed pros with real quotes. No forms, no call centre, no chasing.",
+    "Describe what you want done and Nora lines up three licensed pros with real quotes. No forms, no call centre, no chasing.",
 };
 
 export default function RootLayout({
@@ -28,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${jakarta.variable} ${mono.variable}`}>
+    <html lang="en" className={`${jakarta.variable} ${mono.variable} scroll-smooth`}>
       <body className="font-sans">{children}</body>
     </html>
   );

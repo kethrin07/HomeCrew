@@ -10,40 +10,43 @@ const STEPS = [
   {
     n: "01",
     media: "chat + voice, in the hero",
-    title: "Talk to Ava",
-    body: "Type it or say it out loud, and send photos if you have them. Ava asks about scope, timing and budget — no 14-field form.",
+    img: "/images/chat-voice.png",
+    title: "Talk to Nora",
+    body: "Type it or say it out loud, and send photos if you have them. Nora asks about scope, timing and budget — no 14-field form.",
   },
   {
     n: "02",
     media: "expert on a video call",
+    img: "/images/expert-video-call.png",
     title: "Get an appointment with an expert",
-    body: "Ava lines up a licensed pro and locks in a time that suits you — on site or on a call. No waiting around, no phone tag.",
+    body: "Nora lines up a licensed pro and locks in a time that suits you — on site or on a call. No waiting around, no phone tag.",
   },
   {
     n: "03",
     media: "itemised quote",
+    img: "/images/itemised-quote.png",
     title: "Get a personalized quote",
     body: "Your expert scopes the job with you and hands over a clear, itemised quote built around your home, your ZIP code and your budget.",
   },
 ];
 
 const BLOG_TOPICS = [
-  { tag: "Bathrooms", title: "Bathroom remodel costs, broken down fixture by fixture" },
-  { tag: "Roofing", title: "Repair or replace? How to read the age of your roof" },
-  { tag: "Resale", title: "Kitchen vs. bathroom: which remodel adds more value?" },
-  { tag: "Quick wins", title: "Five small upgrades that make an older home feel new" },
-  { tag: "Budgeting", title: "How to budget a whole-home renovation without surprises" },
-  { tag: "Electrical", title: "Signs your home's wiring is due for an upgrade" },
-  { tag: "Outdoor", title: "Deck materials compared: wood vs. composite vs. PVC" },
-  { tag: "Planning", title: "What to expect during a renovation, week by week" },
-  { tag: "Energy", title: "Insulation and windows: where your money actually goes" },
+  { tag: "Bathrooms", title: "What $15k covers in a bathroom remodel, fixture by fixture" },
+  { tag: "Roofing", title: "Repair or replace? Five signs your roof is out of time" },
+  { tag: "Resale", title: "Kitchen vs. bathroom: which remodel actually pays back at resale" },
+  { tag: "Quick wins", title: "Seven upgrades under $500 that make an older home feel new" },
+  { tag: "Budgeting", title: "Build a renovation budget with a buffer that actually holds" },
+  { tag: "Electrical", title: "Six warning signs your home's wiring is overdue" },
+  { tag: "Outdoor", title: "Deck materials, 10-year cost compared: wood vs. composite vs. PVC" },
+  { tag: "Planning", title: "A realistic renovation timeline, week by week" },
+  { tag: "Energy", title: "Insulation or new windows: where your money saves more" },
 ];
 
 const CATEGORIES = [
-  { name: "Kitchens", range: "$18k–$65k" },
-  { name: "Bathrooms", range: "$9k–$30k" },
-  { name: "Roof & gutters", range: "$7k–$24k" },
-  { name: "Decks & yards", range: "$5k–$28k" },
+  { name: "Kitchens", range: "$18k–$65k", img: "/images/kitchens.png" },
+  { name: "Bathrooms", range: "$9k–$30k", img: "/images/bathrooms.png" },
+  { name: "Roof & gutters", range: "$7k–$24k", img: "/images/roof-and-gutters.png" },
+  { name: "Decks & yards", range: "$5k–$28k", img: "/images/decks-and-yards.png" },
 ];
 
 const TESTIMONIALS = [
@@ -91,7 +94,7 @@ export default function HomePage() {
               We&apos;ll bring the pros.
             </h1>
             <p className="pretty m-0 max-w-[420px] text-[15.5px] font-normal leading-[1.6] text-ink/[.62] sm:text-[16.5px]">
-              Describe what you want done and Ava lines up three licensed pros with
+              Describe what you want done and Nora lines up three licensed pros with
               real quotes. No forms, no call centre, no chasing.
             </p>
 
@@ -111,9 +114,19 @@ export default function HomePage() {
           </div>
 
           <div className="grid h-full min-h-[320px] grid-cols-2 grid-rows-[1.5fr_1fr] gap-3 sm:min-h-[440px] lg:min-h-[520px]">
-            <Placeholder label="video — finished kitchen walkthrough" className="col-span-2 rounded-xl" />
-            <Placeholder label="pro on site" className="rounded-xl" />
-            <Placeholder label="bath detail" className="rounded-xl" />
+            <video
+              src="/videos/kitchen-walkthrough.mp4"
+              poster="/images/after.png"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-label="Finished kitchen walkthrough"
+              className="col-span-2 h-full w-full rounded-xl object-cover"
+            />
+            <Placeholder src="/images/pro-on-site.png" alt="Contractor on site" className="rounded-xl" />
+            <Placeholder src="/images/bath-detail.png" alt="Renovated bathroom vanity" className="rounded-xl" />
           </div>
         </div>
       </section>
@@ -127,11 +140,11 @@ export default function HomePage() {
                 How it works
               </div>
               <h2 className="balance m-0 max-w-[560px] text-[30px] font-bold leading-[1.1] tracking-[-.032em] text-ink sm:text-[38px] lg:text-[42px]">
-                Talk to Ava, meet an expert, and get a quote built for your home
+                Talk to Nora, meet an expert, and get a quote built for your home
               </h2>
             </div>
             <p className="m-0 max-w-[300px] text-[14.5px] font-normal leading-[1.65] text-ink/[.58]">
-              A few minutes with Ava, an expert booked the same day, and a real
+              A few minutes with Nora, an expert booked the same day, and a real
               quote in your hands. Nothing to fill in twice.
             </p>
           </div>
@@ -145,7 +158,7 @@ export default function HomePage() {
                   </div>
                   <div className="h-px flex-1 bg-ink/[.12]" />
                 </div>
-                <Placeholder label={s.media} className="h-[158px] rounded-xl" />
+                <Placeholder src={s.img} alt={s.media} className="h-[158px] rounded-xl" />
                 <div className="text-[21px] font-bold leading-[1.25] tracking-[-.022em] text-ink">
                   {s.title}
                 </div>
@@ -165,7 +178,7 @@ export default function HomePage() {
               href="/ava"
               className="w-full flex-none rounded-[10px] bg-accent px-[22px] py-[14px] text-center text-[14.5px] font-semibold leading-[1.2] text-white hover:text-white sm:w-auto"
             >
-              Start with Ava
+              Start with Nora
             </Link>
           </div>
         </div>
@@ -191,7 +204,7 @@ export default function HomePage() {
                 key={c.name}
                 className="overflow-hidden rounded-xl border border-line transition-shadow hover:shadow-card"
               >
-                <Placeholder className="h-[132px]" align="none" />
+                <Placeholder src={c.img} alt={c.name} className="h-[132px]" />
                 <div className="px-4 py-[14px]">
                   <div className="text-[15.5px] font-semibold leading-[1.3] text-ink">
                     {c.name}
@@ -242,7 +255,7 @@ export default function HomePage() {
       </section>
 
       {/* Guides */}
-      <section id="projects" className="px-5 py-14 sm:px-8 sm:py-[66px] lg:px-12">
+      <section id="blog" className="px-5 py-14 sm:px-8 sm:py-[66px] lg:px-12">
         <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-6">
           <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-2">
             <h2 className="m-0 text-[28px] font-bold leading-[1.1] tracking-[-.03em] text-ink sm:text-[34px] lg:text-[38px]">
@@ -317,7 +330,7 @@ export default function HomePage() {
               Still just thinking about it? Ask anyway.
             </h2>
             <p className="m-0 max-w-[440px] text-[15px] font-normal leading-[1.6] text-white/[.66]">
-              Ava will scope it, price it, and leave you alone until you&apos;re
+              Nora will scope it, price it, and leave you alone until you&apos;re
               ready.
             </p>
           </div>
@@ -332,7 +345,7 @@ export default function HomePage() {
               href="/ava"
               className="rounded-[10px] border border-white/[.28] bg-transparent px-[22px] py-[15px] text-center text-[14.5px] font-semibold leading-none text-white hover:text-white"
             >
-              Talk to Ava
+              Talk to Nora
             </Link>
           </div>
         </div>

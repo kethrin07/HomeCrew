@@ -1,19 +1,38 @@
+import Image from "next/image";
 import { clsx } from "@/lib/clsx";
 
 /**
- * The hatched media placeholder used throughout the design in place of
- * real photography / video. Optionally renders a small mono caption pinned
- * to the bottom-left corner.
+ * Media slot used throughout the design. Without `src` it renders the hatched
+ * placeholder (optionally with a small mono caption). With `src` it renders a
+ * real, optimised photo that covers the slot.
  */
 export function Placeholder({
   label,
   className,
   align = "bottom",
+  src,
+  alt = "",
 }: {
   label?: string;
   className?: string;
   align?: "bottom" | "none";
+  src?: string;
+  alt?: string;
 }) {
+  if (src) {
+    return (
+      <div className={clsx("relative overflow-hidden", className)}>
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          className="object-cover"
+          sizes="(max-width: 1024px) 50vw, 25vw"
+        />
+      </div>
+    );
+  }
+
   return (
     <div
       className={clsx(
