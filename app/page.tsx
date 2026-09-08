@@ -1,10 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Placeholder } from "@/components/Placeholder";
-import { AvaComposer } from "@/components/AvaComposer";
+import { HeroChat } from "@/components/HeroChat";
 import { BeforeAfter } from "@/components/BeforeAfter";
-import { AskAvaPill } from "@/components/AskAvaPill";
 
 const STEPS = [
   {
@@ -56,7 +56,7 @@ const TESTIMONIALS = [
       "I sent one message at 9pm and had two contractors booked for Thursday. That has never happened to me before.",
     name: "Priya N.",
     meta: "Bathroom · Austin",
-    avatar: "oklch(0.88 0.03 165)",
+    img: "/images/priya.png",
   },
   {
     stars: "★★★★★",
@@ -64,7 +64,7 @@ const TESTIMONIALS = [
       "First house, no idea what anything costs. The price bands stopped me getting talked into a $60k kitchen.",
     name: "Marcus T.",
     meta: "Kitchen · Columbus",
-    avatar: "oklch(0.84 0.04 200)",
+    img: "/images/marcus.png",
   },
   {
     stars: "★★★★☆",
@@ -72,7 +72,7 @@ const TESTIMONIALS = [
       "Wanted a human, got one — the agent handed me to a real coordinator when my roof turned out to be structural.",
     name: "Dana R.",
     meta: "Roofing · Portland",
-    avatar: "oklch(0.86 0.04 60)",
+    img: "/images/dana.png",
   },
 ];
 
@@ -82,51 +82,52 @@ export default function HomePage() {
       <Header />
 
       {/* Hero */}
-      <section className="bg-surface px-5 py-14 sm:px-8 sm:py-[72px] lg:px-12">
-        <div className="mx-auto grid w-full max-w-[1200px] grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-[52px]">
-          <div className="flex flex-col gap-6">
+      <section className="relative overflow-hidden bg-ink">
+        {/* Full-bleed kitchen walkthrough */}
+        <video
+          src="/videos/kitchen-walkthrough.mp4"
+          poster="/images/after.png"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+        />
+        {/* Subtle dark scrim, heavier on the right, for a moodier video */}
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-ink/40" />
+        {/* White shading kept to the left to hold the text */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white from-0% via-white/75 via-30% to-transparent to-55%" />
+
+        <div className="relative mx-auto flex min-h-[420px] w-full max-w-[1200px] items-center px-5 py-14 sm:min-h-[480px] sm:px-8 sm:py-20 lg:min-h-[520px] lg:px-12">
+          <div className="flex max-w-[540px] flex-col gap-6">
             <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.12em] text-accent-link">
               Matched in one conversation
             </div>
-            <h1 className="balance m-0 text-[34px] font-extrabold leading-[1.05] tracking-tighter2 text-ink sm:text-[44px] lg:text-[58px]">
+            <h1 className="balance m-0 text-[34px] font-extrabold leading-[1.05] tracking-tighter2 text-ink sm:text-[46px] lg:text-[56px]">
               Tell us the project.
               <br />
               We&apos;ll bring the pros.
             </h1>
-            <p className="pretty m-0 max-w-[420px] text-[15.5px] font-normal leading-[1.6] text-ink/[.62] sm:text-[16.5px]">
-              Describe what you want done and Nora lines up three licensed pros with
-              real quotes. No forms, no call centre, no chasing.
+            <p className="pretty m-0 max-w-[420px] text-[15.5px] font-normal leading-[1.6] text-ink/[.66] sm:text-[16.5px]">
+              Nora lines up three licensed pros with real quotes — chat or call
+              her right here. No forms, no call centre, no chasing.
             </p>
 
-            <AvaComposer />
+            <HeroChat />
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <div className="flex">
-                <div className="h-7 w-7 rounded-full border-2 border-surface" style={{ background: "oklch(0.88 0.03 165)" }} />
-                <div className="-ml-[9px] h-7 w-7 rounded-full border-2 border-surface" style={{ background: "oklch(0.84 0.04 200)" }} />
-                <div className="-ml-[9px] h-7 w-7 rounded-full border-2 border-surface" style={{ background: "oklch(0.86 0.04 60)" }} />
+                <div className="h-7 w-7 rounded-full border-2 border-white" style={{ background: "oklch(0.88 0.03 165)" }} />
+                <div className="-ml-[9px] h-7 w-7 rounded-full border-2 border-white" style={{ background: "oklch(0.84 0.04 200)" }} />
+                <div className="-ml-[9px] h-7 w-7 rounded-full border-2 border-white" style={{ background: "oklch(0.86 0.04 60)" }} />
               </div>
-              <div className="text-[13px] font-normal leading-[1.4] text-ink/[.58]">
+              <div className="text-[13px] font-normal leading-[1.4] text-ink/[.62]">
                 <strong className="font-semibold text-ink">4.8</strong> from 12,400
                 homeowners
               </div>
             </div>
-          </div>
-
-          <div className="grid h-full min-h-[320px] grid-cols-2 grid-rows-[1.5fr_1fr] gap-3 sm:min-h-[440px] lg:min-h-[520px]">
-            <video
-              src="/videos/kitchen-walkthrough.mp4"
-              poster="/images/after.png"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              aria-label="Finished kitchen walkthrough"
-              className="col-span-2 h-full w-full rounded-xl object-cover"
-            />
-            <Placeholder src="/images/pro-on-site.png" alt="Contractor on site" className="rounded-xl" />
-            <Placeholder src="/images/bath-detail.png" alt="Renovated bathroom vanity" className="rounded-xl" />
           </div>
         </div>
       </section>
@@ -238,7 +239,13 @@ export default function HomePage() {
                   {t.quote}
                 </p>
                 <div className="mt-auto flex items-center gap-[10px]">
-                  <div className="h-[30px] w-[30px] rounded-full" style={{ background: t.avatar }} />
+                  <Image
+                    src={t.img}
+                    alt={t.name}
+                    width={30}
+                    height={30}
+                    className="h-[30px] w-[30px] rounded-full object-cover"
+                  />
                   <div>
                     <div className="text-[13px] font-semibold leading-[1.3] text-ink">
                       {t.name}
@@ -319,8 +326,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      <AskAvaPill />
 
       {/* Dark CTA */}
       <section className="bg-ink px-5 py-14 sm:px-8 sm:py-[56px] lg:px-12">

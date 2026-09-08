@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 /**
@@ -11,7 +12,13 @@ export function AskAvaPill() {
         href="/ava"
         className="pointer-events-auto flex items-center gap-[11px] rounded-full bg-ink py-[10px] pl-3 pr-[18px] shadow-pill ring-1 ring-white/10"
       >
-        <div className="h-8 w-8 flex-none rounded-full bg-accent" />
+        <Image
+          src="/images/nora.png"
+          alt="Nora"
+          width={32}
+          height={32}
+          className="h-8 w-8 flex-none rounded-full object-cover"
+        />
         <div>
           <div className="text-[13.5px] font-semibold leading-[1.2] text-white">
             Ask Nora
