@@ -14,20 +14,14 @@ export type ChatTone = "Concise" | "Warm";
  * Ava's canned reply logic, ported from the design's support.js Component.
  * Keyword-matches the homeowner's message and answers in the configured tone.
  */
-export function avaReply(text: string, tone: ChatTone = "Concise"): string {
-  const concise = tone === "Concise";
+export function avaReply(text: string, _tone: ChatTone = "Concise"): string {
+  void _tone;
   const t = text.toLowerCase();
   if (t.includes("roof"))
-    return concise
-      ? "Roofing. Any active leak, or is this age-related?"
-      : "Roofs are the one we move fastest on. Is water coming in right now, or is it more that the roof has had its run?";
+    return "Roofing moves fast. Is water coming in now, or is it age? I'll get an expert to call you either way.";
   if (t.includes("bath"))
-    return concise
-      ? "Bathroom. Full gut, or fixtures and finishes only?"
-      : "Nice one to start with. Are we talking a full gut, or swapping fixtures and finishes and keeping the layout?";
-  return concise
-    ? "Got it. Are you keeping the sink where it is, and what's your ceiling on spend?"
-    : "Okay, that's a very common one and we have good pros for it. Two quick things: does the sink stay put, and what number would you rather not go past?";
+    return "Full gut or fixtures and finishes? Once I know, I'll have an expert ring you with a number.";
+  return "Got it. Is the sink staying put, and what's your ceiling on spend? Then I'll have an expert call you back.";
 }
 
 const INITIAL: Message[] = [

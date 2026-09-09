@@ -1,60 +1,71 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
+import { avaReply, type Message } from "@/lib/ava";
 
 const CHIPS = ["Kitchen refresh", "Roof leak", "Bathroom, under $15k"];
 
+const INITIAL: Message[] = [
+  { text: "Hi — what are we working on?", role: "a" },
+  { text: "My kitchen. 1970s galley, cabinets are shot.", role: "u" },
+];
+
 /** Open the floating widget, optionally seeding a first chat message. */
-function openChat(detail: { mode?: "home" | "chat"; seed?: string }) {
-  window.dispatchEvent(new CustomEvent("nora:open", { detail }));
+function openChat(seed?: string) {
+  window.dispatchEvent(new CustomEvent("nora:open", { detail: { mode: "chat", seed } }));
 }
 
 /**
- * Hero chat card. A styled preview of a conversation with Nora; engaging
- * (chip, Enter, "Get my callback" or "Talk") hands off to the floating
- * NoraChat widget. UI only — no live agent is wired up.
+ * Hero chat card — the primary CTA. Scripted conversation with Nora; sending or
+ * tapping a chip appends the exchange and also opens the floating widget.
  */
 export function HeroChat() {
   const [input, setInput] = useState("");
+  const [msgs, setMsgs] = useState<Message[]>(INITIAL);
 
-  const submit = (text: string) => {
+  const push = (text: string) => {
     const t = text.trim();
-    openChat(t ? { mode: "chat", seed: t } : { mode: "chat" });
+    if (!t) return;
+    setMsgs((prev) => [...prev, { text: t, role: "u" }, { text: avaReply(t), role: "a" }]);
     setInput("");
+    openChat(t);
   };
 
   return (
-    <div className="w-full max-w-[520px] rounded-[20px] border border-ink/10 bg-white p-4 shadow-composer ring-1 ring-black/[.03] sm:p-5">
+    <div className="w-full rounded-[14px] bg-surface p-6 shadow-[0_34px_70px_-28px_rgba(0,0,0,.5)]">
       {/* Header */}
-      <div className="flex items-center gap-2.5 border-b border-line pb-3">
-        <Image
-          src="/images/nora.png"
-          alt="Nora"
-          width={38}
-          height={38}
-          className="h-[38px] w-[38px] flex-none rounded-full object-cover"
-        />
+      <div className="mb-[18px] flex items-center gap-3">
+        <div className="flex h-[38px] w-[38px] flex-none items-center justify-center rounded-full bg-olive-dark font-display text-[14px] font-semibold uppercase leading-none text-surface">
+          AV
+        </div>
         <div className="flex-1">
-          <div className="text-[15.5px] font-bold leading-tight text-ink">Ask Nora</div>
-          <div className="mt-[2px] font-mono text-[11px] font-medium uppercase leading-tight tracking-[.06em] text-ink/50">
-            Chat or voice · replies in seconds
+          <div className="font-display text-[17px] font-semibold uppercase leading-[1.15] tracking-[.05em] text-ink">
+            Ask Nora
+          </div>
+          <div className="mt-[3px] text-[12px] leading-[1.3] text-ink/60">
+            Chat or voice · replies in ~8 seconds
           </div>
         </div>
-        <span className="flex flex-none items-center gap-1 rounded-full bg-olive/10 px-2 py-1 font-mono text-[10px] font-medium uppercase tracking-[.1em] text-olive">
-          <span className="h-1.5 w-1.5 rounded-full bg-olive" />
+        <span className="flex flex-none items-center gap-1.5 rounded-full bg-olive-dark/[.12] px-[11px] py-[7px] text-[9.5px] font-semibold uppercase leading-[1.4] tracking-[.16em] text-olive-dark">
+          <span className="h-1.5 w-1.5 rounded-full bg-olive-dark" />
           Online
         </span>
       </div>
 
-      {/* Sample conversation */}
-      <div className="flex flex-col gap-2 pt-3.5">
-        <div className="max-w-[85%] self-start rounded-[14px_14px_14px_4px] bg-canvas px-3.5 py-2.5 text-[14.5px] leading-[1.5] text-ink">
-          Hi — what are we working on?
-        </div>
-        <div className="max-w-[85%] self-end rounded-[14px_14px_4px_14px] bg-olive-dark px-3.5 py-2.5 text-[14.5px] leading-[1.5] text-white">
-          My kitchen. It&apos;s a 1970s galley and the cabinets are shot.
-        </div>
+      {/* Transcript */}
+      <div className="mb-4 flex max-h-[220px] flex-col gap-2.5 overflow-y-auto">
+        {msgs.map((m, i) => (
+          <div
+            key={i}
+            className={
+              m.role === "u"
+                ? "max-w-[86%] self-end rounded-[12px_12px_3px_12px] bg-olive-dark px-[15px] py-3 text-[14.5px] leading-[1.55] text-surface"
+                : "max-w-[86%] self-start rounded-[12px_12px_12px_3px] bg-canvas px-[15px] py-3 text-[14.5px] leading-[1.55] text-ink"
+            }
+          >
+            {m.text}
+          </div>
+        ))}
       </div>
 
       {/* Input */}
@@ -62,44 +73,43 @@ export function HeroChat() {
         value={input}
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={(e) => {
-          if (e.key === "Enter") submit(input);
+          if (e.key === "Enter") push(input);
         }}
         placeholder="Redo my 1970s kitchen — where do I start?"
-        className="mt-3 w-full rounded-[11px] border border-ink/15 bg-surface px-3.5 py-3.5 text-[14.5px] leading-none text-ink outline-none placeholder:text-ink/45 focus:border-accent"
+        className="w-full rounded-[9px] border border-ink/[.18] bg-[#fffdf8] px-4 py-[15px] text-[15px] leading-[1.3] text-ink outline-none placeholder:text-ink/45 focus:border-accent"
       />
 
       {/* Actions */}
-      <div className="mt-2.5 flex gap-2">
+      <div className="mt-2.5 flex gap-[9px]">
         <button
-          onClick={() => submit(input)}
-          className="flex-[2] rounded-[11px] bg-accent px-4 py-3.5 text-[14px] font-semibold uppercase tracking-[.04em] leading-none text-white transition-transform hover:scale-[1.01]"
+          onClick={() => push(input || "Kitchen refresh — where do I start?")}
+          className="flex-[2] rounded-[9px] bg-accent p-[17px] font-display text-[14px] font-semibold uppercase leading-[1.2] tracking-[.12em] text-surface transition-colors hover:bg-accent-dark"
         >
           Get my callback
         </button>
         <button
-          onClick={() => openChat({ mode: "home" })}
-          className="flex-1 rounded-[11px] border border-ink/20 bg-white px-4 py-3.5 text-[14px] font-semibold uppercase tracking-[.04em] leading-none text-ink transition-colors hover:border-ink/40"
+          onClick={() => openChat()}
+          className="flex-1 whitespace-nowrap rounded-[9px] border-[1.5px] border-olive-dark p-[17px] font-display text-[13px] font-semibold uppercase leading-[1.2] tracking-[.1em] text-olive-dark transition-colors hover:bg-olive-dark hover:text-surface"
         >
           ● Talk
         </button>
       </div>
 
-      {/* Quick chips */}
-      <div className="mt-2.5 flex flex-wrap gap-1.5">
+      {/* Chips */}
+      <div className="mt-3 flex flex-wrap gap-[7px]">
         {CHIPS.map((chip) => (
           <button
             key={chip}
-            onClick={() => submit(chip)}
-            className="rounded-full border border-ink/[.14] px-3 py-2 text-[13px] font-medium leading-tight text-ink/[.7] transition-colors hover:border-accent hover:text-accent-link"
+            onClick={() => push(chip)}
+            className="inline-flex items-center rounded-full border border-ink/[.16] px-3 py-[7px] text-[12px] font-medium leading-[1.35] text-ink/[.68] transition-colors hover:border-accent hover:text-accent"
           >
             {chip}
           </button>
         ))}
       </div>
 
-      {/* Footer note */}
-      <div className="mt-3 border-t border-ink/[.07] pt-3 font-mono text-[11.5px] font-medium leading-tight text-ink/55">
-        Free · no obligation · an expert calls you back
+      <div className="mt-[13px] text-center text-[11.5px] leading-[1.5] text-ink/50">
+        Free · no obligation · no fixed appointment to keep
       </div>
     </div>
   );

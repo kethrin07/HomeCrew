@@ -2,100 +2,44 @@ import Image from "next/image";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { Placeholder } from "@/components/Placeholder";
 import { HeroChat } from "@/components/HeroChat";
 import { BeforeAfter } from "@/components/BeforeAfter";
 
 const STEPS = [
   {
     n: "01",
-    media: "chat + voice, in the hero",
     img: "/images/chat-voice.png",
-    title: "Talk to Nora",
-    body: "Type it or say it out loud, and send photos if you have them. Nora asks about scope, timing and budget — no 14-field form.",
+    label: "Photo — homeowner on phone",
+    title: "Tell Nora",
+    body: "Type it or speak it, photos welcome. She asks about scope, timing and budget. No fourteen-field form.",
   },
   {
     n: "02",
-    media: "expert on a video call",
-    img: "/images/expert-video-call.png",
-    title: "Get an appointment with an expert",
-    body: "Nora lines up a licensed pro and locks in a time that suits you — on site or on a call. No waiting around, no phone tag.",
+    img: "/images/itemised-quote.png",
+    label: "Screen — price range panel",
+    title: "See the range",
+    body: "A real price band for your ZIP code and square footage, before anyone calls. You decide if it is worth continuing.",
   },
   {
     n: "03",
-    media: "itemised quote",
-    img: "/images/itemised-quote.png",
-    title: "Get a personalized quote",
-    body: "Your expert scopes the job with you and hands over a clear, itemised quote built around your home, your ZIP code and your budget.",
+    img: "/images/expert-video-call.png",
+    label: "Photo — expert at the door",
+    title: "Get the call",
+    body: "Nora hands your notes to a HomeCrew expert who rings within two hours. No slot to keep, nothing repeated.",
   },
 ];
 
-const TRUST = ["Licence checked", "Insured on file", "2-year warranty"];
-
-function trustIcon(i: number) {
-  if (i === 0)
-    return (
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M4 12l5 5L20 6" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    );
-  if (i === 1)
-    return (
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M12 2.5l2.1 6.4h6.7l-5.4 4 2 6.4-5.4-4-5.4 4 2-6.4-5.4-4h6.7z" />
-      </svg>
-    );
-  return (
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12 2.5l7.5 3.2v5.5c0 4.5-3.1 8.2-7.5 9.3-4.4-1.1-7.5-4.8-7.5-9.3V5.7z" />
-    </svg>
-  );
-}
-
-const BLOG_TOPICS = [
-  { tag: "Bathrooms", title: "What $15k covers in a bathroom remodel, fixture by fixture" },
-  { tag: "Roofing", title: "Repair or replace? Five signs your roof is out of time" },
-  { tag: "Resale", title: "Kitchen vs. bathroom: which remodel actually pays back at resale" },
-  { tag: "Quick wins", title: "Seven upgrades under $500 that make an older home feel new" },
-  { tag: "Budgeting", title: "Build a renovation budget with a buffer that actually holds" },
-  { tag: "Electrical", title: "Six warning signs your home's wiring is overdue" },
-  { tag: "Outdoor", title: "Deck materials, 10-year cost compared: wood vs. composite vs. PVC" },
-  { tag: "Planning", title: "A realistic renovation timeline, week by week" },
-  { tag: "Energy", title: "Insulation or new windows: where your money saves more" },
+const TRUST = [
+  { icon: "✓", label: "Licence checked" },
+  { icon: "◈", label: "Insured on file" },
+  { icon: "☗", label: "2-year warranty" },
 ];
 
 const CATEGORIES = [
-  { name: "Kitchens", range: "$18k–$65k", img: "/images/kitchens.png" },
-  { name: "Bathrooms", range: "$9k–$30k", img: "/images/bathrooms.png" },
-  { name: "Roof & gutters", range: "$7k–$24k", img: "/images/roof-and-gutters.png" },
-  { name: "Decks & yards", range: "$5k–$28k", img: "/images/decks-and-yards.png" },
-];
-
-const TESTIMONIALS = [
-  {
-    stars: "★★★★★",
-    quote:
-      "I sent one message at 9pm and had two contractors booked for Thursday. That has never happened to me before.",
-    name: "Priya N.",
-    meta: "Bathroom · Austin",
-    img: "/images/priya.png",
-  },
-  {
-    stars: "★★★★★",
-    quote:
-      "First house, no idea what anything costs. The price bands stopped me getting talked into a $60k kitchen.",
-    name: "Marcus T.",
-    meta: "Kitchen · Columbus",
-    img: "/images/marcus.png",
-  },
-  {
-    stars: "★★★★☆",
-    quote:
-      "Wanted a human, got one — the agent handed me to a real coordinator when my roof turned out to be structural.",
-    name: "Dana R.",
-    meta: "Roofing · Portland",
-    img: "/images/dana.png",
-  },
+  { name: "Kitchens", range: "$18k – $65k", img: "/images/kitchens.png" },
+  { name: "Bathrooms", range: "$9k – $30k", img: "/images/bathrooms.png" },
+  { name: "Roof & gutters", range: "$7k – $24k", img: "/images/roof-and-gutters.png" },
+  { name: "Decks & yards", range: "$5k – $28k", img: "/images/decks-and-yards.png" },
 ];
 
 export default function HomePage() {
@@ -104,155 +48,153 @@ export default function HomePage() {
       <Header />
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-ink">
-        {/* Dark photo hero */}
+      <section className="relative overflow-hidden">
         <Image
-          src="/images/kitch-reno.jpeg"
+          src="/images/kitchens.png"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="pointer-events-none object-cover"
+          className="object-cover"
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-ink/90 via-ink/70 to-ink/45" />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/55 to-transparent" />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(100deg,rgba(28,32,24,.88) 0%,rgba(28,32,24,.62) 46%,rgba(28,32,24,.22) 100%)",
+          }}
+        />
+        <span className="absolute right-5 top-5 hidden rounded bg-black/30 px-[10px] py-1.5 text-[9.5px] font-medium uppercase leading-[1.4] tracking-[.16em] text-surface/75 sm:block">
+          Video — living room remodel, muted loop
+        </span>
 
-        {/* Video label chip */}
-        <div className="absolute right-5 top-5 z-10 hidden sm:block lg:right-8">
-          <span className="rounded-full bg-ink/70 px-3 py-1.5 font-mono text-[9.5px] font-medium uppercase tracking-[.14em] text-white/70">
-            video — kitchen walkthrough, muted loop
-          </span>
-        </div>
-
-        <div className="relative mx-auto grid w-full max-w-[1200px] grid-cols-1 items-center gap-10 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-[1fr_minmax(0,520px)] lg:gap-14 lg:px-12 lg:py-24">
+        <div className="relative mx-auto grid min-h-[540px] w-full max-w-[1200px] grid-cols-1 items-center gap-12 px-5 py-16 sm:min-h-[620px] sm:px-8 sm:py-24 lg:min-h-[720px] lg:grid-cols-[1.12fr_.88fr] lg:gap-[48px] lg:px-11 lg:py-[100px]">
           {/* Copy */}
-          <div className="flex flex-col gap-6">
-            <div className="font-mono text-[11px] font-medium uppercase leading-none tracking-[.2em] text-accent-soft">
-              Matched in one conversation
+          <div className="flex flex-col gap-[22px]">
+            <div className="text-[10px] font-medium uppercase leading-none tracking-[.28em] text-accent-soft">
+              Welcome to HomeCrew
             </div>
-            <h1 className="balance m-0 text-[42px] font-semibold leading-[.98] tracking-[.005em] text-white sm:text-[58px] lg:text-[68px]">
-              Tell us the project.
+            <h1 className="m-0 whitespace-nowrap font-display uppercase text-[42px] font-semibold leading-[.96] tracking-[.005em] text-surface sm:text-[58px] lg:text-[72px]">
+              Modern homes,
               <br />
-              We&apos;ll bring the pros.
+              vetted crews
             </h1>
-            <p className="pretty m-0 max-w-[420px] text-[16.5px] font-normal leading-[1.6] text-white/[.82] sm:text-[17.5px]">
-              Nora lines up three licensed pros with real quotes — chat or call
-              her right here. No forms, no call centre, no chasing.
+            <p className="pretty m-0 max-w-[430px] text-[16px] leading-[1.7] text-surface/80">
+              Tell Nora what you want done. She scopes the job, prices it for
+              your ZIP code, and has a HomeCrew expert call you back the same
+              afternoon.
             </p>
-
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[14px]">
-              <div className="flex items-center gap-2">
-                <span className="tracking-[.15em] text-accent-soft">★★★★★</span>
-                <span className="text-white/80">
-                  <strong className="font-semibold text-white">4.8</strong> from 12,400
-                  homeowners
-                </span>
+            <div className="mt-1.5 flex flex-wrap items-center gap-x-[26px] gap-y-3">
+              <div className="flex items-center gap-2.5">
+                <span className="text-[13px] tracking-[.1em] text-accent-soft">★★★★★</span>
+                <span className="text-[13px] text-surface/[.72]">4.8 · 12,400 homeowners</span>
               </div>
-              <span className="text-white/55">Licensed &amp; insured only</span>
+              <span className="hidden h-4 w-px bg-surface/25 sm:block" />
+              <span className="text-[13px] text-surface/[.72]">Licensed &amp; insured only</span>
             </div>
           </div>
 
           {/* Chat card */}
-          <div className="lg:justify-self-end">
+          <div className="w-full lg:justify-self-end lg:max-w-[460px]">
             <HeroChat />
           </div>
         </div>
       </section>
 
       {/* How it works */}
-      <section id="how" className="bg-olive px-5 py-12 sm:px-8 sm:py-[60px] lg:px-12">
-        <div className="mx-auto flex w-full max-w-[1080px] flex-col items-center gap-10">
-          {/* Centered header */}
-          <div className="flex flex-col items-center gap-4 text-center">
-            <div className="font-mono text-[12px] font-medium uppercase leading-none tracking-[.18em] text-accent-soft">
-              How it works
-            </div>
-            <h2 className="balance m-0 max-w-[640px] text-[26px] font-semibold leading-[1.1] tracking-[.005em] text-white sm:text-[32px] lg:text-[36px]">
-              Talk to Nora, meet an expert, and get a quote built for your home
-            </h2>
-            <p className="pretty m-0 max-w-[460px] text-[16px] font-normal leading-[1.6] text-white/80">
-              A few minutes with Nora, an expert booked the same day, and a real
-              quote in your hands. Nothing to fill in twice.
-            </p>
+      <section
+        id="how"
+        className="flex flex-col items-center gap-[46px] bg-olive px-5 py-16 sm:px-8 sm:py-[78px] lg:px-11"
+      >
+        <div className="flex flex-col items-center gap-4 text-center">
+          <div className="text-[10px] font-medium uppercase leading-none tracking-[.28em] text-accent-soft">
+            How it works
           </div>
+          <h2 className="m-0 max-w-[720px] font-display uppercase text-[30px] font-semibold leading-[1.04] tracking-[.01em] text-surface sm:text-[40px] lg:text-[50px]">
+            One chat with Nora.
+            <br className="hidden sm:block" />
+            An expert calls you back.
+          </h2>
+        </div>
 
-          {/* Steps */}
-          <div className="grid w-full grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 md:gap-7">
-            {STEPS.map((s) => (
-              <div key={s.n} className="flex flex-col gap-3">
-                <Placeholder src={s.img} alt={s.media} className="h-[180px] rounded-xl" />
-                <div className="flex items-baseline gap-2">
-                  <span className="font-mono text-[14px] font-semibold leading-none text-accent-soft">
-                    {s.n}
-                  </span>
-                  <span className="font-mono text-[14px] font-semibold uppercase leading-none tracking-[.08em] text-accent-soft">
-                    {s.title}
-                  </span>
-                </div>
-                <p className="pretty m-0 text-[15.5px] font-normal leading-[1.6] text-white/85">
-                  {s.body}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          {/* CTA */}
-          <div className="flex flex-col items-center gap-4">
-            <p className="m-0 max-w-[440px] text-center text-[15px] font-medium leading-[1.55] text-white/80">
-              Book a time that suits you and get a written quote — no pressure to
-              commit until you&apos;re ready.
-            </p>
-            <Link
-              href="/ava"
-              className="rounded-[10px] bg-accent px-7 py-4 text-[14px] font-semibold uppercase leading-none tracking-[.06em] text-white transition-transform hover:scale-[1.02] hover:text-white"
-            >
-              Start with Nora
-            </Link>
-          </div>
-
-          {/* Trust badges */}
-          <div className="grid w-full max-w-[720px] grid-cols-1 gap-3.5 sm:grid-cols-3">
-            {TRUST.map((t, i) => (
+        <div className="grid w-full max-w-[1200px] grid-cols-1 gap-[26px] sm:grid-cols-2 md:grid-cols-3">
+          {STEPS.map((s) => (
+            <div key={s.n} className="flex flex-col gap-[18px]">
               <div
-                key={t}
-                className="flex items-center justify-center gap-2 rounded-xl bg-sand px-4 py-4 text-center"
+                className="flex h-[220px] items-end rounded-[14px] bg-cover bg-center p-[13px] sm:h-[250px]"
+                style={{ backgroundImage: `url('${s.img}')` }}
               >
-                <span className="text-accent">{trustIcon(i)}</span>
-                <span className="font-mono text-[13px] font-semibold uppercase leading-none tracking-[.1em] text-accent-dark">
-                  {t}
+                <span className="rounded bg-[rgba(28,32,24,.4)] px-2 py-[5px] text-[9px] font-medium uppercase leading-[1.4] tracking-[.14em] text-surface/[.82]">
+                  {s.label}
                 </span>
               </div>
-            ))}
-          </div>
+              <div className="flex items-baseline gap-[11px]">
+                <span className="font-display text-[13px] font-semibold leading-none tracking-[.1em] text-accent-soft">
+                  {s.n}
+                </span>
+                <span className="font-display text-[22px] font-semibold uppercase leading-[1.15] tracking-[.04em] text-surface">
+                  {s.title}
+                </span>
+              </div>
+              <p className="m-0 text-[14.5px] leading-[1.7] text-surface/[.76]">{s.body}</p>
+            </div>
+          ))}
+        </div>
+
+        <Link
+          href="/ava"
+          className="rounded-[7px] bg-accent px-[34px] py-4 font-display text-[13.5px] font-semibold uppercase leading-none tracking-[.14em] text-surface transition-colors hover:bg-accent-dark hover:text-surface"
+        >
+          Start with Nora
+        </Link>
+
+        <div className="mt-1.5 grid w-full max-w-[860px] grid-cols-1 gap-[22px] sm:grid-cols-3">
+          {TRUST.map((t) => (
+            <div
+              key={t.label}
+              className="flex flex-col items-center gap-2.5 rounded-xl bg-sand px-5 py-[26px] text-center"
+            >
+              <div className="font-display text-[20px] font-semibold leading-none text-accent">{t.icon}</div>
+              <div className="font-display text-[14px] font-semibold uppercase leading-none tracking-[.12em] text-accent-dark">
+                {t.label}
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
       <BeforeAfter />
 
       {/* Categories */}
-      <section id="categories" className="px-5 pb-14 pt-14 sm:px-8 sm:pb-[66px] lg:px-12">
-        <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-[22px]">
+      <section id="categories" className="px-5 pb-[82px] sm:px-8 lg:px-11">
+        <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-[30px]">
           <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-2">
-            <h2 className="m-0 text-[28px] font-bold leading-[1.1] tracking-[-.01em] text-olive-dark sm:text-[34px] lg:text-[38px]">
+            <h2 className="m-0 font-display uppercase text-[30px] font-semibold leading-[1.05] tracking-[.01em] text-olive-dark sm:text-[38px] lg:text-[46px]">
               Start where you are
             </h2>
-            <Link href="/#categories" className="text-[14px] font-semibold leading-none text-accent-link">
+            <Link
+              href="/#categories"
+              className="font-display text-[12.5px] font-semibold uppercase leading-none tracking-[.14em] text-accent"
+            >
               All 34 categories →
             </Link>
           </div>
-          <div className="grid grid-cols-2 gap-[14px] lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-[18px] lg:grid-cols-4">
             {CATEGORIES.map((c) => (
               <Link
                 href="/ava"
                 key={c.name}
-                className="overflow-hidden rounded-xl border border-line transition-shadow hover:shadow-card"
+                className="overflow-hidden rounded-[14px] bg-canvas transition-shadow hover:shadow-card"
               >
-                <Placeholder src={c.img} alt={c.name} className="h-[132px]" />
-                <div className="bg-canvas px-4 py-[14px]">
-                  <div className="text-[15.5px] font-semibold leading-[1.3] text-ink">
+                <div
+                  className="h-[160px] bg-cover bg-center sm:h-[210px]"
+                  style={{ backgroundImage: `url('${c.img}')` }}
+                />
+                <div className="px-[18px] pb-[22px] pt-[18px]">
+                  <div className="font-display text-[19px] font-semibold uppercase leading-[1.1] tracking-[.05em] text-ink">
                     {c.name}
                   </div>
-                  <div className="mt-[6px] font-mono text-[12px] font-semibold leading-none tracking-[.04em] text-accent">
+                  <div className="mt-[9px] text-[12px] font-medium leading-none tracking-[.06em] text-accent">
                     {c.range}
                   </div>
                 </div>
@@ -262,137 +204,97 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="bg-canvas px-5 py-14 sm:px-8 sm:py-[60px] lg:px-12">
-        <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-[26px]">
-          <h2 className="m-0 text-[26px] font-bold leading-[1.1] tracking-[-.01em] text-olive-dark sm:text-[30px] lg:text-[34px]">
-            What homeowners said
-          </h2>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            {TESTIMONIALS.map((t) => (
-              <div
-                key={t.name}
-                className="flex flex-col gap-[14px] rounded-[14px] border border-line bg-white p-[22px]"
-              >
-                <div className="font-mono text-[13px] font-medium leading-none tracking-[.08em] text-accent-link">
-                  {t.stars}
-                </div>
-                <p className="m-0 text-[16px] font-normal leading-[1.6] text-ink/80">
-                  {t.quote}
-                </p>
-                <div className="mt-auto flex items-center gap-[10px]">
-                  <Image
-                    src={t.img}
-                    alt={t.name}
-                    width={34}
-                    height={34}
-                    className="h-[34px] w-[34px] rounded-full object-cover"
-                  />
-                  <div>
-                    <div className="text-[14px] font-semibold leading-[1.3] text-ink">
-                      {t.name}
-                    </div>
-                    <div className="text-[13px] font-normal leading-[1.3] text-ink/60">
-                      {t.meta}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Guides */}
-      <section id="blog" className="bg-canvas px-5 py-14 sm:px-8 sm:py-[66px] lg:px-12">
-        <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-6">
-          <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-2">
-            <h2 className="m-0 text-[28px] font-bold leading-[1.1] tracking-[-.01em] text-olive-dark sm:text-[34px] lg:text-[38px]">
-              Read before you renovate
-            </h2>
-            <Link href="/guides/kitchen-30k" className="text-[14px] font-semibold leading-none text-accent-link">
+      <section id="blog" className="bg-canvas px-5 py-16 sm:px-8 sm:py-[78px] lg:px-11">
+        <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-8">
+          <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-3">
+            <div className="flex flex-col gap-[13px]">
+              <div className="text-[10px] font-medium uppercase leading-none tracking-[.28em] text-accent">
+                Guides
+              </div>
+              <h2 className="m-0 font-display uppercase text-[30px] font-semibold leading-[1.05] tracking-[.01em] text-olive-dark sm:text-[38px] lg:text-[46px]">
+                Read before you renovate
+              </h2>
+            </div>
+            <Link
+              href="/guides/kitchen-30k"
+              className="font-display text-[12.5px] font-semibold uppercase leading-none tracking-[.14em] text-accent"
+            >
               All guides →
             </Link>
           </div>
-          <div className="grid grid-cols-1 gap-[18px] md:grid-cols-[1.6fr_1fr_1fr]">
-            <Link href="/guides/kitchen-30k" className="flex flex-col gap-[14px]">
-              <Placeholder className="h-[200px] rounded-xl sm:h-[230px]" align="none" />
-              <div className="font-mono text-[11.5px] font-medium uppercase leading-none tracking-[.1em] text-ink/[.42]">
+
+          <div className="grid grid-cols-1 gap-[22px] md:grid-cols-[1.5fr_1fr_1fr]">
+            <Link href="/guides/kitchen-30k" className="flex flex-col gap-4">
+              <div
+                className="h-[220px] rounded-[14px] bg-cover bg-center sm:h-[290px]"
+                style={{ backgroundImage: "url('/images/after.png')" }}
+              />
+              <div className="text-[9.5px] font-medium uppercase leading-none tracking-[.2em] text-ink/50">
                 Budgeting · 7 min
               </div>
-              <div className="max-w-[440px] text-[22px] font-bold leading-[1.22] tracking-[-.025em] text-ink sm:text-[25px]">
+              <div className="max-w-[430px] font-display text-[26px] font-semibold uppercase leading-[1.12] tracking-[.02em] text-ink sm:text-[30px]">
                 What a $30,000 kitchen actually buys you in 2026
               </div>
+              <p className="m-0 max-w-[400px] text-[14.5px] leading-[1.7] text-ink/[.62]">
+                We pulled the line items from 214 finished kitchens under
+                $35,000 and broke down where the money went.
+              </p>
             </Link>
-            <div className="flex flex-col gap-3">
-              <Placeholder className="h-[130px] rounded-xl" align="none" />
-              <div className="font-mono text-[11.5px] font-medium uppercase leading-none tracking-[.1em] text-ink/[.42]">
+
+            <Link href="/guides/kitchen-30k" className="flex flex-col gap-[13px]">
+              <div
+                className="h-[170px] rounded-[14px] bg-cover bg-center"
+                style={{ backgroundImage: "url('/images/bathrooms.png')" }}
+              />
+              <div className="text-[9.5px] font-medium uppercase leading-none tracking-[.2em] text-ink/50">
                 Hiring · 5 min
               </div>
-              <div className="text-[18px] font-bold leading-[1.3] tracking-[-.02em] text-ink">
+              <div className="font-display text-[21px] font-semibold uppercase leading-[1.18] tracking-[.03em] text-ink">
                 Nine questions to ask before you sign a contract
               </div>
-            </div>
-            <div className="flex flex-col gap-3">
-              <Placeholder className="h-[130px] rounded-xl" align="none" />
-              <div className="font-mono text-[11.5px] font-medium uppercase leading-none tracking-[.1em] text-ink/[.42]">
+            </Link>
+
+            <Link href="/guides/kitchen-30k" className="flex flex-col gap-[13px]">
+              <div
+                className="h-[170px] rounded-[14px] bg-cover bg-center"
+                style={{ backgroundImage: "url('/images/roof-and-gutters.png')" }}
+              />
+              <div className="text-[9.5px] font-medium uppercase leading-none tracking-[.2em] text-ink/50">
                 Permits · 4 min
               </div>
-              <div className="text-[18px] font-bold leading-[1.3] tracking-[-.02em] text-ink">
+              <div className="font-display text-[21px] font-semibold uppercase leading-[1.18] tracking-[.03em] text-ink">
                 Which jobs need a permit, by state
               </div>
-            </div>
-          </div>
-
-          {/* More example blog topics */}
-          <div className="mt-4 flex flex-col gap-[18px] border-t border-line pt-8">
-            <div className="font-mono text-[11.5px] font-medium uppercase leading-none tracking-[.14em] text-accent-link">
-              More on the blog
-            </div>
-            <div className="grid grid-cols-1 gap-x-8 gap-y-[14px] sm:grid-cols-2 lg:grid-cols-3">
-              {BLOG_TOPICS.map((t) => (
-                <Link
-                  key={t.title}
-                  href="/guides/kitchen-30k"
-                  className="group flex flex-col gap-[6px] border-t border-ink/[.06] pt-[14px]"
-                >
-                  <span className="font-mono text-[11.5px] font-medium uppercase leading-none tracking-[.1em] text-accent">
-                    {t.tag}
-                  </span>
-                  <span className="text-[16px] font-semibold leading-[1.4] tracking-[-.005em] text-ink transition-colors group-hover:text-accent-link">
-                    {t.title}
-                  </span>
-                </Link>
-              ))}
-            </div>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Dark CTA */}
-      <section className="bg-olive-dark px-5 py-14 sm:px-8 sm:py-[56px] lg:px-12">
-        <div className="mx-auto flex w-full max-w-[1200px] flex-col items-start justify-between gap-8 sm:flex-row sm:items-center sm:gap-10">
-          <div className="flex flex-col gap-3">
-            <h2 className="m-0 max-w-[520px] text-[27px] font-bold leading-[1.12] tracking-[-.03em] text-white sm:text-[34px]">
+      {/* Closing CTA */}
+      <section className="bg-olive-dark px-5 py-14 sm:px-8 sm:py-16 lg:px-11">
+        <div className="mx-auto flex w-full max-w-[1200px] flex-col items-start justify-between gap-8 sm:flex-row sm:items-center sm:gap-12">
+          <div className="flex flex-col gap-[14px]">
+            <h2 className="m-0 max-w-[560px] font-display uppercase text-[30px] font-semibold leading-[1.06] tracking-[.01em] text-surface sm:text-[38px] lg:text-[42px]">
               Still just thinking about it? Ask anyway.
             </h2>
-            <p className="m-0 max-w-[440px] text-[16.5px] font-normal leading-[1.6] text-white/[.78]">
-              Nora will scope it, price it, and leave you alone until you&apos;re
+            <p className="m-0 max-w-[440px] text-[15px] leading-[1.7] text-surface/[.74]">
+              Nora will scope it, price it, and leave you alone until you are
               ready.
             </p>
           </div>
-          <div className="flex w-full flex-col gap-[10px] sm:w-auto sm:flex-none sm:flex-row">
+          <div className="flex w-full flex-col gap-[11px] sm:w-auto sm:flex-none sm:flex-row">
             <Link
               href="/ava"
-              className="rounded-[10px] bg-accent px-[22px] py-[15px] text-center text-[14.5px] font-semibold leading-none text-white hover:text-white"
+              className="rounded-[7px] bg-accent px-7 py-[17px] text-center font-display text-[13.5px] font-semibold uppercase leading-none tracking-[.14em] text-surface transition-colors hover:bg-accent-dark hover:text-surface"
             >
-              Start a chat
+              Chat with Nora
             </Link>
             <Link
               href="/ava"
-              className="rounded-[10px] border border-white/[.28] bg-transparent px-[22px] py-[15px] text-center text-[14.5px] font-semibold leading-none text-white hover:text-white"
+              className="rounded-[7px] border-[1.5px] border-surface/40 px-7 py-[17px] text-center font-display text-[13.5px] font-semibold uppercase leading-none tracking-[.14em] text-surface transition-colors hover:border-surface hover:text-surface"
             >
-              Talk to Nora
+              Request a call
             </Link>
           </div>
         </div>
