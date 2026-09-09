@@ -17,7 +17,7 @@ export function Header({ variant = "default" }: { variant?: "default" | "onDark"
       className={
         onDark
           ? "relative z-10 px-5 py-5 sm:px-8 lg:px-12"
-          : "border-b border-line px-5 py-[18px] sm:px-8 lg:px-12"
+          : "sticky top-0 z-40 border-b border-line bg-surface/80 px-5 py-[18px] shadow-[0_1px_0_rgba(46,58,62,0.04)] backdrop-blur-md sm:px-8 lg:px-12"
       }
     >
       <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between">

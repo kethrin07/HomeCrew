@@ -78,12 +78,22 @@ const TESTIMONIALS = [
 
 export default function HomePage() {
   return (
-    <main className="w-full overflow-hidden bg-white">
+    <main className="w-full overflow-hidden bg-surface">
       <Header />
 
       {/* Hero */}
       <section className="relative overflow-hidden bg-ink">
-        {/* Full-bleed kitchen walkthrough */}
+        {/* Temporary hero image (swap back to the <video> below to restore). */}
+        <Image
+          src="/images/hero-temp.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          aria-hidden="true"
+          className="pointer-events-none object-cover"
+        />
+        {/*
         <video
           src="/videos/kitchen-walkthrough.mp4"
           poster="/images/after.png"
@@ -95,6 +105,7 @@ export default function HomePage() {
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 h-full w-full object-cover"
         />
+        */}
         {/* Subtle dark scrim, heavier on the right, for a moodier video */}
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-ink/40" />
         {/* White shading kept to the left to hold the text */}
@@ -133,7 +144,7 @@ export default function HomePage() {
       </section>
 
       {/* How it works */}
-      <section id="how" className="bg-white px-5 py-14 sm:px-8 sm:py-[74px] lg:px-12">
+      <section id="how" className="border-b border-line bg-canvas px-5 py-14 sm:px-8 sm:py-[74px] lg:px-12">
         <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-10">
           <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end sm:gap-12">
             <div className="flex flex-col gap-[14px]">
@@ -170,7 +181,7 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="flex flex-col items-start justify-between gap-5 rounded-[14px] border border-ink/10 bg-surface px-5 py-5 sm:flex-row sm:items-center sm:gap-8 sm:px-[26px] sm:py-[22px]">
+          <div className="flex flex-col items-start justify-between gap-5 rounded-[14px] border border-line bg-surface px-5 py-5 shadow-card sm:flex-row sm:items-center sm:gap-8 sm:px-[26px] sm:py-[22px]">
             <div className="text-[15px] font-medium leading-[1.5] text-ink/[.72]">
               Book a time that suits you and get a written quote — no pressure to
               commit until you&apos;re ready.
@@ -203,7 +214,7 @@ export default function HomePage() {
               <Link
                 href="/ava"
                 key={c.name}
-                className="overflow-hidden rounded-xl border border-line transition-shadow hover:shadow-card"
+                className="overflow-hidden rounded-xl border border-line bg-surface shadow-card transition-all hover:-translate-y-0.5 hover:shadow-[0_14px_34px_-16px_rgba(36,40,44,0.22)]"
               >
                 <Placeholder src={c.img} alt={c.name} className="h-[132px]" />
                 <div className="px-4 py-[14px]">
@@ -221,7 +232,7 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials */}
-      <section className="bg-surface px-5 py-14 sm:px-8 sm:py-[60px] lg:px-12">
+      <section className="border-y border-line bg-canvas px-5 py-14 sm:px-8 sm:py-[60px] lg:px-12">
         <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-[26px]">
           <h2 className="m-0 text-[26px] font-bold leading-[1.1] tracking-[-.03em] text-ink sm:text-[30px] lg:text-[34px]">
             What homeowners said
@@ -230,7 +241,7 @@ export default function HomePage() {
             {TESTIMONIALS.map((t) => (
               <div
                 key={t.name}
-                className="flex flex-col gap-[14px] rounded-[14px] border border-line bg-white p-[22px]"
+                className="flex flex-col gap-[14px] rounded-[14px] border border-line bg-surface p-[22px] shadow-card"
               >
                 <div className="font-mono text-[13px] font-medium leading-none tracking-[.08em] text-accent-link">
                   {t.stars}

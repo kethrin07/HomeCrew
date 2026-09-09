@@ -139,7 +139,7 @@ export function AvaFlow({ seed }: { seed?: string }) {
                   className={
                     m.role === "u"
                       ? "max-w-[88%] self-end rounded-[14px_14px_4px_14px] bg-accent px-[14px] py-[11px] text-[14.5px] font-normal leading-[1.5] text-white"
-                      : "max-w-[88%] self-start rounded-[14px_14px_14px_4px] bg-[#f1f3f4] px-[14px] py-[11px] text-[14.5px] font-normal leading-[1.5] text-ink"
+                      : "max-w-[88%] self-start rounded-[14px_14px_14px_4px] bg-canvas px-[14px] py-[11px] text-[14.5px] font-normal leading-[1.5] text-ink"
                   }
                 >
                   {m.text}
@@ -147,7 +147,7 @@ export function AvaFlow({ seed }: { seed?: string }) {
               ))}
 
               {typing ? (
-                <div className="max-w-[88%] self-start rounded-[14px_14px_14px_4px] bg-[#f1f3f4] px-[14px] py-[11px] text-[14.5px] font-normal leading-[1.5] text-ink/50">
+                <div className="max-w-[88%] self-start rounded-[14px_14px_14px_4px] bg-canvas px-[14px] py-[11px] text-[14.5px] font-normal leading-[1.5] text-ink/50">
                   Nora is typing…
                 </div>
               ) : null}

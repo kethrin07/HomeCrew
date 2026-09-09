@@ -25,7 +25,7 @@ export function HeroChat() {
   };
 
   return (
-    <div className="w-full max-w-[450px] rounded-2xl border border-ink/10 bg-white p-4 shadow-composer">
+    <div className="w-full max-w-[450px] rounded-2xl border border-ink/10 bg-surface p-4 shadow-composer">
       {/* Header */}
       <div className="mb-3 flex items-center gap-2.5">
         <div className="relative flex-none">
@@ -47,7 +47,7 @@ export function HeroChat() {
       </div>
 
       {/* Default greeting */}
-      <div className="rounded-[14px_14px_14px_4px] bg-[#f1f3f4] px-3.5 py-2.5 text-[13.5px] leading-[1.5] text-ink">
+      <div className="rounded-[14px_14px_14px_4px] bg-canvas px-3.5 py-2.5 text-[13.5px] leading-[1.5] text-ink">
         {GREETING}
       </div>
 
@@ -65,7 +65,7 @@ export function HeroChat() {
       </div>
 
       {/* Composer */}
-      <div className="mt-3 flex items-center gap-2 rounded-[11px] border border-ink/15 bg-surface px-3 py-2">
+      <div className="mt-3 flex items-center gap-2 rounded-[11px] border border-ink/15 bg-canvas px-3 py-2">
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}

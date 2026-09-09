@@ -8,10 +8,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: "#14171a",
-        surface: "#f8f9fa",
-        canvas: "#eceef0",
-        line: "rgba(20,23,26,0.09)",
+        // 60/30/10 — clean white/grey base, charcoal grey, green for CTAs.
+        ink: "#24282c", // dark charcoal grey (dark sections + text)
+        surface: "#fafbfc", // near-white (dominant base)
+        canvas: "#eef0f3", // light grey (alternating bands)
+        line: "rgba(36,40,44,0.11)",
         accent: {
           DEFAULT: "oklch(0.52 0.13 165)",
           link: "oklch(0.46 0.12 165)",
@@ -30,10 +31,10 @@ const config: Config = {
         tighter2: "-.035em",
       },
       boxShadow: {
-        composer: "0 22px 50px -22px rgba(20,23,26,.34)",
+        composer: "0 22px 50px -22px rgba(36,40,44,.34)",
         float: "0 24px 60px -20px rgba(0,0,0,.5)",
-        pill: "0 12px 34px -10px rgba(20,23,26,.55)",
-        card: "0 1px 3px rgba(20,23,26,.07)",
+        pill: "0 12px 34px -10px rgba(36,40,44,.5)",
+        card: "0 1px 3px rgba(36,40,44,.08)",
       },
     },
   },

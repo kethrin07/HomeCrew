@@ -15,8 +15,8 @@ body {
 }
 
 body {
-  background: #eceef0;
-  color: #14171a;
+  background: #fafbfc;
+  color: #24282c;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -34,10 +34,10 @@ a:hover {
   background:
     repeating-linear-gradient(
       135deg,
-      rgba(20, 23, 26, 0.055) 0 7px,
-      rgba(20, 23, 26, 0) 7px 14px
+      rgba(36, 40, 44, 0.05) 0 7px,
+      rgba(36, 40, 44, 0) 7px 14px
     ),
-    oklch(0.945 0.008 250);
+    #e6e8ec;
 }
 
 /* Before/after range slider */

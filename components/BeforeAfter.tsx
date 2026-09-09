@@ -10,7 +10,7 @@ export function BeforeAfter() {
   const [ba, setBa] = useState(52);
 
   return (
-    <section className="px-5 pb-14 sm:px-8 sm:pb-[66px] lg:px-12">
+    <section className="px-5 py-14 sm:px-8 sm:py-[66px] lg:px-12">
       <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-[22px]">
       <div className="flex flex-wrap items-baseline gap-x-[14px] gap-y-1">
         <h2 className="m-0 text-[28px] font-bold leading-[1.1] tracking-[-.03em] text-ink sm:text-[34px] lg:text-[38px]">
