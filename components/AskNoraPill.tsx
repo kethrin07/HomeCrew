@@ -2,14 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 /**
- * Floating "Ask Ava" pill fixed to the bottom-right of the viewport
+ * Floating "Ask Nora" pill fixed to the bottom-right of the viewport
  * (design 1d / 1f). Stays visible as the page scrolls.
  */
-export function AskAvaPill() {
+export function AskNoraPill() {
   return (
     <div className="pointer-events-none fixed bottom-5 right-5 z-50 sm:bottom-6 sm:right-6">
       <Link
-        href="/ava"
+        href="/nora"
         className="pointer-events-auto flex items-center gap-[11px] rounded-full bg-ink py-[10px] pl-3 pr-[18px] shadow-pill ring-1 ring-white/10"
       >
         <Image

@@ -2,21 +2,21 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useAvaChat } from "@/lib/ava";
+import { useNoraChat } from "@/lib/nora";
 
 const CHIPS = ["Kitchen refresh", "Roof leak", "Bathroom, under $15k"];
 
 /**
  * Hero chat composer (design 1a / 1d). The homeowner can type a project,
- * tap a chip, or hit "Ask Ava" — any of which pushes them into the Ava flow.
+ * tap a chip, or hit "Ask Nora" — any of which pushes them into the Nora flow.
  */
-export function AvaComposer() {
+export function NoraComposer() {
   const router = useRouter();
-  const { input, setInput } = useAvaChat();
+  const { input, setInput } = useNoraChat();
 
   const go = (seed?: string) => {
     const q = (seed ?? input).trim();
-    router.push(q ? `/ava?q=${encodeURIComponent(q)}` : "/ava");
+    router.push(q ? `/nora?q=${encodeURIComponent(q)}` : "/nora");
   };
 
   // TODO(elevenlabs): start the voice agent here instead of routing to chat.

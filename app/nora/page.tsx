@@ -1,19 +1,19 @@
 import { redirect } from "next/navigation";
 
 /**
- * The Ava intake flow is hidden for now — visiting /ava sends people back home.
- * The full three-panel experience is preserved in components/ava/AvaFlow.tsx and
+ * The Nora intake flow is hidden for now — visiting /nora sends people back home.
+ * The full three-panel experience is preserved in components/nora/NoraFlow.tsx and
  * the original page wiring is kept below for reference. Restore it once the
  * ElevenLabs voice agent + callback backend are wired up.
  */
-export default function AvaPage() {
+export default function NoraPage() {
   redirect("/");
 }
 
-/* --- Original /ava page, kept for later reference ---------------------------
+/* --- Original /nora page, kept for later reference ---------------------------
 import type { Metadata } from "next";
 import { Header } from "@/components/Header";
-import { AvaFlow } from "@/components/ava/AvaFlow";
+import { NoraFlow } from "@/components/nora/NoraFlow";
 
 export const metadata: Metadata = {
   title: "Nora — MyHomeQuote",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     "Nora collects the details and hands you to a real expert who calls you back within two hours.",
 };
 
-export default async function AvaPage({
+export default async function NoraPage({
   searchParams,
 }: {
   searchParams: Promise<{ q?: string }>;
@@ -34,7 +34,7 @@ export default async function AvaPage({
         <Header />
       </div>
       <div className="mx-auto max-w-[1180px] bg-surface sm:rounded-b-[10px] sm:border sm:border-t-0 sm:border-line sm:shadow-card">
-        <AvaFlow seed={q} />
+        <NoraFlow seed={q} />
       </div>
     </main>
   );

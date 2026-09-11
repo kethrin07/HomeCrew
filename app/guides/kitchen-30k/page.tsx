@@ -30,7 +30,7 @@ export default function GuidePage() {
           MyHomeQuote <span className="font-medium text-ink/45">Guides</span>
         </Link>
         <Link
-          href="/ava"
+          href="/nora"
           className="rounded-lg bg-ink px-[15px] py-[9px] text-[12.5px] font-semibold leading-none text-white hover:text-white"
         >
           Get matched
@@ -156,7 +156,7 @@ export default function GuidePage() {
               </div>
             </div>
             <Link
-              href="/ava"
+              href="/nora"
               className="w-full flex-none rounded-[9px] bg-white px-5 py-[13px] text-center text-[13.5px] font-semibold leading-none text-ink hover:text-ink sm:w-auto"
             >
               Ask Nora

@@ -48,7 +48,7 @@ export function Header({ variant = "default" }: { variant?: "default" | "onDark"
         </div>
         <div className="flex items-center gap-3 sm:gap-4">
           <Link
-            href="/ava"
+            href="/nora"
             className={`hidden text-[13.5px] font-medium leading-none sm:inline ${
               onDark ? "text-white/80 hover:text-white" : "text-ink/60 hover:text-ink"
             }`}
@@ -56,7 +56,7 @@ export function Header({ variant = "default" }: { variant?: "default" | "onDark"
             Sign in
           </Link>
           <Link
-            href="/ava"
+            href="/nora"
             className={`rounded-lg px-[17px] py-[10px] text-[13px] font-semibold leading-none ${
               onDark
                 ? "bg-white text-ink hover:text-ink"

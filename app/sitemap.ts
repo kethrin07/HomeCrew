@@ -4,7 +4,7 @@ import type { MetadataRoute } from "next";
 const SITE_URL = "https://homecrew.com";
 
 /**
- * Sitemap served at /sitemap.xml. Lists indexable routes only — /ava is
+ * Sitemap served at /sitemap.xml. Lists indexable routes only — /nora is
  * excluded because it redirects to the homepage. Add new guides/category
  * pages here (or generate them) as they ship.
  */

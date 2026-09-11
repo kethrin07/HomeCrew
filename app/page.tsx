@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Placeholder } from "@/components/Placeholder";
-import { AvaComposer } from "@/components/AvaComposer";
+import { NoraComposer } from "@/components/NoraComposer";
 import { BeforeAfter } from "@/components/BeforeAfter";
 
 const STEPS = [
@@ -98,7 +98,7 @@ export default function HomePage() {
               real quotes. No forms, no call centre, no chasing.
             </p>
 
-            <AvaComposer />
+            <NoraComposer />
 
             <div className="flex items-center gap-4">
               <div className="flex">
@@ -175,7 +175,7 @@ export default function HomePage() {
               commit until you&apos;re ready.
             </div>
             <Link
-              href="/ava"
+              href="/nora"
               className="w-full flex-none rounded-[10px] bg-accent px-[22px] py-[14px] text-center text-[14.5px] font-semibold leading-[1.2] text-white hover:text-white sm:w-auto"
             >
               Start with Nora
@@ -200,7 +200,7 @@ export default function HomePage() {
           <div className="grid grid-cols-2 gap-[14px] lg:grid-cols-4">
             {CATEGORIES.map((c) => (
               <Link
-                href="/ava"
+                href="/nora"
                 key={c.name}
                 className="overflow-hidden rounded-xl border border-line transition-shadow hover:shadow-card"
               >
@@ -340,13 +340,13 @@ export default function HomePage() {
           </div>
           <div className="flex w-full flex-col gap-[10px] sm:w-auto sm:flex-none sm:flex-row">
             <Link
-              href="/ava"
+              href="/nora"
               className="rounded-[10px] bg-white px-[22px] py-[15px] text-center text-[14.5px] font-semibold leading-none text-ink hover:text-ink"
             >
               Start a chat
             </Link>
             <Link
-              href="/ava"
+              href="/nora"
               className="rounded-[10px] border border-white/[.28] bg-transparent px-[22px] py-[15px] text-center text-[14.5px] font-semibold leading-none text-white hover:text-white"
             >
               Talk to Nora

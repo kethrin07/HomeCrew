@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { avaReply, type Message } from "@/lib/ava";
+import { noraReply, type Message } from "@/lib/nora";
 
 const QUICK_REPLIES = ["Keeping the sink", "Not sure yet", "Under $35k"];
 const CALL_TIMES = [
@@ -20,15 +20,15 @@ interface CallbackForm {
 }
 
 /**
- * The Ava intake flow (design 1g): three panels — a live chat that collects
+ * The Nora intake flow (design 1g): three panels — a live chat that collects
  * the project, a callback form, and the queue confirmation. `seed` is an
  * optional opening message carried over from the hero composer.
  *
- * The chat is scripted for now (see lib/ava). The voice buttons are stubs that
+ * The chat is scripted for now (see lib/nora). The voice buttons are stubs that
  * will be wired to the ElevenLabs conversational agent later — search for
  * `TODO(elevenlabs)`.
  */
-export function AvaFlow({ seed }: { seed?: string }) {
+export function NoraFlow({ seed }: { seed?: string }) {
   const [msgs, setMsgs] = useState<Message[]>([
     { text: "Hi — what are we working on?", role: "a" },
     {
@@ -56,7 +56,7 @@ export function AvaFlow({ seed }: { seed?: string }) {
     setMsgs((prev) => [
       ...prev,
       { text: q, role: "u" },
-      { text: avaReply(q), role: "a" },
+      { text: noraReply(q), role: "a" },
     ]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -72,8 +72,8 @@ export function AvaFlow({ seed }: { seed?: string }) {
     setMsgs((prev) => [...prev, { text, role: "u" }]);
     setInput("");
     setTyping(true);
-    // Simulate Ava composing a reply so the "TYPING…" state reads as real.
-    const reply = avaReply(text);
+    // Simulate Nora composing a reply so the "TYPING…" state reads as real.
+    const reply = noraReply(text);
     window.setTimeout(() => {
       setMsgs((prev) => [...prev, { text: reply, role: "a" }]);
       setTyping(false);

@@ -2,8 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { avaReply } from "@/lib/ava";
-import { GREETING, OPTIONS } from "@/lib/nora";
+import { noraReply, GREETING, OPTIONS } from "@/lib/nora";
 
 type Msg = { role: "nora" | "user"; text: string };
 type Mode = "home" | "chat";
@@ -31,7 +30,7 @@ function PanelShell({ children }: { children: React.ReactNode }) {
  * Nora's photo plus a prominent Call button — and offers a text-chat
  * alternative underneath.
  *
- * UI only: chat replies come from the scripted responder in lib/ava and the
+ * UI only: chat replies come from the scripted responder in lib/nora and the
  * Call button just shows a hint — no live voice/AI agent is wired up yet.
  * Search `TODO(elevenlabs)` / `TODO(agent)` to connect them.
  */
@@ -78,8 +77,8 @@ export function NoraChat() {
     setMsgs((prev) => [...prev, { role: "user", text: t }]);
     setInput("");
     setTyping(true);
-    // TODO(agent): swap avaReply for the live assistant response.
-    const reply = avaReply(t);
+    // TODO(agent): swap noraReply for the live assistant response.
+    const reply = noraReply(t);
     window.setTimeout(() => {
       setMsgs((prev) => [...prev, { role: "nora", text: reply }]);
       setTyping(false);
