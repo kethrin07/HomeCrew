@@ -12,14 +12,14 @@ const STEPS = [
     media: "chat + voice, in the hero",
     img: "/images/chat-voice.png",
     title: "Talk to Nora",
-    body: "Type it or say it out loud, and send photos if you have them. Nora asks about scope, timing and budget — no 14-field form.",
+    body: "Type it or say it out loud, and send photos if you have them. Nora asks about scope, timing and budget. No 14-field form.",
   },
   {
     n: "02",
     media: "expert on a video call",
     img: "/images/expert-video-call.png",
     title: "Get an appointment with an expert",
-    body: "Nora lines up a licensed pro and locks in a time that suits you — on site or on a call. No waiting around, no phone tag.",
+    body: "Nora lines up a licensed pro and locks in a time that suits you, on site or on a call. No waiting around, no phone tag.",
   },
   {
     n: "03",
@@ -69,7 +69,7 @@ const TESTIMONIALS = [
   {
     stars: "★★★★☆",
     quote:
-      "Wanted a human, got one — the agent handed me to a real coordinator when my roof turned out to be structural.",
+      "Wanted a human, got one. The agent handed me to a real coordinator when my roof turned out to be structural.",
     name: "Dana R.",
     meta: "Roofing · Portland",
     img: "/images/dana.png",
@@ -171,7 +171,7 @@ export default function HomePage() {
 
           <div className="flex flex-col items-start justify-between gap-5 rounded-[14px] border border-ink/10 bg-surface px-5 py-5 sm:flex-row sm:items-center sm:gap-8 sm:px-[26px] sm:py-[22px]">
             <div className="text-[15px] font-medium leading-[1.5] text-ink/[.72]">
-              Book a time that suits you and get a written quote — no pressure to
+              Book a time that suits you and get a written quote, with no pressure to
               commit until you&apos;re ready.
             </div>
             <Link
@@ -193,8 +193,8 @@ export default function HomePage() {
             <h2 className="m-0 text-[28px] font-bold leading-[1.1] tracking-[-.03em] text-ink sm:text-[34px] lg:text-[38px]">
               Start where you are
             </h2>
-            <Link href="/#categories" className="text-[13.5px] font-semibold leading-none text-accent-link">
-              All 34 categories →
+            <Link href="/categories" className="text-[13.5px] font-semibold leading-none text-accent-link">
+              All categories →
             </Link>
           </div>
           <div className="grid grid-cols-2 gap-[14px] lg:grid-cols-4">

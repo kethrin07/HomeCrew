@@ -42,7 +42,7 @@ export function noraReply(text: string, tone: ChatTone = "Concise"): string {
 }
 
 const INITIAL: Message[] = [
-  { text: "Hi — what are we working on?", role: "a" },
+  { text: "Hi, what are we working on?", role: "a" },
   {
     text: "My kitchen. It's a 1970s galley and the cabinets are shot.",
     role: "u",
@@ -73,7 +73,7 @@ export function useNoraChat(tone: ChatTone = "Concise") {
   );
 
   const send = useCallback(
-    () => push(input || "Kitchen refresh — where do I start?"),
+    () => push(input || "Kitchen refresh, where do I start?"),
     [push, input],
   );
 

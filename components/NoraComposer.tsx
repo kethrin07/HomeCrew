@@ -8,7 +8,7 @@ const CHIPS = ["Kitchen refresh", "Roof leak", "Bathroom remodel"];
 
 /**
  * Hero chat composer (design 1a / 1d). The homeowner can type a project,
- * tap a chip, or hit "Ask Nora" — any of which pushes them into the Nora flow.
+ * tap a chip, or hit "Ask Nora", any of which pushes them into the Nora flow.
  */
 export function NoraComposer() {
   const router = useRouter();
@@ -43,7 +43,7 @@ export function NoraComposer() {
         onKeyDown={(e) => {
           if (e.key === "Enter") go();
         }}
-        placeholder="Redo my 1970s kitchen — where do I start?"
+        placeholder="Redo my 1970s kitchen, where do I start?"
         className="w-full rounded-[11px] border border-ink/15 bg-surface px-[15px] py-[14px] text-[15px] font-normal leading-[1.3] text-ink outline-none placeholder:text-ink/45"
       />
 
@@ -77,7 +77,7 @@ export function NoraComposer() {
       <div className="mt-[12px] flex gap-[14px] border-t border-ink/[.07] pt-[12px] text-[11.5px] font-medium leading-none text-ink/50">
         <span>Free · no obligation</span>
         <span>·</span>
-        <span>No rigid appointment — an expert calls you</span>
+        <span>No rigid appointment, an expert calls you</span>
       </div>
     </div>
   );

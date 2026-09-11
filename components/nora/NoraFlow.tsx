@@ -20,17 +20,17 @@ interface CallbackForm {
 }
 
 /**
- * The Nora intake flow (design 1g): three panels — a live chat that collects
+ * The Nora intake flow (design 1g): three panels, a live chat that collects
  * the project, a callback form, and the queue confirmation. `seed` is an
  * optional opening message carried over from the hero composer.
  *
  * The chat is scripted for now (see lib/nora). The voice buttons are stubs that
- * will be wired to the ElevenLabs conversational agent later — search for
+ * will be wired to the ElevenLabs conversational agent later, search for
  * `TODO(elevenlabs)`.
  */
 export function NoraFlow({ seed }: { seed?: string }) {
   const [msgs, setMsgs] = useState<Message[]>([
-    { text: "Hi — what are we working on?", role: "a" },
+    { text: "Hi, what are we working on?", role: "a" },
     {
       text: "Kitchen. 1970s galley, about 120 sq ft. Cabinets are shot.",
       role: "u",
@@ -110,7 +110,7 @@ export function NoraFlow({ seed }: { seed?: string }) {
   return (
     <div className="mx-auto max-w-[1180px] px-6 py-[34px] sm:px-8">
       <div className="grid grid-cols-1 items-stretch gap-[18px] lg:grid-cols-3">
-        {/* Panel 1 — chat */}
+        {/* Panel 1: chat */}
         <section className="flex flex-col overflow-hidden rounded-[16px] border border-ink/10 bg-white">
           <div className="flex items-center gap-[10px] border-b border-line px-[18px] py-[14px]">
             <Image
@@ -189,13 +189,13 @@ export function NoraFlow({ seed }: { seed?: string }) {
             </div>
             {voiceHint ? (
               <div className="font-mono text-[10.5px] font-medium leading-[1.4] text-accent-link">
-                Voice with Nora is coming soon — type for now.
+                Voice with Nora is coming soon. Type for now.
               </div>
             ) : null}
           </div>
         </section>
 
-        {/* Panel 2 — callback form */}
+        {/* Panel 2: callback form */}
         <section className="flex flex-col overflow-hidden rounded-[16px] border border-ink/10 bg-white">
           <div className="flex items-center border-b border-line px-[18px] py-[14px]">
             <div className="text-[13px] font-semibold leading-[1.2] text-ink">
@@ -270,7 +270,7 @@ export function NoraFlow({ seed }: { seed?: string }) {
           </div>
         </section>
 
-        {/* Panel 3 — queue confirmation */}
+        {/* Panel 3: queue confirmation */}
         <section className="flex flex-col overflow-hidden rounded-[16px] border border-ink/10 bg-white">
           <div className="flex items-center border-b border-line px-[18px] py-[14px]">
             <div className="text-[13px] font-semibold leading-[1.2] text-ink">
@@ -287,7 +287,7 @@ export function NoraFlow({ seed }: { seed?: string }) {
                 <div className="hatch h-10 w-10 flex-none rounded-full" />
                 <div>
                   <div className="text-[13.5px] font-semibold leading-[1.3] text-ink">
-                    Marcus Boyd — kitchen expert
+                    Marcus Boyd, kitchen expert
                   </div>
                   <div className="text-[12.5px] font-normal leading-[1.4] text-accent-dark">
                     Will call you within 2 hours
@@ -300,7 +300,7 @@ export function NoraFlow({ seed }: { seed?: string }) {
                   {form.name.split(" ")[0]}, expect a call on {form.phone}
                 </div>
                 <div className="text-[14px] font-normal leading-[1.55] text-ink/60">
-                  He has your notes already, so it&apos;s a real conversation — not a
+                  He has your notes already, so it&apos;s a real conversation, not a
                   repeat of the last ten minutes.
                 </div>
               </div>
@@ -339,7 +339,7 @@ export function NoraFlow({ seed }: { seed?: string }) {
                 Almost there
               </div>
               <div className="max-w-[240px] text-[13.5px] font-normal leading-[1.55] text-ink/55">
-                Add your details and request a callback — your matched expert shows
+                Add your details and request a callback, and your matched expert shows
                 up here.
               </div>
             </div>

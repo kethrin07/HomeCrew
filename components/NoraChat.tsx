@@ -9,7 +9,7 @@ type Mode = "home" | "chat";
 
 /**
  * Fixed-size panel wrapper. Defined at module scope (not inside the component)
- * so its identity is stable across renders — otherwise the chat input would
+ * so its identity is stable across renders, otherwise the chat input would
  * remount and lose focus on every keystroke.
  */
 function PanelShell({ children }: { children: React.ReactNode }) {
@@ -26,12 +26,12 @@ function PanelShell({ children }: { children: React.ReactNode }) {
 }
 
 /**
- * Floating chat popup, open by default. Leads with a call-first "home" screen —
- * Nora's photo plus a prominent Call button — and offers a text-chat
+ * Floating chat popup, open by default. Leads with a call-first "home" screen
+ * (Nora's photo plus a prominent Call button) and offers a text-chat
  * alternative underneath.
  *
  * UI only: chat replies come from the scripted responder in lib/nora and the
- * Call button just shows a hint — no live voice/AI agent is wired up yet.
+ * Call button just shows a hint: no live voice/AI agent is wired up yet.
  * Search `TODO(elevenlabs)` / `TODO(agent)` to connect them.
  */
 export function NoraChat() {
@@ -161,7 +161,7 @@ export function NoraChat() {
                 Talk to Nora
               </div>
               <p className="text-[13.5px] leading-[1.55] text-ink/60">
-                Have a real conversation about your project — she scopes it with you
+                Have a real conversation about your project. She scopes it with you
                 and lines up a licensed pro. No hold music.
               </p>
             </div>
@@ -192,7 +192,7 @@ export function NoraChat() {
             {voiceHint ? (
               <div className="flex items-center gap-1.5 font-mono text-[10px] font-medium leading-tight text-accent-link">
                 <span className="inline-block h-1.5 w-1.5 flex-none rounded-full bg-accent" />
-                Voice calls with Nora are coming soon — chat by text for now.
+                Voice calls with Nora are coming soon. Chat by text for now.
               </div>
             ) : null}
           </div>

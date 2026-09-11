@@ -4,7 +4,7 @@ import type { MetadataRoute } from "next";
 const SITE_URL = "https://homecrew.com";
 
 /**
- * Sitemap served at /sitemap.xml. Lists indexable routes only — /nora is
+ * Sitemap served at /sitemap.xml. Lists indexable routes only. /nora is
  * excluded because it redirects to the homepage. Add new guides/category
  * pages here (or generate them) as they ship.
  */
@@ -17,6 +17,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "weekly",
       priority: 1,
+    },
+    {
+      url: `${SITE_URL}/categories`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.8,
     },
     {
       url: `${SITE_URL}/guides/kitchen-30k`,

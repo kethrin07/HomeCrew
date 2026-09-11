@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Placeholder } from "@/components/Placeholder";
 
 export const metadata: Metadata = {
-  title: "What a mid-range kitchen actually buys you in 2026 — MyHomeQuote Guides",
+  title: "What a mid-range kitchen actually buys you in 2026 · MyHomeQuote Guides",
   description:
     "We pulled the line items from 214 finished mid-range kitchens and broke down where the money went.",
 };
@@ -81,7 +81,7 @@ export default function GuidePage() {
 
       {/* Hero image */}
       <div className="flex justify-center px-5 pb-6 sm:px-[30px]">
-        <Placeholder label="hero photo — mid-budget kitchen, wide" className="h-[220px] w-full rounded-xl sm:h-[330px]" />
+        <Placeholder label="hero photo: mid-budget kitchen, wide" className="h-[220px] w-full rounded-xl sm:h-[330px]" />
       </div>
 
       {/* Body */}
@@ -137,7 +137,7 @@ export default function GuidePage() {
             skip the pot filler.
           </p>
 
-          <Placeholder label="photo — cabinet hardware detail" className="my-[6px] h-[230px] rounded-xl" />
+          <Placeholder label="photo: cabinet hardware detail" className="my-[6px] h-[230px] rounded-xl" />
 
           <p className="m-0 text-[16.5px] font-normal leading-[1.75] text-ink/[.82] sm:text-[17.5px]">
             If your number is firm, say so in the first conversation. Good pros

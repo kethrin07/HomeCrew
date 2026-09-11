@@ -61,7 +61,7 @@ export function BeforeAfter() {
       }
     };
 
-    // Respect users who prefer reduced motion — jump straight to the rest state.
+    // Respect users who prefer reduced motion: jump straight to the rest state.
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const observer = new IntersectionObserver(
@@ -112,7 +112,7 @@ export function BeforeAfter() {
         }}
       >
         <span className="absolute bottom-4 right-4 rounded bg-white/85 px-2 py-[5px] font-mono text-[10px] font-medium uppercase leading-none tracking-[.06em] text-ink/50">
-          after — 6 weeks
+          after · 6 weeks
         </span>
 
         <div
@@ -130,11 +130,11 @@ export function BeforeAfter() {
             }}
           />
           <span className="absolute left-4 top-4 rounded bg-white/85 px-2 py-[5px] font-mono text-[10px] font-medium uppercase leading-none tracking-[.06em] text-ink/50">
-            before — original kitchen
+            before · original kitchen
           </span>
         </div>
 
-        {/* Visible handle — driven by the same `ba` as the separation line so
+        {/* Visible handle, driven by the same `ba` as the separation line so
             the two stay locked together; the range input below does the actual
             dragging. pointer-events-none so it never intercepts the drag. */}
         <div

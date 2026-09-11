@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 
 /**
- * The Nora intake flow is hidden for now — visiting /nora sends people back home.
+ * The Nora intake flow is hidden for now; visiting /nora sends people back home.
  * The full three-panel experience is preserved in components/nora/NoraFlow.tsx and
  * the original page wiring is kept below for reference. Restore it once the
  * ElevenLabs voice agent + callback backend are wired up.
@@ -16,7 +16,7 @@ import { Header } from "@/components/Header";
 import { NoraFlow } from "@/components/nora/NoraFlow";
 
 export const metadata: Metadata = {
-  title: "Nora — MyHomeQuote",
+  title: "Nora · MyHomeQuote",
   description:
     "Nora collects the details and hands you to a real expert who calls you back within two hours.",
 };

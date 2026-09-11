@@ -6,7 +6,7 @@ export type ClassValue =
   | undefined
   | ClassValue[];
 
-/** Tiny className joiner — filters falsy values and flattens arrays. */
+/** Tiny className joiner: filters falsy values and flattens arrays. */
 export function clsx(...inputs: ClassValue[]): string {
   const out: string[] = [];
   for (const input of inputs) {

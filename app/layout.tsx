@@ -19,7 +19,7 @@ const mono = IBM_Plex_Mono({
 
 const SITE_URL = "https://homecrew.com";
 const SITE_NAME = "MyHomeQuote";
-const DEFAULT_TITLE = "MyHomeQuote — Tell us the project. We'll bring the pros.";
+const DEFAULT_TITLE = "MyHomeQuote: Tell us the project. We'll bring the pros.";
 const DEFAULT_DESCRIPTION =
   "Describe what you want done and Nora lines up three licensed pros with real quotes. No forms, no call centre, no chasing.";
 
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: DEFAULT_TITLE,
-    template: `%s — ${SITE_NAME}`,
+    template: `%s · ${SITE_NAME}`,
   },
   description: DEFAULT_DESCRIPTION,
   applicationName: SITE_NAME,
