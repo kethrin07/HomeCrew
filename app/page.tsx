@@ -43,9 +43,9 @@ const BLOG_TOPICS = [
 ];
 
 const CATEGORIES = [
-  { name: "Kitchens", img: "/images/kitchens.png" },
-  { name: "Bathrooms", img: "/images/bathrooms.png" },
-  { name: "Roof & gutters", img: "/images/roof-and-gutters.png" },
+  { name: "Kitchens", img: "/images/kitchen.png" },
+  { name: "Bathrooms", img: "/images/bathroom.png" },
+  { name: "Roof & gutters", img: "/images/roof-and-gutter.png" },
   { name: "Decks & yards", img: "/images/decks-and-yards.png" },
 ];
 
@@ -158,7 +158,7 @@ export default function HomePage() {
                   </div>
                   <div className="h-px flex-1 bg-ink/[.12]" />
                 </div>
-                <Placeholder src={s.img} alt={s.media} className="h-[158px] rounded-xl" />
+                <Placeholder src={s.img} alt={s.media} className="h-[189px] rounded-xl" />
                 <div className="text-[21px] font-bold leading-[1.25] tracking-[-.022em] text-ink">
                   {s.title}
                 </div>
