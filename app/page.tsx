@@ -94,8 +94,8 @@ export default function HomePage() {
               We&apos;ll bring the pros.
             </h1>
             <p className="pretty m-0 max-w-[420px] text-[15.5px] font-normal leading-[1.6] text-ink/[.62] sm:text-[16.5px]">
-              Describe what you want done and Nora lines up three licensed pros with
-              real quotes. No forms, no call centre, no chasing.
+              Describe what you want done and Nora sets you up with a licensed pro
+              for a personalized quote. No forms, no call centre, no chasing.
             </p>
 
             <NoraComposer />

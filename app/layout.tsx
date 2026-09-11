@@ -21,7 +21,7 @@ const SITE_URL = "https://homecrew.com";
 const SITE_NAME = "MyHomeQuote";
 const DEFAULT_TITLE = "MyHomeQuote: Tell us the project. We'll bring the pros.";
 const DEFAULT_DESCRIPTION =
-  "Describe what you want done and Nora lines up three licensed pros with real quotes. No forms, no call centre, no chasing.";
+  "Describe what you want done and Nora sets you up with a licensed pro for a personalized quote. No forms, no call centre, no chasing.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
