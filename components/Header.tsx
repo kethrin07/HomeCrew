@@ -28,7 +28,7 @@ export function Header({ variant = "default" }: { variant?: "default" | "onDark"
               onDark ? "text-white hover:text-white" : "text-ink hover:text-ink"
             }`}
           >
-            HomeCrew
+            MyHomeQuote
           </Link>
           <nav
             className={`hidden gap-[22px] text-[13.5px] font-medium leading-none md:flex ${

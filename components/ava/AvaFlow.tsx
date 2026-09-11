@@ -348,7 +348,7 @@ export function AvaFlow({ seed }: { seed?: string }) {
       </div>
 
       <p className="mt-8 text-center text-[13px] leading-[1.6] text-ink/50">
-        <Link href="/">← Back to HomeCrew</Link>
+        <Link href="/">← Back to MyHomeQuote</Link>
       </p>
     </div>
   );

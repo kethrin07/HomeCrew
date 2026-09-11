@@ -5,7 +5,7 @@ export function Footer() {
     <footer className="border-t border-line px-5 py-[34px] sm:px-8 lg:px-12">
       <div className="mx-auto flex w-full max-w-[1200px] flex-wrap items-center justify-between gap-4">
         <div className="text-[15px] font-extrabold leading-none tracking-[-.03em] text-ink">
-          HomeCrew
+          MyHomeQuote
         </div>
         <div className="flex flex-wrap gap-x-6 gap-y-2 text-[12.5px] font-normal leading-none text-ink/50">
           {LINKS.map((l) => (

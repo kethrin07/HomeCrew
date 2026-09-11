@@ -16,7 +16,7 @@ import { Header } from "@/components/Header";
 import { AvaFlow } from "@/components/ava/AvaFlow";
 
 export const metadata: Metadata = {
-  title: "Nora — HomeCrew",
+  title: "Nora — MyHomeQuote",
   description:
     "Nora collects the details and hands you to a real expert who calls you back within two hours.",
 };

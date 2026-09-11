@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Placeholder } from "@/components/Placeholder";
 
 export const metadata: Metadata = {
-  title: "What a $30,000 kitchen actually buys you in 2026 — HomeCrew Guides",
+  title: "What a $30,000 kitchen actually buys you in 2026 — MyHomeQuote Guides",
   description:
     "We pulled the line items from 214 finished kitchens under $35,000 and broke down where the money went.",
 };
@@ -27,7 +27,7 @@ export default function GuidePage() {
       {/* Header */}
       <header className="flex items-center justify-between border-b border-line px-5 py-[18px] sm:px-[30px]">
         <Link href="/" className="text-[17px] font-extrabold leading-none tracking-[-.03em] text-ink hover:text-ink">
-          HomeCrew <span className="font-medium text-ink/45">Guides</span>
+          MyHomeQuote <span className="font-medium text-ink/45">Guides</span>
         </Link>
         <Link
           href="/ava"
