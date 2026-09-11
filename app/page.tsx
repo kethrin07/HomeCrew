@@ -31,10 +31,10 @@ const STEPS = [
 ];
 
 const BLOG_TOPICS = [
-  { tag: "Bathrooms", title: "What $15k covers in a bathroom remodel, fixture by fixture" },
+  { tag: "Bathrooms", title: "What a mid-range bathroom remodel covers, fixture by fixture" },
   { tag: "Roofing", title: "Repair or replace? Five signs your roof is out of time" },
   { tag: "Resale", title: "Kitchen vs. bathroom: which remodel actually pays back at resale" },
-  { tag: "Quick wins", title: "Seven upgrades under $500 that make an older home feel new" },
+  { tag: "Quick wins", title: "Seven low-cost upgrades that make an older home feel new" },
   { tag: "Budgeting", title: "Build a renovation budget with a buffer that actually holds" },
   { tag: "Electrical", title: "Six warning signs your home's wiring is overdue" },
   { tag: "Outdoor", title: "Deck materials, 10-year cost compared: wood vs. composite vs. PVC" },
@@ -43,10 +43,10 @@ const BLOG_TOPICS = [
 ];
 
 const CATEGORIES = [
-  { name: "Kitchens", range: "$18k–$65k", img: "/images/kitchens.png" },
-  { name: "Bathrooms", range: "$9k–$30k", img: "/images/bathrooms.png" },
-  { name: "Roof & gutters", range: "$7k–$24k", img: "/images/roof-and-gutters.png" },
-  { name: "Decks & yards", range: "$5k–$28k", img: "/images/decks-and-yards.png" },
+  { name: "Kitchens", img: "/images/kitchens.png" },
+  { name: "Bathrooms", img: "/images/bathrooms.png" },
+  { name: "Roof & gutters", img: "/images/roof-and-gutters.png" },
+  { name: "Decks & yards", img: "/images/decks-and-yards.png" },
 ];
 
 const TESTIMONIALS = [
@@ -61,7 +61,7 @@ const TESTIMONIALS = [
   {
     stars: "★★★★★",
     quote:
-      "First house, no idea what anything costs. The price bands stopped me getting talked into a $60k kitchen.",
+      "First house, no idea what anything costs. Nora's guidance stopped me getting talked into a kitchen I didn't need.",
     name: "Marcus T.",
     meta: "Kitchen · Columbus",
     img: "/images/marcus.png",
@@ -209,9 +209,6 @@ export default function HomePage() {
                   <div className="text-[15.5px] font-semibold leading-[1.3] text-ink">
                     {c.name}
                   </div>
-                  <div className="mt-[6px] font-mono text-[11.5px] font-medium leading-none text-ink/45">
-                    {c.range}
-                  </div>
                 </div>
               </Link>
             ))}
@@ -278,7 +275,7 @@ export default function HomePage() {
                 Budgeting · 7 min
               </div>
               <div className="max-w-[440px] text-[22px] font-bold leading-[1.22] tracking-[-.025em] text-ink sm:text-[25px]">
-                What a $30,000 kitchen actually buys you in 2026
+                What a mid-range kitchen actually buys you in 2026
               </div>
             </Link>
             <div className="flex flex-col gap-3">

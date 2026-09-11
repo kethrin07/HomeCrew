@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import { Placeholder } from "@/components/Placeholder";
 
 export const metadata: Metadata = {
-  title: "What a $30,000 kitchen actually buys you in 2026 — MyHomeQuote Guides",
+  title: "What a mid-range kitchen actually buys you in 2026 — MyHomeQuote Guides",
   description:
-    "We pulled the line items from 214 finished kitchens under $35,000 and broke down where the money went.",
+    "We pulled the line items from 214 finished mid-range kitchens and broke down where the money went.",
 };
 
 const BREAKDOWN = [
@@ -49,10 +49,10 @@ export default function GuidePage() {
             Budgeting · 7 min read · Feb 2026
           </div>
           <h1 className="balance m-0 text-[32px] font-extrabold leading-[1.1] tracking-tighter2 text-ink sm:text-[44px] sm:leading-[1.08]">
-            What a $30,000 kitchen actually buys you in 2026
+            What a mid-range kitchen actually buys you in 2026
           </h1>
           <p className="pretty m-0 text-[17px] font-normal leading-[1.6] text-ink/60 sm:text-[19px]">
-            We pulled the line items from 214 finished kitchens under $35,000 and
+            We pulled the line items from 214 finished mid-range kitchens and
             broke down where the money went.
           </p>
           <div className="flex items-center gap-3 border-y border-ink/10 py-4">
@@ -88,10 +88,10 @@ export default function GuidePage() {
       <article className="flex flex-col items-center px-5 pb-[56px] pt-4 sm:px-[30px]">
         <div className="flex w-full max-w-[620px] flex-col gap-[22px]">
           <p className="m-0 text-[16.5px] font-normal leading-[1.75] text-ink/[.82] sm:text-[17.5px]">
-            Thirty thousand dollars is the number most first-time renovators land
-            on. It is enough to change how a kitchen works, and not quite enough
-            to change where its walls are. The projects in our sample that came in
-            on budget had one thing in common: the plumbing stayed where it was.
+            A mid-range budget is where most first-time renovators land. It is
+            enough to change how a kitchen works, and not quite enough to change
+            where its walls are. The projects in our sample that came in on
+            budget had one thing in common: the plumbing stayed where it was.
           </p>
 
           <h2 className="mt-[14px] text-[22px] font-bold leading-[1.2] tracking-[-.028em] text-ink sm:text-[26px]">

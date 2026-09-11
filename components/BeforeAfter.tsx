@@ -112,7 +112,7 @@ export function BeforeAfter() {
         }}
       >
         <span className="absolute bottom-4 right-4 rounded bg-white/85 px-2 py-[5px] font-mono text-[10px] font-medium uppercase leading-none tracking-[.06em] text-ink/50">
-          after — 6 weeks, $42k
+          after — 6 weeks
         </span>
 
         <div

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useNoraChat } from "@/lib/nora";
 
-const CHIPS = ["Kitchen refresh", "Roof leak", "Bathroom, under $15k"];
+const CHIPS = ["Kitchen refresh", "Roof leak", "Bathroom remodel"];
 
 /**
  * Hero chat composer (design 1a / 1d). The homeowner can type a project,

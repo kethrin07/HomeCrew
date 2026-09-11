@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { noraReply, type Message } from "@/lib/nora";
 
-const QUICK_REPLIES = ["Keeping the sink", "Not sure yet", "Under $35k"];
+const QUICK_REPLIES = ["Keeping the sink", "Not sure yet", "Watching the budget"];
 const CALL_TIMES = [
   "As soon as possible",
   "Weekday mornings",
