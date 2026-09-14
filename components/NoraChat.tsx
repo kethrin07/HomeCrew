@@ -53,6 +53,13 @@ export function NoraChat() {
     if (el) el.scrollTop = el.scrollHeight;
   }, [msgs, typing, mode, open]);
 
+  // Broadcast open/closed so other UI (e.g. the 30s popup) can avoid clashing.
+  useEffect(() => {
+    window.dispatchEvent(
+      new CustomEvent("nora:openchange", { detail: { open } }),
+    );
+  }, [open]);
+
   // Let other parts of the page open the widget, optionally jumping straight
   // into chat mode and seeding a first message.
   useEffect(() => {

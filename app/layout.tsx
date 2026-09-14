@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { NoraChat } from "@/components/NoraChat";
+import { NoraPopup } from "@/components/NoraPopup";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -81,6 +82,7 @@ export default function RootLayout({
       <body className="font-sans">
         {children}
         <NoraChat />
+        <NoraPopup />
       </body>
     </html>
   );
