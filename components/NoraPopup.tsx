@@ -6,8 +6,16 @@ import { GREETING } from "@/lib/nora";
 
 // How long the visitor browses before Nora proactively says hello, and the
 // session key that keeps it to once per visit.
-const DELAY_MS = 1_000;
+const DELAY_MS = 10_000;
 const SEEN_KEY = "nora-popup-seen";
+
+// One-tap starting points so visitors don't have to think of what to type.
+const QUICK_OPTIONS = [
+  "Kitchen remodel",
+  "Bathroom reno",
+  "Roofing",
+  "Decks & yards",
+];
 
 /**
  * Centered modal that appears after the visitor has been on the site for a
@@ -66,10 +74,10 @@ export function NoraPopup() {
     close();
   };
 
-  // Send the typed message straight into the chat widget, which picks up the
-  // conversation from Nora's greeting.
-  const send = () => {
-    const t = input.trim();
+  // Carry a message straight into the chat widget, which picks up the
+  // conversation from Nora's greeting. Used by both the input and the chips.
+  const startChat = (text: string) => {
+    const t = text.trim();
     if (!t) return;
     window.dispatchEvent(
       new CustomEvent("nora:open", { detail: { mode: "chat", seed: t } }),
@@ -145,6 +153,19 @@ export function NoraPopup() {
             {GREETING}
           </div>
 
+          {/* Quick starting points */}
+          <div className="flex flex-wrap gap-2">
+            {QUICK_OPTIONS.map((opt) => (
+              <button
+                key={opt}
+                onClick={() => startChat(opt)}
+                className="rounded-full border border-accent/40 bg-white px-3.5 py-2 text-[12.5px] font-medium leading-tight text-accent-deep transition-colors hover:border-accent hover:bg-accent-tint"
+              >
+                {opt}
+              </button>
+            ))}
+          </div>
+
           {/* Composer — typing here carries straight into the chat */}
           <div className="flex items-center gap-2 rounded-xl border border-ink/15 bg-white px-3 py-2 transition-colors focus-within:border-accent">
             <input
@@ -152,13 +173,13 @@ export function NoraPopup() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => {
-                if (e.key === "Enter") send();
+                if (e.key === "Enter") startChat(input);
               }}
               placeholder="Type your message…"
               className="min-w-0 flex-1 bg-transparent text-[14px] leading-none text-ink outline-none placeholder:text-ink/40"
             />
             <button
-              onClick={send}
+              onClick={() => startChat(input)}
               disabled={!input.trim()}
               aria-label="Send message"
               className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-accent text-white transition-opacity disabled:opacity-40"
