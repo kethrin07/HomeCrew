@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { noraReply, GREETING, OPTIONS } from "@/lib/nora";
+import { streamNora, type ChatMessage } from "@/lib/chat";
 
 type Msg = { role: "nora" | "user"; text: string };
 type Mode = "home" | "chat";
@@ -78,18 +79,51 @@ export function NoraChat() {
     return () => window.removeEventListener("nora:open", openHandler);
   }, []);
 
-  const send = (text: string) => {
+  const send = async (text: string) => {
     const t = text.trim();
     if (!t || typing) return;
+
+    // Snapshot the conversation (with this turn) for the API, mapping our
+    // "nora"/"user" roles to the assistant/user roles the model expects.
+    const history: ChatMessage[] = [
+      ...msgs.map((m) => ({
+        role: m.role === "nora" ? ("assistant" as const) : ("user" as const),
+        content: m.text,
+      })),
+      { role: "user" as const, content: t },
+    ];
+
     setMsgs((prev) => [...prev, { role: "user", text: t }]);
     setInput("");
     setTyping(true);
-    // TODO(agent): swap noraReply for the live assistant response.
-    const reply = noraReply(t);
-    window.setTimeout(() => {
-      setMsgs((prev) => [...prev, { role: "nora", text: reply }]);
+
+    let started = false;
+    try {
+      await streamNora(history, (soFar) => {
+        if (!started) {
+          // First token: drop the typing dots and open the reply bubble.
+          started = true;
+          setTyping(false);
+          setMsgs((prev) => [...prev, { role: "nora", text: soFar }]);
+        } else {
+          setMsgs((prev) => {
+            const copy = prev.slice();
+            copy[copy.length - 1] = { role: "nora", text: soFar };
+            return copy;
+          });
+        }
+      });
+      if (!started) {
+        // Empty stream — fall back to the scripted responder.
+        setMsgs((prev) => [...prev, { role: "nora", text: noraReply(t) }]);
+        setTyping(false);
+      }
+    } catch {
+      if (!started) {
+        setMsgs((prev) => [...prev, { role: "nora", text: noraReply(t) }]);
+      }
       setTyping(false);
-    }, 650);
+    }
   };
   sendRef.current = send;
 

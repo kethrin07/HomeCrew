@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { noraReply, type Message } from "@/lib/nora";
+import { streamNora, type ChatMessage } from "@/lib/chat";
 
 const QUICK_REPLIES = ["Keeping the sink", "Not sure yet", "Watching the budget"];
 const CALL_TIMES = [
@@ -19,26 +20,25 @@ interface CallbackForm {
   zip: string;
 }
 
+// Map the flow's a/u roles to the assistant/user roles the model expects.
+const toChatMessage = (m: Message): ChatMessage => ({
+  role: m.role === "a" ? "assistant" : "user",
+  content: m.text,
+});
+
 /**
  * The Nora intake flow (design 1g): three panels, a live chat that collects
  * the project, a callback form, and the queue confirmation. `seed` is an
  * optional opening message carried over from the hero composer.
  *
- * The chat is scripted for now (see lib/nora). The voice buttons are stubs that
- * will be wired to the ElevenLabs conversational agent later, search for
+ * The chat streams from the live LLM (/api/chat) and falls back to the scripted
+ * responder in lib/nora if that fails. The voice buttons are stubs that will be
+ * wired to the ElevenLabs conversational agent later, search for
  * `TODO(elevenlabs)`.
  */
 export function NoraFlow({ seed }: { seed?: string }) {
   const [msgs, setMsgs] = useState<Message[]>([
     { text: "Hi, what are we working on?", role: "a" },
-    {
-      text: "Kitchen. 1970s galley, about 120 sq ft. Cabinets are shot.",
-      role: "u",
-    },
-    {
-      text: "Got it. Two quick ones: is the sink staying where it is, and what's your rough ceiling on spend?",
-      role: "a",
-    },
   ]);
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
@@ -53,11 +53,12 @@ export function NoraFlow({ seed }: { seed?: string }) {
   useEffect(() => {
     const q = seed?.trim();
     if (!q) return;
-    setMsgs((prev) => [
-      ...prev,
-      { text: q, role: "u" },
-      { text: noraReply(q), role: "a" },
-    ]);
+    const history: ChatMessage[] = [
+      ...msgs.map(toChatMessage),
+      { role: "user", content: q },
+    ];
+    setMsgs((prev) => [...prev, { text: q, role: "u" }]);
+    void streamReply(history, q);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -67,17 +68,47 @@ export function NoraFlow({ seed }: { seed?: string }) {
     if (el) el.scrollTop = el.scrollHeight;
   }, [msgs, typing]);
 
-  const push = (text: string) => {
-    if (!text.trim() || typing) return;
-    setMsgs((prev) => [...prev, { text, role: "u" }]);
-    setInput("");
+  // Stream Nora's reply into a growing bubble; fall back to the scripted
+  // responder if the request fails or returns nothing.
+  const streamReply = async (history: ChatMessage[], fallbackFor: string) => {
     setTyping(true);
-    // Simulate Nora composing a reply so the "TYPING…" state reads as real.
-    const reply = noraReply(text);
-    window.setTimeout(() => {
-      setMsgs((prev) => [...prev, { text: reply, role: "a" }]);
+    let started = false;
+    try {
+      await streamNora(history, (soFar) => {
+        if (!started) {
+          started = true;
+          setTyping(false);
+          setMsgs((prev) => [...prev, { text: soFar, role: "a" }]);
+        } else {
+          setMsgs((prev) => {
+            const copy = prev.slice();
+            copy[copy.length - 1] = { text: soFar, role: "a" };
+            return copy;
+          });
+        }
+      });
+      if (!started) {
+        setMsgs((prev) => [...prev, { text: noraReply(fallbackFor), role: "a" }]);
+        setTyping(false);
+      }
+    } catch {
+      if (!started) {
+        setMsgs((prev) => [...prev, { text: noraReply(fallbackFor), role: "a" }]);
+      }
       setTyping(false);
-    }, 650);
+    }
+  };
+
+  const push = (text: string) => {
+    const t = text.trim();
+    if (!t || typing) return;
+    const history: ChatMessage[] = [
+      ...msgs.map(toChatMessage),
+      { role: "user", content: t },
+    ];
+    setMsgs((prev) => [...prev, { text: t, role: "u" }]);
+    setInput("");
+    void streamReply(history, t);
   };
 
   // TODO(elevenlabs): replace with a call into the ElevenLabs voice agent.
