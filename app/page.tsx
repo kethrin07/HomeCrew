@@ -6,6 +6,7 @@ import { Placeholder } from "@/components/Placeholder";
 import { NoraComposer } from "@/components/NoraComposer";
 import { BeforeAfter } from "@/components/BeforeAfter";
 import { AskNora } from "@/components/AskNora";
+import { Testimonials } from "@/components/Testimonials";
 
 const STEPS = [
   {
@@ -219,43 +220,12 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials */}
-      <section className="bg-surface px-5 py-14 sm:px-8 sm:py-[60px] lg:px-12">
-        <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-[26px]">
-          <h2 className="m-0 text-[26px] font-bold leading-[1.1] tracking-[-.03em] text-ink sm:text-[30px] lg:text-[34px]">
+      <section className="overflow-hidden bg-surface px-5 py-14 sm:px-8 sm:py-[60px] lg:px-12">
+        <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-9">
+          <h2 className="m-0 text-center text-[26px] font-bold leading-[1.1] tracking-[-.03em] text-ink sm:text-[30px] lg:text-[34px]">
             What homeowners are saying
           </h2>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            {TESTIMONIALS.map((t) => (
-              <div
-                key={t.name}
-                className="flex flex-col gap-[14px] rounded-[14px] border border-line bg-white p-[22px]"
-              >
-                <div className="font-mono text-[13px] font-medium leading-none tracking-[.08em] text-accent-link">
-                  {t.stars}
-                </div>
-                <p className="m-0 text-[15px] font-normal leading-[1.6] text-ink/75">
-                  {t.quote}
-                </p>
-                <div className="mt-auto flex items-center gap-[10px]">
-                  <Image
-                    src={t.img}
-                    alt={t.name}
-                    width={30}
-                    height={30}
-                    className="h-[30px] w-[30px] rounded-full object-cover"
-                  />
-                  <div>
-                    <div className="text-[13px] font-semibold leading-[1.3] text-ink">
-                      {t.name}
-                    </div>
-                    <div className="text-[12px] font-normal leading-[1.3] text-ink/50">
-                      {t.meta}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <Testimonials items={TESTIMONIALS} />
         </div>
       </section>
 
