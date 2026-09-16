@@ -1,11 +1,48 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Placeholder } from "@/components/Placeholder";
+import { JsonLd } from "@/components/JsonLd";
+
+const SITE_URL = "https://homecrew.com";
+const GUIDE_PATH = "/guides/kitchen-30k";
+const GUIDE_TITLE = "What a mid-range kitchen actually buys you in 2026";
+const GUIDE_DESCRIPTION =
+  "We pulled the line items from 214 finished mid-range kitchens and broke down where the money went.";
 
 export const metadata: Metadata = {
-  title: "What a mid-range kitchen actually buys you in 2026 · MyHomeQuote Guides",
-  description:
-    "We pulled the line items from 214 finished mid-range kitchens and broke down where the money went.",
+  title: `${GUIDE_TITLE} · MyHomeQuote Guides`,
+  description: GUIDE_DESCRIPTION,
+  alternates: { canonical: GUIDE_PATH },
+};
+
+// Article + breadcrumb structured data for this guide.
+const GUIDE_SCHEMA = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      headline: GUIDE_TITLE,
+      description: GUIDE_DESCRIPTION,
+      author: { "@type": "Person", name: "Renée Okafor" },
+      datePublished: "2026-02-01",
+      image: `${SITE_URL}/opengraph-image`,
+      publisher: { "@id": `${SITE_URL}/#organization` },
+      mainEntityOfPage: `${SITE_URL}${GUIDE_PATH}`,
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+        { "@type": "ListItem", position: 2, name: "Guides", item: `${SITE_URL}/#blog` },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: GUIDE_TITLE,
+          item: `${SITE_URL}${GUIDE_PATH}`,
+        },
+      ],
+    },
+  ],
 };
 
 const BREAKDOWN = [
@@ -24,6 +61,7 @@ const KEEP_READING = [
 export default function GuidePage() {
   return (
     <main className="mx-auto my-0 max-w-[820px] overflow-hidden bg-white sm:my-8 sm:rounded-[10px] sm:border sm:border-line sm:shadow-card">
+      <JsonLd data={GUIDE_SCHEMA} />
       {/* Header */}
       <header className="flex items-center justify-between border-b border-line px-5 py-[18px] sm:px-[30px]">
         <Link href="/" className="text-[17px] font-extrabold leading-none tracking-[-.03em] text-ink hover:text-ink">

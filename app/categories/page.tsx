@@ -2,7 +2,10 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { JsonLd } from "@/components/JsonLd";
 import { CATEGORY_GROUPS } from "@/lib/categories";
+
+const SITE_URL = "https://homecrew.com";
 
 export const metadata: Metadata = {
   title: "All project categories",
@@ -11,9 +14,24 @@ export const metadata: Metadata = {
   alternates: { canonical: "/categories" },
 };
 
+const CATEGORIES_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "All categories",
+      item: `${SITE_URL}/categories`,
+    },
+  ],
+};
+
 export default function CategoriesPage() {
   return (
     <main className="w-full overflow-hidden bg-white">
+      <JsonLd data={CATEGORIES_SCHEMA} />
       <Header />
 
       <section className="px-5 py-14 sm:px-8 sm:py-[72px] lg:px-12">

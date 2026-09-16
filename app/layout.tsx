@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { NoraChat } from "@/components/NoraChat";
 import { NoraPopup } from "@/components/NoraPopup";
+import { JsonLd } from "@/components/JsonLd";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -72,6 +73,30 @@ export const metadata: Metadata = {
   },
 };
 
+// Site-wide structured data: who the brand is (Organization) and the site
+// itself (WebSite), linked by @id so page-level schema can reference the org.
+const SITE_SCHEMA = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: SITE_NAME,
+      url: SITE_URL,
+      description: DEFAULT_DESCRIPTION,
+      image: `${SITE_URL}/opengraph-image`,
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: SITE_NAME,
+      description: DEFAULT_DESCRIPTION,
+      publisher: { "@id": `${SITE_URL}/#organization` },
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -80,6 +105,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${jakarta.variable} ${mono.variable} scroll-smooth`}>
       <body className="font-sans">
+        <JsonLd data={SITE_SCHEMA} />
         {children}
         <NoraChat />
         <NoraPopup />
