@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AskNora } from "@/components/AskNora";
 
 const NAV = [
   { label: "How it works", href: "/#how" },
@@ -47,16 +48,14 @@ export function Header({ variant = "default" }: { variant?: "default" | "onDark"
           </nav>
         </div>
         <div className="flex items-center gap-3 sm:gap-4">
-          <Link
-            href="/nora"
+          <AskNora
             className={`hidden text-[13.5px] font-medium leading-none sm:inline ${
               onDark ? "text-white/80 hover:text-white" : "text-ink/60 hover:text-ink"
             }`}
           >
             Sign in
-          </Link>
-          <Link
-            href="/nora"
+          </AskNora>
+          <AskNora
             className={`rounded-lg px-[17px] py-[10px] text-[13px] font-semibold leading-none ${
               onDark
                 ? "bg-white text-ink hover:text-ink"
@@ -64,7 +63,7 @@ export function Header({ variant = "default" }: { variant?: "default" | "onDark"
             }`}
           >
             Get started
-          </Link>
+          </AskNora>
         </div>
       </div>
     </header>

@@ -1,26 +1,32 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useNoraChat } from "@/lib/nora";
 
 const CHIPS = ["Kitchen refresh", "Roof leak", "Bathroom remodel"];
 
 /**
  * Hero chat composer (design 1a / 1d). The homeowner can type a project,
- * tap a chip, or hit "Ask Nora", any of which pushes them into the Nora flow.
+ * tap a chip, or hit "Ask Nora", any of which opens the floating Nora widget.
  */
 export function NoraComposer() {
-  const router = useRouter();
   const { input, setInput } = useNoraChat();
 
   const go = (seed?: string) => {
     const q = (seed ?? input).trim();
-    router.push(q ? `/nora?q=${encodeURIComponent(q)}` : "/nora");
+    window.dispatchEvent(
+      new CustomEvent("nora:open", {
+        detail: { mode: "chat", ...(q ? { seed: q } : {}) },
+      }),
+    );
+    setInput("");
   };
 
-  // TODO(elevenlabs): start the voice agent here instead of routing to chat.
-  const talk = () => go();
+  // TODO(elevenlabs): start the voice agent here instead of opening chat.
+  const talk = () =>
+    window.dispatchEvent(
+      new CustomEvent("nora:open", { detail: { mode: "home" } }),
+    );
 
   return (
     <div className="max-w-[510px] rounded-[18px] border-[1.5px] border-accent/40 bg-white p-[18px] shadow-composer">

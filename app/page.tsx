@@ -5,6 +5,7 @@ import { Footer } from "@/components/Footer";
 import { Placeholder } from "@/components/Placeholder";
 import { NoraComposer } from "@/components/NoraComposer";
 import { BeforeAfter } from "@/components/BeforeAfter";
+import { AskNora } from "@/components/AskNora";
 
 const STEPS = [
   {
@@ -175,12 +176,11 @@ export default function HomePage() {
               Pick a time that suits you and get a written quote, with zero pressure
               to commit until you&apos;re good and ready.
             </div>
-            <Link
-              href="/nora"
+            <AskNora
               className="w-full flex-none rounded-[10px] bg-accent px-[22px] py-[14px] text-center text-[14.5px] font-semibold leading-[1.2] text-white hover:text-white sm:w-auto"
             >
               Start with Nora
-            </Link>
+            </AskNora>
           </div>
         </div>
       </section>
@@ -200,10 +200,11 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-2 gap-[14px] lg:grid-cols-4">
             {CATEGORIES.map((c) => (
-              <Link
-                href="/nora"
+              <AskNora
                 key={c.name}
-                className="overflow-hidden rounded-xl border border-line transition-shadow hover:shadow-card"
+                seed={c.name}
+                ariaLabel={`Ask Nora about ${c.name}`}
+                className="block w-full overflow-hidden rounded-xl border border-line text-left transition-shadow hover:shadow-card"
               >
                 <Placeholder src={c.img} alt={c.name} className="h-[132px]" />
                 <div className="px-4 py-[14px]">
@@ -211,7 +212,7 @@ export default function HomePage() {
                     {c.name}
                   </div>
                 </div>
-              </Link>
+              </AskNora>
             ))}
           </div>
         </div>
@@ -324,31 +325,61 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Dark CTA */}
-      <section className="bg-ink px-5 py-14 sm:px-8 sm:py-[56px] lg:px-12">
-        <div className="mx-auto flex w-full max-w-[1200px] flex-col items-start justify-between gap-8 sm:flex-row sm:items-center sm:gap-10">
-          <div className="flex flex-col gap-3">
-            <h2 className="m-0 max-w-[520px] text-[27px] font-bold leading-[1.12] tracking-[-.03em] text-white sm:text-[34px]">
-              Still just dreaming about it? Come say hi.
-            </h2>
-            <p className="m-0 max-w-[440px] text-[15px] font-normal leading-[1.6] text-white/[.66]">
-              Nora will happily help you scope it and price it, then leave you be
-              until you&apos;re ready. No pressure, ever.
-            </p>
-          </div>
-          <div className="flex w-full flex-col gap-[10px] sm:w-auto sm:flex-none sm:flex-row">
-            <Link
-              href="/nora"
-              className="rounded-[10px] bg-white px-[22px] py-[15px] text-center text-[14.5px] font-semibold leading-none text-ink hover:text-ink"
-            >
-              Start a chat
-            </Link>
-            <Link
-              href="/nora"
-              className="rounded-[10px] border border-white/[.28] bg-transparent px-[22px] py-[15px] text-center text-[14.5px] font-semibold leading-none text-white hover:text-white"
-            >
-              Talk to Nora
-            </Link>
+      {/* Bottom CTA */}
+      <section className="bg-white px-5 pb-12 pt-12 sm:px-8 sm:pb-14 sm:pt-14 lg:px-12 lg:pt-20">
+        <div className="mx-auto w-full max-w-[1200px]">
+          <div className="relative rounded-[24px] bg-canvas shadow-[0_18px_55px_-12px_rgba(20,23,26,0.45)]">
+            <div className="grid grid-cols-1 lg:grid-cols-2">
+              {/* Copy */}
+              <div className="flex flex-col gap-4 px-7 py-8 sm:px-12 sm:py-10 lg:py-12">
+                <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.14em] text-accent-link">
+                  Ready when you are
+                </div>
+                <h2 className="balance m-0 max-w-[420px] text-[27px] font-bold leading-[1.12] tracking-[-.03em] text-ink sm:text-[34px]">
+                  Still just dreaming about it? Come say hi.
+                </h2>
+                <p className="pretty m-0 max-w-[400px] text-[15px] font-normal leading-[1.6] text-ink/[.62]">
+                  Nora will happily help you scope it and price it, then leave you be
+                  until you&apos;re ready. No pressure, ever.
+                </p>
+                <div className="mt-1 flex flex-col gap-[10px] sm:flex-row">
+                  <AskNora
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-[24px] py-[14px] text-[14.5px] font-semibold leading-none text-white transition-transform hover:scale-[1.02] hover:text-white"
+                  >
+                    Start a chat
+                    <span aria-hidden="true">→</span>
+                  </AskNora>
+                  <AskNora
+                    mode="home"
+                    className="inline-flex items-center justify-center rounded-full border border-ink/15 px-[24px] py-[14px] text-[14.5px] font-semibold leading-none text-ink transition-colors hover:border-ink/40 hover:text-ink"
+                  >
+                    Talk to Nora
+                  </AskNora>
+                </div>
+              </div>
+
+              {/* Mobile image: contained inside the card */}
+              <div className="flex justify-center px-7 pb-8 lg:hidden">
+                <Image
+                  src="/images/bottom-cta.png"
+                  alt="Planning a home project with Nora"
+                  width={420}
+                  height={360}
+                  className="h-auto w-full max-w-[260px] object-contain"
+                />
+              </div>
+            </div>
+
+            {/* Desktop image: full (uncropped) and rising above the card's top edge */}
+            <div className="pointer-events-none absolute bottom-0 right-2 hidden h-[calc(100%+40px)] w-[40%] lg:block xl:right-6">
+              <Image
+                src="/images/bottom-cta.png"
+                alt="Planning a home project with Nora"
+                fill
+                sizes="600px"
+                className="object-contain object-bottom"
+              />
+            </div>
           </div>
         </div>
       </section>

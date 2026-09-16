@@ -1,8 +1,8 @@
-import Link from "next/link";
 import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
+import { AskNora } from "@/components/AskNora";
 import { CATEGORY_GROUPS } from "@/lib/categories";
 
 const SITE_URL = "https://homecrew.com";
@@ -60,10 +60,11 @@ export default function CategoriesPage() {
                 </div>
                 <div className="grid grid-cols-2 gap-[12px] sm:grid-cols-3 lg:grid-cols-4">
                   {group.items.map((item) => (
-                    <Link
+                    <AskNora
                       key={item.name}
-                      href={`/nora?q=${encodeURIComponent(item.name)}`}
-                      className="group flex items-center gap-3 rounded-xl border border-line px-4 py-[15px] transition-shadow hover:shadow-card"
+                      seed={item.name}
+                      ariaLabel={`Ask Nora about ${item.name}`}
+                      className="group flex w-full items-center gap-3 rounded-xl border border-line px-4 py-[15px] text-left transition-shadow hover:shadow-card"
                     >
                       <span
                         aria-hidden="true"
@@ -77,7 +78,7 @@ export default function CategoriesPage() {
                       <span className="font-mono text-[13px] leading-none text-ink/30 transition-colors group-hover:text-accent-link">
                         →
                       </span>
-                    </Link>
+                    </AskNora>
                   ))}
                 </div>
               </div>
@@ -89,12 +90,11 @@ export default function CategoriesPage() {
               Tell Nora what you&apos;re dreaming up and she&apos;ll take it from
               there, with no forms and no call list.
             </div>
-            <Link
-              href="/nora"
+            <AskNora
               className="w-full flex-none rounded-[10px] bg-accent px-[22px] py-[14px] text-center text-[14.5px] font-semibold leading-[1.2] text-white hover:text-white sm:w-auto"
             >
               Start with Nora
-            </Link>
+            </AskNora>
           </div>
         </div>
       </section>

@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Placeholder } from "@/components/Placeholder";
 import { JsonLd } from "@/components/JsonLd";
+import { AskNora } from "@/components/AskNora";
 
 const SITE_URL = "https://homecrew.com";
 const GUIDE_PATH = "/guides/kitchen-30k";
@@ -67,12 +68,11 @@ export default function GuidePage() {
         <Link href="/" className="text-[17px] font-extrabold leading-none tracking-[-.03em] text-ink hover:text-ink">
           MyHomeQuote <span className="font-medium text-ink/45">Guides</span>
         </Link>
-        <Link
-          href="/nora"
+        <AskNora
           className="rounded-lg bg-ink px-[15px] py-[9px] text-[12.5px] font-semibold leading-none text-white hover:text-white"
         >
           Get matched
-        </Link>
+        </AskNora>
       </header>
 
       {/* Reading progress */}
@@ -193,12 +193,11 @@ export default function GuidePage() {
                 Nora will price it around your home and ZIP, never a national average.
               </div>
             </div>
-            <Link
-              href="/nora"
+            <AskNora
               className="w-full flex-none rounded-[9px] bg-white px-5 py-[13px] text-center text-[13.5px] font-semibold leading-none text-ink hover:text-ink sm:w-auto"
             >
               Ask Nora
-            </Link>
+            </AskNora>
           </div>
 
           {/* Keep reading */}
