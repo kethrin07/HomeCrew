@@ -11,22 +11,22 @@ const STEPS = [
     n: "01",
     media: "chat + voice, in the hero",
     img: "/images/chat-voice.png",
-    title: "Talk to Nora",
-    body: "Type it or say it out loud, and send photos if you have them. Nora asks about scope, timing and budget. No 14-field form.",
+    title: "Say hello to Nora",
+    body: "Type it or say it out loud. Nora gently asks about scope, timing and budget. No 14-field form to slog through.",
   },
   {
     n: "02",
     media: "expert on a video call",
     img: "/images/expert-video-call.png",
-    title: "Get an appointment with an expert",
-    body: "Nora lines up a licensed pro and locks in a time that suits you, on site or on a call. No waiting around, no phone tag.",
+    title: "Meet your expert",
+    body: "Nora lines up a licensed pro and finds a time that suits you, on site or on a call. No waiting around, no phone tag.",
   },
   {
     n: "03",
     media: "itemised quote",
     img: "/images/itemised-quote.png",
-    title: "Get a personalized quote",
-    body: "Your expert scopes the job with you and hands over a clear, itemised quote built around your home, your ZIP code and your budget.",
+    title: "Get a quote made for you",
+    body: "Your expert walks the job through with you and hands over a clear, itemised quote built around your home, your ZIP code and your budget.",
   },
 ];
 
@@ -53,7 +53,7 @@ const TESTIMONIALS = [
   {
     stars: "★★★★★",
     quote:
-      "I sent one message at 9pm and had two contractors booked for Thursday. That has never happened to me before.",
+      "Messaged them late one night not expecting much. Nora had a pro lined up to call me by the next afternoon. Smoother than I thought it would be.",
     name: "Priya N.",
     meta: "Bathroom · Austin",
     img: "/images/priya.png",
@@ -61,7 +61,7 @@ const TESTIMONIALS = [
   {
     stars: "★★★★★",
     quote:
-      "First house, no idea what anything costs. Nora's guidance stopped me getting talked into a kitchen I didn't need.",
+      "First house and I had no clue where to start. Nora asked the right questions and set up a call with someone who actually knew their stuff. No pressure to commit.",
     name: "Marcus T.",
     meta: "Kitchen · Columbus",
     img: "/images/marcus.png",
@@ -69,7 +69,7 @@ const TESTIMONIALS = [
   {
     stars: "★★★★☆",
     quote:
-      "Wanted a human, got one. The agent handed me to a real coordinator when my roof turned out to be structural.",
+      "The chat was easy and the pro called when they said they would. The quote took a couple days longer than I'd hoped, but the work held up.",
     name: "Dana R.",
     meta: "Roofing · Portland",
     img: "/images/dana.png",
@@ -89,13 +89,14 @@ export default function HomePage() {
               Matched in one conversation
             </div>
             <h1 className="balance m-0 text-[34px] font-extrabold leading-[1.05] tracking-tighter2 text-ink sm:text-[44px] lg:text-[58px]">
-              Tell us the project.
+              Let&apos;s bring your home
               <br />
-              We&apos;ll bring the pros.
+              project to life.
             </h1>
             <p className="pretty m-0 max-w-[420px] text-[15.5px] font-normal leading-[1.6] text-ink/[.62] sm:text-[16.5px]">
-              Describe what you want done and Nora sets you up with a licensed pro
-              for a personalized quote. No forms, no call centre, no chasing.
+              Just tell Nora what you have in mind, and she&apos;ll set you up with a
+              trusted local pro for a personalized quote. No forms, no call centre,
+              no chasing, promise.
             </p>
 
             <NoraComposer />
@@ -108,7 +109,7 @@ export default function HomePage() {
               </div>
               <div className="text-[13px] font-normal leading-[1.4] text-ink/[.58]">
                 <strong className="font-semibold text-ink">4.8</strong> from 12,400
-                homeowners
+                happy homeowners
               </div>
             </div>
           </div>
@@ -140,12 +141,12 @@ export default function HomePage() {
                 How it works
               </div>
               <h2 className="balance m-0 max-w-[560px] text-[30px] font-bold leading-[1.1] tracking-[-.032em] text-ink sm:text-[38px] lg:text-[42px]">
-                Talk to Nora, meet an expert, and get a quote built for your home
+                Say hello to Nora, meet your expert, and get a quote made just for your home
               </h2>
             </div>
             <p className="m-0 max-w-[300px] text-[14.5px] font-normal leading-[1.65] text-ink/[.58]">
-              A few minutes with Nora, an expert booked the same day, and a real
-              quote in your hands. Nothing to fill in twice.
+              A few friendly minutes with Nora, an expert booked the same day, and a
+              real quote in your hands. Nothing to fill in twice, ever.
             </p>
           </div>
 
@@ -171,8 +172,8 @@ export default function HomePage() {
 
           <div className="flex flex-col items-start justify-between gap-5 rounded-[14px] border border-ink/10 bg-surface px-5 py-5 sm:flex-row sm:items-center sm:gap-8 sm:px-[26px] sm:py-[22px]">
             <div className="text-[15px] font-medium leading-[1.5] text-ink/[.72]">
-              Book a time that suits you and get a written quote, with no pressure to
-              commit until you&apos;re ready.
+              Pick a time that suits you and get a written quote, with zero pressure
+              to commit until you&apos;re good and ready.
             </div>
             <Link
               href="/nora"
@@ -220,7 +221,7 @@ export default function HomePage() {
       <section className="bg-surface px-5 py-14 sm:px-8 sm:py-[60px] lg:px-12">
         <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-[26px]">
           <h2 className="m-0 text-[26px] font-bold leading-[1.1] tracking-[-.03em] text-ink sm:text-[30px] lg:text-[34px]">
-            What homeowners said
+            What homeowners are saying
           </h2>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             {TESTIMONIALS.map((t) => (
@@ -262,7 +263,7 @@ export default function HomePage() {
         <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-6">
           <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-2">
             <h2 className="m-0 text-[28px] font-bold leading-[1.1] tracking-[-.03em] text-ink sm:text-[34px] lg:text-[38px]">
-              Read before you renovate
+              A little reading before you begin
             </h2>
             <Link href="/guides/kitchen-30k" className="text-[13.5px] font-semibold leading-none text-accent-link">
               All guides →
@@ -328,11 +329,11 @@ export default function HomePage() {
         <div className="mx-auto flex w-full max-w-[1200px] flex-col items-start justify-between gap-8 sm:flex-row sm:items-center sm:gap-10">
           <div className="flex flex-col gap-3">
             <h2 className="m-0 max-w-[520px] text-[27px] font-bold leading-[1.12] tracking-[-.03em] text-white sm:text-[34px]">
-              Still just thinking about it? Ask anyway.
+              Still just dreaming about it? Come say hi.
             </h2>
             <p className="m-0 max-w-[440px] text-[15px] font-normal leading-[1.6] text-white/[.66]">
-              Nora will scope it, price it, and leave you alone until you&apos;re
-              ready.
+              Nora will happily help you scope it and price it, then leave you be
+              until you&apos;re ready. No pressure, ever.
             </p>
           </div>
           <div className="flex w-full flex-col gap-[10px] sm:w-auto sm:flex-none sm:flex-row">

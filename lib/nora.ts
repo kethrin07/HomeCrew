@@ -4,13 +4,13 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 /** Default greeting and quick replies for Nora's chat popup. */
 export const GREETING =
-  "Hi there! I'm Nora, an AI assistant with MyHomeQuote. I help homeowners think through projects like kitchens, baths, roofing, and more. What's on your mind today?";
+  "Hi, so glad you're here! I'm Nora, the AI assistant at MyHomeQuote. I love helping homeowners think through projects big and small, from kitchens and baths to roofing and beyond. What's on your mind today?";
 
 export const OPTIONS = [
-  "I need my kitchen remodeled",
-  "I'm planning a bathroom reno",
-  "My roof needs attention",
-  "Just exploring for now",
+  "I'm dreaming up a new kitchen",
+  "Thinking about a bathroom refresh",
+  "My roof could use some love",
+  "Just looking around for now",
 ];
 
 export type Role = "a" | "u";

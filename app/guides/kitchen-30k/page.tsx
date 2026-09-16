@@ -187,10 +187,10 @@ export default function GuidePage() {
           <div className="mt-5 flex flex-col items-start gap-4 rounded-[14px] bg-ink p-5 sm:flex-row sm:items-center sm:gap-[22px] sm:p-[26px]">
             <div className="flex-1">
               <div className="text-[20px] font-bold leading-[1.3] tracking-[-.02em] text-white">
-                Want this priced for your kitchen?
+                Curious what this looks like for your kitchen?
               </div>
               <div className="mt-[6px] text-[14px] font-normal leading-[1.55] text-white/[.66]">
-                Nora uses your ZIP and square footage, not a national average.
+                Nora will price it around your home and ZIP, never a national average.
               </div>
             </div>
             <Link

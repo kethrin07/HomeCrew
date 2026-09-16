@@ -11,10 +11,10 @@ const SEEN_KEY = "nora-popup-seen";
 
 // One-tap starting points so visitors don't have to think of what to type.
 const QUICK_OPTIONS = [
-  "Kitchen remodel",
-  "Bathroom reno",
-  "Roofing",
-  "Decks & yards",
+  "A new kitchen",
+  "A fresh bathroom",
+  "Some roof help",
+  "My deck or yard",
 ];
 
 /**
@@ -196,7 +196,7 @@ export function NoraPopup() {
             className="flex items-center justify-center gap-1.5 text-[12.5px] font-medium leading-none text-ink/55 transition-colors hover:text-accent-link"
           >
             {phoneIcon(13)}
-            or call Nora instead
+            or give Nora a call instead
           </button>
         </div>
       </div>

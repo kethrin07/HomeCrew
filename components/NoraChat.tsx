@@ -202,8 +202,8 @@ export function NoraChat() {
                 Talk to Nora
               </div>
               <p className="text-[13.5px] leading-[1.55] text-ink/60">
-                Have a real conversation about your project. She scopes it with you
-                and lines up a licensed pro. No hold music.
+                Have a real, friendly chat about your project. Nora scopes it with
+                you and lines up a licensed pro you can trust. No hold music, ever.
               </p>
             </div>
 
@@ -233,7 +233,7 @@ export function NoraChat() {
             {voiceHint ? (
               <div className="flex items-center gap-1.5 font-mono text-[10px] font-medium leading-tight text-accent-link">
                 <span className="inline-block h-1.5 w-1.5 flex-none rounded-full bg-accent" />
-                Voice calls with Nora are coming soon. Chat by text for now.
+                Voice chats with Nora are coming soon. Let&apos;s talk by text for now.
               </div>
             ) : null}
           </div>

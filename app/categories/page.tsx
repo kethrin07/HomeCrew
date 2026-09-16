@@ -41,11 +41,11 @@ export default function CategoriesPage() {
               All categories
             </div>
             <h1 className="balance m-0 max-w-[620px] text-[30px] font-bold leading-[1.1] tracking-[-.032em] text-ink sm:text-[38px] lg:text-[44px]">
-              Whatever the project, Nora can line up the pros
+              Whatever you&apos;re dreaming up, Nora can line up the pros
             </h1>
             <p className="pretty m-0 max-w-[440px] text-[15.5px] font-normal leading-[1.6] text-ink/[.62]">
-              Don&apos;t see an exact match? Describe it anyway. Nora scopes the
-              unusual ones too.
+              Don&apos;t see an exact match? Tell us anyway. Nora loves the unusual
+              projects too.
             </p>
           </div>
 
@@ -86,7 +86,7 @@ export default function CategoriesPage() {
 
           <div className="flex flex-col items-start justify-between gap-5 rounded-[14px] border border-ink/10 bg-surface px-5 py-5 sm:flex-row sm:items-center sm:gap-8 sm:px-[26px] sm:py-[22px]">
             <div className="text-[15px] font-medium leading-[1.5] text-ink/[.72]">
-              Tell Nora what you&apos;re planning and she&apos;ll take it from
+              Tell Nora what you&apos;re dreaming up and she&apos;ll take it from
               there, with no forms and no call list.
             </div>
             <Link

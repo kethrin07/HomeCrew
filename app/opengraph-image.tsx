@@ -5,7 +5,7 @@ import { ImageResponse } from "next/og";
 // Site-wide social share image, generated at build time. Next wires the output
 // into og:image (and twitter:image) automatically. Pages can add their own
 // opengraph-image file to override this default.
-export const alt = "MyHomeQuote — Tell us the project. We'll bring the pros.";
+export const alt = "MyHomeQuote: tell us your project, we'll bring the pros.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

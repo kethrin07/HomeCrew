@@ -33,7 +33,7 @@ export function NoraComposer() {
           className="h-[30px] w-[30px] flex-none rounded-full object-cover"
         />
         <div className="text-[15.5px] font-bold leading-[1.25] tracking-[-.015em] text-ink">
-          Nora books your expert appointment
+          Nora helps you book your expert visit
         </div>
       </div>
 
@@ -43,7 +43,7 @@ export function NoraComposer() {
         onKeyDown={(e) => {
           if (e.key === "Enter") go();
         }}
-        placeholder="Redo my 1970s kitchen, where do I start?"
+        placeholder="I'd love to redo my 1970s kitchen, where do I start?"
         className="w-full rounded-[11px] border border-ink/15 bg-surface px-[15px] py-[14px] text-[15px] font-normal leading-[1.3] text-ink outline-none placeholder:text-ink/45"
       />
 
@@ -75,9 +75,9 @@ export function NoraComposer() {
       </div>
 
       <div className="mt-[12px] flex gap-[14px] border-t border-ink/[.07] pt-[12px] text-[11.5px] font-medium leading-none text-ink/50">
-        <span>Free · no obligation</span>
+        <span>Free, no strings</span>
         <span>·</span>
-        <span>No rigid appointment, an expert calls you</span>
+        <span>No rigid appointments, a real expert calls you</span>
       </div>
     </div>
   );

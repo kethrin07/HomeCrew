@@ -63,7 +63,7 @@ export function Header({ variant = "default" }: { variant?: "default" | "onDark"
                 : "bg-ink text-white hover:text-white"
             }`}
           >
-            Get matched
+            Get started
           </Link>
         </div>
       </div>
