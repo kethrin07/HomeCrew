@@ -68,9 +68,9 @@ export default function CategoriesPage() {
                     >
                       <span
                         aria-hidden="true"
-                        className="flex h-9 w-9 flex-none items-center justify-center rounded-lg bg-surface text-[18px] leading-none"
+                        className="flex h-9 w-9 flex-none items-center justify-center rounded-lg bg-surface text-accent-link"
                       >
-                        {item.icon}
+                        <item.icon size={18} strokeWidth={1.75} />
                       </span>
                       <span className="flex-1 text-[14.5px] font-semibold leading-[1.3] text-ink">
                         {item.name}

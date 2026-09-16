@@ -266,7 +266,7 @@ export default function HomePage() {
             <h2 className="m-0 text-[28px] font-bold leading-[1.1] tracking-[-.03em] text-ink sm:text-[34px] lg:text-[38px]">
               A little reading before you begin
             </h2>
-            <Link href="/guides/kitchen-30k" className="text-[13.5px] font-semibold leading-none text-accent-link">
+            <Link href="/guides" className="text-[13.5px] font-semibold leading-none text-accent-link">
               All guides →
             </Link>
           </div>
