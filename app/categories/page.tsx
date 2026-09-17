@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { AskNora } from "@/components/AskNora";
+import { Reveal } from "@/components/Reveal";
 import { CATEGORY_GROUPS } from "@/lib/categories";
 
 const SITE_URL = "https://homecrew.com";
@@ -36,7 +37,7 @@ export default function CategoriesPage() {
 
       <section className="px-5 py-14 sm:px-8 sm:py-[72px] lg:px-12">
         <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-10">
-          <div className="flex flex-col gap-[14px]">
+          <Reveal className="flex flex-col gap-[14px]">
             <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.14em] text-accent-link">
               All categories
             </div>
@@ -47,45 +48,46 @@ export default function CategoriesPage() {
               Don&apos;t see an exact match? Tell us anyway. Nora loves the unusual
               projects too.
             </p>
-          </div>
+          </Reveal>
 
           <div className="flex flex-col gap-10">
             {CATEGORY_GROUPS.map((group) => (
               <div key={group.heading} className="flex flex-col gap-[18px]">
-                <div className="flex items-center gap-3">
+                <Reveal className="flex items-center gap-3">
                   <h2 className="m-0 text-[13px] font-semibold uppercase leading-none tracking-[.08em] text-ink">
                     {group.heading}
                   </h2>
                   <div className="h-px flex-1 bg-ink/[.12]" />
-                </div>
+                </Reveal>
                 <div className="grid grid-cols-2 gap-[12px] sm:grid-cols-3 lg:grid-cols-4">
-                  {group.items.map((item) => (
-                    <AskNora
-                      key={item.name}
-                      seed={item.name}
-                      ariaLabel={`Ask Nora about ${item.name}`}
-                      className="group flex w-full items-center gap-3 rounded-xl border border-line px-4 py-[15px] text-left transition-shadow hover:shadow-card"
-                    >
-                      <span
-                        aria-hidden="true"
-                        className="flex h-9 w-9 flex-none items-center justify-center rounded-lg bg-surface text-accent-link"
+                  {group.items.map((item, i) => (
+                    <Reveal key={item.name} delay={i * 55}>
+                      <AskNora
+                        seed={item.name}
+                        ariaLabel={`Ask Nora about ${item.name}`}
+                        className="group flex w-full items-center gap-3 rounded-xl border border-line px-4 py-[15px] text-left transition-shadow hover:shadow-card"
                       >
-                        <item.icon size={18} strokeWidth={1.75} />
-                      </span>
-                      <span className="flex-1 text-[14.5px] font-semibold leading-[1.3] text-ink">
-                        {item.name}
-                      </span>
-                      <span className="font-mono text-[13px] leading-none text-ink/30 transition-colors group-hover:text-accent-link">
-                        →
-                      </span>
-                    </AskNora>
+                        <span
+                          aria-hidden="true"
+                          className="flex h-9 w-9 flex-none items-center justify-center rounded-lg bg-surface text-accent-link"
+                        >
+                          <item.icon size={18} strokeWidth={1.75} />
+                        </span>
+                        <span className="flex-1 text-[14.5px] font-semibold leading-[1.3] text-ink">
+                          {item.name}
+                        </span>
+                        <span className="font-mono text-[13px] leading-none text-ink/30 transition-colors group-hover:text-accent-link">
+                          →
+                        </span>
+                      </AskNora>
+                    </Reveal>
                   ))}
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="flex flex-col items-start justify-between gap-5 rounded-[14px] border border-ink/10 bg-surface px-5 py-5 sm:flex-row sm:items-center sm:gap-8 sm:px-[26px] sm:py-[22px]">
+          <Reveal className="flex flex-col items-start justify-between gap-5 rounded-[14px] border border-ink/10 bg-surface px-5 py-5 sm:flex-row sm:items-center sm:gap-8 sm:px-[26px] sm:py-[22px]">
             <div className="text-[15px] font-medium leading-[1.5] text-ink/[.72]">
               Tell Nora what you&apos;re dreaming up and she&apos;ll take it from
               there, with no forms and no call list.
@@ -95,7 +97,7 @@ export default function CategoriesPage() {
             >
               Start with Nora
             </AskNora>
-          </div>
+          </Reveal>
         </div>
       </section>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Reveal } from "@/components/Reveal";
 
 // Automatic reveal played once when the section first scrolls into view. The
 // separation line runs a scripted timeline: from the extreme right across to
@@ -92,16 +93,16 @@ export function BeforeAfter() {
   };
 
   return (
-    <section ref={sectionRef} className="px-5 pb-14 sm:px-8 sm:pb-[66px] lg:px-12">
+    <section id="gallery" ref={sectionRef} className="px-5 pb-14 sm:px-8 sm:pb-[66px] lg:px-12">
       <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-[22px]">
-      <div className="flex flex-wrap items-baseline gap-x-[14px] gap-y-1">
+      <Reveal className="flex flex-wrap items-baseline gap-x-[14px] gap-y-1">
         <h2 className="m-0 text-[28px] font-bold leading-[1.1] tracking-[-.03em] text-ink sm:text-[34px] lg:text-[38px]">
           Before, and after
         </h2>
         <span className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.1em] text-ink/40">
           drag the handle
         </span>
-      </div>
+      </Reveal>
 
       <div
         className="relative h-[280px] overflow-hidden rounded-[14px] sm:h-[420px]"

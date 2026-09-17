@@ -21,12 +21,12 @@ export function Placeholder({
 }) {
   if (src) {
     return (
-      <div className={clsx("relative overflow-hidden", className)}>
+      <div className={clsx("group relative overflow-hidden", className)}>
         <Image
           src={src}
           alt={alt}
           fill
-          className="object-cover"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(max-width: 1024px) 50vw, 25vw"
         />
       </div>

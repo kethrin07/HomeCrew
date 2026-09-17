@@ -1,6 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import Image from "next/image";
 
 export interface Testimonial {
@@ -11,19 +17,16 @@ export interface Testimonial {
   img: string;
 }
 
-function Card({
-  t,
-  active,
-}: {
-  t: Testimonial;
-  active: boolean;
-}) {
+const INTERVAL_MS = 2000; // time each card stays before advancing
+const TRANSITION_MS = 800; // slide duration
+
+function Card({ t, active }: { t: Testimonial; active: boolean }) {
   return (
     <div
-      className={`flex flex-col gap-[14px] rounded-[16px] border bg-white p-[22px] transition-all duration-300 sm:p-[26px] ${
+      className={`flex h-full w-full flex-col gap-[14px] rounded-[16px] border bg-white p-[22px] transition-[opacity,box-shadow] duration-500 sm:p-[26px] ${
         active
-          ? "border-line opacity-100 shadow-composer"
-          : "border-line/60 opacity-50"
+          ? "border-accent/40 opacity-100 shadow-composer"
+          : "border-line/60 opacity-45"
       }`}
     >
       <div className="font-mono text-[13px] font-medium leading-none tracking-[.08em] text-accent-link">
@@ -54,12 +57,69 @@ function Card({
 }
 
 export function Testimonials({ items }: { items: Testimonial[] }) {
-  const [active, setActive] = useState(0);
   const n = items.length;
-  const prev = (active - 1 + n) % n;
-  const next = (active + 1) % n;
+  // Three copies so the centered card always has neighbours to peek, and the
+  // loop can snap back by one copy invisibly (same content) with no rewind.
+  const extended = [...items, ...items, ...items];
 
-  const go = (dir: -1 | 1) => setActive((i) => (i + dir + n) % n);
+  const [index, setIndex] = useState(n); // start in the middle copy
+  const [animate, setAnimate] = useState(true);
+  const [offset, setOffset] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  // Centre the card at `index` inside the viewport.
+  const recalc = useCallback(() => {
+    const container = containerRef.current;
+    const track = trackRef.current;
+    if (!container || !track) return;
+    const card = track.children[index] as HTMLElement | undefined;
+    if (!card) return;
+    setOffset(
+      container.clientWidth / 2 - (card.offsetLeft + card.offsetWidth / 2),
+    );
+  }, [index]);
+
+  useLayoutEffect(() => {
+    recalc();
+  }, [recalc]);
+
+  useEffect(() => {
+    window.addEventListener("resize", recalc);
+    return () => window.removeEventListener("resize", recalc);
+  }, [recalc]);
+
+  // Auto-advance, paused while hovered.
+  useEffect(() => {
+    if (paused) return;
+    const id = window.setInterval(() => setIndex((i) => i + 1), INTERVAL_MS);
+    return () => window.clearInterval(id);
+  }, [paused]);
+
+  // Once we drift out of the middle copy, wait for the slide to finish then
+  // snap by one copy (identical content) with animation off, so it never rewinds.
+  useEffect(() => {
+    if (index >= 2 * n || index < n) {
+      const t = window.setTimeout(() => {
+        setAnimate(false);
+        setIndex((i) => (i >= 2 * n ? i - n : i + n));
+      }, TRANSITION_MS);
+      return () => window.clearTimeout(t);
+    }
+  }, [index, n]);
+
+  // Re-enable the transition on the next frame after a snap.
+  useEffect(() => {
+    if (!animate) {
+      const id = requestAnimationFrame(() => setAnimate(true));
+      return () => cancelAnimationFrame(id);
+    }
+  }, [animate]);
+
+  const activeItem = ((index % n) + n) % n;
+  const go = (dir: -1 | 1) => setIndex((i) => i + dir);
 
   const arrow = (dir: -1 | 1) => (
     <button
@@ -80,34 +140,46 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
   );
 
   return (
-    <div className="flex flex-col items-center gap-7">
-      {/* Stage: center card with faded peeks on the sides (lg only) */}
-      <div className="flex w-full items-stretch justify-center gap-4 lg:gap-0">
-        <div className="hidden w-[320px] flex-none scale-[0.9] lg:-mr-10 lg:block">
-          <Card t={items[prev]} active={false} />
-        </div>
-
-        <div className="z-10 w-full max-w-[460px] flex-none">
-          <Card t={items[active]} active />
-        </div>
-
-        <div className="hidden w-[320px] flex-none scale-[0.9] lg:-ml-10 lg:block">
-          <Card t={items[next]} active={false} />
+    <div
+      className="flex flex-col items-center gap-7"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      {/* Sliding track */}
+      <div
+        ref={containerRef}
+        className="w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,#000_9%,#000_91%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,#000_9%,#000_91%,transparent)]"
+      >
+        <div
+          ref={trackRef}
+          className="flex w-max items-stretch gap-5"
+          style={{
+            transform: `translateX(${offset}px)`,
+            transition: animate
+              ? `transform ${TRANSITION_MS}ms cubic-bezier(0.16,1,0.3,1)`
+              : "none",
+          }}
+        >
+          {extended.map((t, i) => (
+            <div key={i} className="w-[300px] flex-none sm:w-[360px]">
+              <Card t={t} active={i === index} />
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Controls: arrows + avatar thumbnails */}
+      {/* Controls: arrows + dots */}
       <div className="flex items-center gap-4">
         {arrow(-1)}
         <div className="flex items-center gap-2">
           {items.map((t, i) => (
             <button
               key={t.name}
-              onClick={() => setActive(i)}
+              onClick={() => setIndex((cur) => cur - (((cur % n) + n) % n) + i)}
               aria-label={`Show ${t.name}'s review`}
-              aria-current={i === active}
+              aria-current={i === activeItem}
               className={`h-2 rounded-full transition-all ${
-                i === active ? "w-5 bg-accent" : "w-2 bg-ink/20 hover:bg-ink/40"
+                i === activeItem ? "w-5 bg-accent" : "w-2 bg-ink/20 hover:bg-ink/40"
               }`}
             />
           ))}

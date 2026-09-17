@@ -7,6 +7,7 @@ import { NoraComposer } from "@/components/NoraComposer";
 import { BeforeAfter } from "@/components/BeforeAfter";
 import { AskNora } from "@/components/AskNora";
 import { Testimonials } from "@/components/Testimonials";
+import { Reveal } from "@/components/Reveal";
 
 const STEPS = [
   {
@@ -87,49 +88,65 @@ export default function HomePage() {
       <section className="bg-surface px-5 py-14 sm:px-8 sm:py-[72px] lg:px-12">
         <div className="mx-auto grid w-full max-w-[1200px] grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-[52px]">
           <div className="flex flex-col gap-6">
-            <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.12em] text-accent-link">
-              Matched in one conversation
-            </div>
-            <h1 className="balance m-0 text-[34px] font-extrabold leading-[1.05] tracking-tighter2 text-ink sm:text-[44px] lg:text-[58px]">
-              Let&apos;s bring your home
-              <br />
-              project to life.
-            </h1>
-            <p className="pretty m-0 max-w-[420px] text-[15.5px] font-normal leading-[1.6] text-ink/[.62] sm:text-[16.5px]">
-              Just tell Nora what you have in mind, and she&apos;ll set you up with a
-              trusted local pro for a personalized quote. No forms, no call centre,
-              no chasing, promise.
-            </p>
-
-            <NoraComposer />
-
-            <div className="flex items-center gap-4">
-              <div className="flex">
-                <div className="h-7 w-7 rounded-full border-2 border-surface" style={{ background: "oklch(0.88 0.03 165)" }} />
-                <div className="-ml-[9px] h-7 w-7 rounded-full border-2 border-surface" style={{ background: "oklch(0.84 0.04 200)" }} />
-                <div className="-ml-[9px] h-7 w-7 rounded-full border-2 border-surface" style={{ background: "oklch(0.86 0.04 60)" }} />
+            <Reveal delay={0}>
+              <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.12em] text-accent-link">
+                Matched in one conversation
               </div>
-              <div className="text-[13px] font-normal leading-[1.4] text-ink/[.58]">
-                <strong className="font-semibold text-ink">4.8</strong> from 12,400
-                happy homeowners
+            </Reveal>
+            <Reveal delay={240}>
+              <h1 className="balance m-0 text-[34px] font-extrabold leading-[1.05] tracking-tighter2 text-ink sm:text-[44px] lg:text-[58px]">
+                Let&apos;s bring your home
+                <br />
+                project to life.
+              </h1>
+            </Reveal>
+            <Reveal delay={480}>
+              <p className="pretty m-0 max-w-[420px] text-[15.5px] font-normal leading-[1.6] text-ink/[.62] sm:text-[16.5px]">
+                Just tell Nora what you have in mind, and she&apos;ll set you up with a
+                trusted local pro for a personalized quote. No forms, no call centre,
+                no chasing, promise.
+              </p>
+            </Reveal>
+
+            <Reveal delay={720}>
+              <NoraComposer />
+            </Reveal>
+
+            <Reveal delay={960}>
+              <div className="flex items-center gap-4">
+                <div className="flex">
+                  <div className="h-7 w-7 rounded-full border-2 border-surface" style={{ background: "oklch(0.88 0.03 165)" }} />
+                  <div className="-ml-[9px] h-7 w-7 rounded-full border-2 border-surface" style={{ background: "oklch(0.84 0.04 200)" }} />
+                  <div className="-ml-[9px] h-7 w-7 rounded-full border-2 border-surface" style={{ background: "oklch(0.86 0.04 60)" }} />
+                </div>
+                <div className="text-[13px] font-normal leading-[1.4] text-ink/[.58]">
+                  <strong className="font-semibold text-ink">4.8</strong> from 12,400
+                  happy homeowners
+                </div>
               </div>
-            </div>
+            </Reveal>
           </div>
 
           <div className="grid h-full min-h-[320px] grid-cols-2 grid-rows-[1.5fr_1fr] gap-3 sm:min-h-[440px] lg:min-h-[520px]">
-            <video
-              src="/videos/kitchen-walkthrough.mp4"
-              poster="/images/after.png"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              aria-label="Finished kitchen walkthrough"
-              className="col-span-2 h-full w-full rounded-xl object-cover"
-            />
-            <Placeholder src="/images/pro-on-site.png" alt="Contractor on site" className="rounded-xl" />
-            <Placeholder src="/images/bath-detail.png" alt="Renovated bathroom vanity" className="rounded-xl" />
+            <Reveal delay={300} className="col-span-2 h-full">
+              <video
+                src="/videos/kitchen-walkthrough.mp4"
+                poster="/images/after.png"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-label="Finished kitchen walkthrough"
+                className="h-full w-full rounded-xl object-cover"
+              />
+            </Reveal>
+            <Reveal delay={460} className="h-full">
+              <Placeholder src="/images/pro-on-site.png" alt="Contractor on site" className="h-full rounded-xl" />
+            </Reveal>
+            <Reveal delay={620} className="h-full">
+              <Placeholder src="/images/bath-detail.png" alt="Renovated bathroom vanity" className="h-full rounded-xl" />
+            </Reveal>
           </div>
         </div>
       </section>
@@ -138,41 +155,62 @@ export default function HomePage() {
       <section id="how" className="bg-white px-5 py-14 sm:px-8 sm:py-[74px] lg:px-12">
         <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-10">
           <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end sm:gap-12">
-            <div className="flex flex-col gap-[14px]">
+            <Reveal className="flex flex-col gap-[14px]">
               <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.14em] text-accent-link">
                 How it works
               </div>
               <h2 className="balance m-0 max-w-[560px] text-[30px] font-bold leading-[1.1] tracking-[-.032em] text-ink sm:text-[38px] lg:text-[42px]">
                 Say hello to Nora, meet your expert, and get a quote made just for your home
               </h2>
-            </div>
-            <p className="m-0 max-w-[300px] text-[14.5px] font-normal leading-[1.65] text-ink/[.58]">
-              A few friendly minutes with Nora, an expert booked the same day, and a
-              real quote in your hands. Nothing to fill in twice, ever.
-            </p>
+            </Reveal>
+            <Reveal delay={160}>
+              <p className="m-0 max-w-[300px] text-[14.5px] font-normal leading-[1.65] text-ink/[.58]">
+                A few friendly minutes with Nora, an expert booked the same day, and a
+                real quote in your hands. Nothing to fill in twice, ever.
+              </p>
+            </Reveal>
           </div>
 
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-[26px] md:grid-cols-3">
-            {STEPS.map((s) => (
-              <div key={s.n} className="flex flex-col gap-4">
+            {STEPS.map((s, i) => (
+              <Reveal key={s.n} direction="left" delay={i * 480} className="flex flex-col gap-4">
                 <div className="flex items-center gap-3">
                   <div className="flex h-[30px] w-[30px] flex-none items-center justify-center rounded-full bg-accent font-mono text-[11.5px] font-medium leading-none text-white">
                     {s.n}
                   </div>
                   <div className="h-px flex-1 bg-ink/[.12]" />
                 </div>
-                <Placeholder src={s.img} alt={s.media} className="h-[189px] rounded-xl" />
-                <div className="text-[21px] font-bold leading-[1.25] tracking-[-.022em] text-ink">
+                {s.n === "01" ? (
+                  <AskNora
+                    ariaLabel="Start chatting with Nora"
+                    className="peer group relative block h-[189px] w-full overflow-hidden rounded-xl ring-1 ring-transparent transition-all duration-200 hover:shadow-composer hover:ring-2 hover:ring-accent/50"
+                  >
+                    <Image
+                      src={s.img}
+                      alt={s.media}
+                      fill
+                      sizes="(max-width: 1024px) 50vw, 25vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <span className="pointer-events-none absolute inset-x-0 bottom-0 flex items-center justify-center gap-1.5 bg-gradient-to-t from-ink/80 via-ink/30 to-transparent px-4 pb-3 pt-10 text-[13.5px] font-semibold text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                      Start chatting
+                      <span aria-hidden="true">→</span>
+                    </span>
+                  </AskNora>
+                ) : (
+                  <Placeholder src={s.img} alt={s.media} className="h-[189px] rounded-xl" />
+                )}
+                <div className="text-[21px] font-bold leading-[1.25] tracking-[-.022em] text-ink transition-colors peer-hover:text-accent-link">
                   {s.title}
                 </div>
                 <p className="pretty m-0 text-[15px] font-normal leading-[1.65] text-ink/[.62]">
                   {s.body}
                 </p>
-              </div>
+              </Reveal>
             ))}
           </div>
 
-          <div className="flex flex-col items-start justify-between gap-5 rounded-[14px] border border-ink/10 bg-surface px-5 py-5 sm:flex-row sm:items-center sm:gap-8 sm:px-[26px] sm:py-[22px]">
+          <Reveal className="flex flex-col items-start justify-between gap-5 rounded-[14px] border border-ink/10 bg-surface px-5 py-5 sm:flex-row sm:items-center sm:gap-8 sm:px-[26px] sm:py-[22px]">
             <div className="text-[15px] font-medium leading-[1.5] text-ink/[.72]">
               Pick a time that suits you and get a written quote, with zero pressure
               to commit until you&apos;re good and ready.
@@ -182,7 +220,7 @@ export default function HomePage() {
             >
               Start with Nora
             </AskNora>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -191,29 +229,30 @@ export default function HomePage() {
       {/* Categories */}
       <section id="categories" className="px-5 pb-14 pt-14 sm:px-8 sm:pb-[66px] lg:px-12">
         <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-[22px]">
-          <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-2">
+          <Reveal className="flex flex-wrap items-end justify-between gap-x-4 gap-y-2">
             <h2 className="m-0 text-[28px] font-bold leading-[1.1] tracking-[-.03em] text-ink sm:text-[34px] lg:text-[38px]">
               Start where you are
             </h2>
             <Link href="/categories" className="text-[13.5px] font-semibold leading-none text-accent-link">
               All categories →
             </Link>
-          </div>
+          </Reveal>
           <div className="grid grid-cols-2 gap-[14px] lg:grid-cols-4">
-            {CATEGORIES.map((c) => (
-              <AskNora
-                key={c.name}
-                seed={c.name}
-                ariaLabel={`Ask Nora about ${c.name}`}
-                className="block w-full overflow-hidden rounded-xl border border-line text-left transition-shadow hover:shadow-card"
-              >
-                <Placeholder src={c.img} alt={c.name} className="h-[132px]" />
-                <div className="px-4 py-[14px]">
-                  <div className="text-[15.5px] font-semibold leading-[1.3] text-ink">
-                    {c.name}
+            {CATEGORIES.map((c, i) => (
+              <Reveal key={c.name} delay={i * 90}>
+                <AskNora
+                  seed={c.name}
+                  ariaLabel={`Ask Nora about ${c.name}`}
+                  className="block w-full overflow-hidden rounded-xl border border-line text-left transition-shadow hover:shadow-card"
+                >
+                  <Placeholder src={c.img} alt={c.name} className="h-[132px]" />
+                  <div className="px-4 py-[14px]">
+                    <div className="text-[15.5px] font-semibold leading-[1.3] text-ink">
+                      {c.name}
+                    </div>
                   </div>
-                </div>
-              </AskNora>
+                </AskNora>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -222,56 +261,66 @@ export default function HomePage() {
       {/* Testimonials */}
       <section className="overflow-hidden bg-surface px-5 py-14 sm:px-8 sm:py-[60px] lg:px-12">
         <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-9">
-          <h2 className="m-0 text-center text-[26px] font-bold leading-[1.1] tracking-[-.03em] text-ink sm:text-[30px] lg:text-[34px]">
-            What homeowners are saying
-          </h2>
-          <Testimonials items={TESTIMONIALS} />
+          <Reveal>
+            <h2 className="m-0 text-center text-[26px] font-bold leading-[1.1] tracking-[-.03em] text-ink sm:text-[30px] lg:text-[34px]">
+              What homeowners are saying
+            </h2>
+          </Reveal>
+          <Reveal delay={150}>
+            <Testimonials items={TESTIMONIALS} />
+          </Reveal>
         </div>
       </section>
 
       {/* Guides */}
       <section id="blog" className="px-5 py-14 sm:px-8 sm:py-[66px] lg:px-12">
         <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-6">
-          <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-2">
+          <Reveal className="flex flex-wrap items-end justify-between gap-x-4 gap-y-2">
             <h2 className="m-0 text-[28px] font-bold leading-[1.1] tracking-[-.03em] text-ink sm:text-[34px] lg:text-[38px]">
               A little reading before you begin
             </h2>
             <Link href="/guides" className="text-[13.5px] font-semibold leading-none text-accent-link">
               All guides →
             </Link>
-          </div>
+          </Reveal>
           <div className="grid grid-cols-1 gap-[18px] md:grid-cols-[1.6fr_1fr_1fr]">
-            <Link href="/guides/kitchen-30k" className="flex flex-col gap-[14px]">
-              <Placeholder className="h-[200px] rounded-xl sm:h-[230px]" align="none" />
-              <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.1em] text-ink/[.42]">
-                Budgeting · 7 min
+            <Reveal>
+              <Link href="/guides/kitchen-30k" className="flex flex-col gap-[14px]">
+                <Placeholder className="h-[200px] rounded-xl sm:h-[230px]" align="none" />
+                <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.1em] text-ink/[.42]">
+                  Budgeting · 7 min
+                </div>
+                <div className="max-w-[440px] text-[22px] font-bold leading-[1.22] tracking-[-.025em] text-ink sm:text-[25px]">
+                  What a mid-range kitchen actually buys you in 2026
+                </div>
+              </Link>
+            </Reveal>
+            <Reveal delay={120}>
+              <div className="flex flex-col gap-3">
+                <Placeholder className="h-[130px] rounded-xl" align="none" />
+                <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.1em] text-ink/[.42]">
+                  Hiring · 5 min
+                </div>
+                <div className="text-[18px] font-bold leading-[1.3] tracking-[-.02em] text-ink">
+                  Nine questions to ask before you sign a contract
+                </div>
               </div>
-              <div className="max-w-[440px] text-[22px] font-bold leading-[1.22] tracking-[-.025em] text-ink sm:text-[25px]">
-                What a mid-range kitchen actually buys you in 2026
+            </Reveal>
+            <Reveal delay={240}>
+              <div className="flex flex-col gap-3">
+                <Placeholder className="h-[130px] rounded-xl" align="none" />
+                <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.1em] text-ink/[.42]">
+                  Permits · 4 min
+                </div>
+                <div className="text-[18px] font-bold leading-[1.3] tracking-[-.02em] text-ink">
+                  Which jobs need a permit, by state
+                </div>
               </div>
-            </Link>
-            <div className="flex flex-col gap-3">
-              <Placeholder className="h-[130px] rounded-xl" align="none" />
-              <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.1em] text-ink/[.42]">
-                Hiring · 5 min
-              </div>
-              <div className="text-[18px] font-bold leading-[1.3] tracking-[-.02em] text-ink">
-                Nine questions to ask before you sign a contract
-              </div>
-            </div>
-            <div className="flex flex-col gap-3">
-              <Placeholder className="h-[130px] rounded-xl" align="none" />
-              <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.1em] text-ink/[.42]">
-                Permits · 4 min
-              </div>
-              <div className="text-[18px] font-bold leading-[1.3] tracking-[-.02em] text-ink">
-                Which jobs need a permit, by state
-              </div>
-            </div>
+            </Reveal>
           </div>
 
           {/* More example blog topics */}
-          <div className="mt-4 flex flex-col gap-[18px] border-t border-line pt-8">
+          <Reveal className="mt-4 flex flex-col gap-[18px] border-t border-line pt-8">
             <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.14em] text-accent-link">
               More on the blog
             </div>
@@ -291,14 +340,14 @@ export default function HomePage() {
                 </Link>
               ))}
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* Bottom CTA */}
       <section className="bg-white px-5 pb-12 pt-12 sm:px-8 sm:pb-14 sm:pt-14 lg:px-12 lg:pt-20">
         <div className="mx-auto w-full max-w-[1200px]">
-          <div className="relative rounded-[24px] bg-canvas shadow-[0_18px_55px_-12px_rgba(20,23,26,0.45)]">
+          <Reveal className="relative rounded-[24px] bg-canvas shadow-[0_18px_55px_-12px_rgba(20,23,26,0.45)]">
             <div className="grid grid-cols-1 lg:grid-cols-2">
               {/* Copy */}
               <div className="flex flex-col gap-4 px-7 py-8 sm:px-12 sm:py-10 lg:py-12">
@@ -350,7 +399,7 @@ export default function HomePage() {
                 className="object-contain object-bottom"
               />
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 

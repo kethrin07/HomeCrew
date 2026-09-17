@@ -1,5 +1,6 @@
-import Link from "next/link";
 import type { Metadata } from "next";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { Placeholder } from "@/components/Placeholder";
 import { JsonLd } from "@/components/JsonLd";
 import { AskNora } from "@/components/AskNora";
@@ -61,28 +62,13 @@ const KEEP_READING = [
 
 export default function GuidePage() {
   return (
-    <main className="mx-auto my-0 max-w-[820px] overflow-hidden bg-white sm:my-8 sm:rounded-[10px] sm:border sm:border-line sm:shadow-card">
+    <main className="w-full bg-white">
       <JsonLd data={GUIDE_SCHEMA} />
-      {/* Header */}
-      <header className="flex items-center justify-between border-b border-line px-5 py-[18px] sm:px-[30px]">
-        <Link href="/" className="text-[17px] font-extrabold leading-none tracking-[-.03em] text-ink hover:text-ink">
-          MyHomeQuote <span className="font-medium text-ink/45">Guides</span>
-        </Link>
-        <AskNora
-          className="rounded-lg bg-ink px-[15px] py-[9px] text-[12.5px] font-semibold leading-none text-white hover:text-white"
-        >
-          Get matched
-        </AskNora>
-      </header>
-
-      {/* Reading progress */}
-      <div className="h-[3px] bg-ink/[.07]">
-        <div className="h-[3px] w-[34%] bg-accent" />
-      </div>
+      <Header />
 
       {/* Title block */}
       <div className="flex flex-col items-center px-5 pb-[10px] pt-10 sm:px-[30px] sm:pt-[52px]">
-        <div className="flex w-full max-w-[620px] flex-col gap-5">
+        <div className="flex w-full max-w-[760px] flex-col gap-5">
           <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.12em] text-accent-link">
             Budgeting · 7 min read · Feb 2026
           </div>
@@ -124,7 +110,7 @@ export default function GuidePage() {
 
       {/* Body */}
       <article className="flex flex-col items-center px-5 pb-[56px] pt-4 sm:px-[30px]">
-        <div className="flex w-full max-w-[620px] flex-col gap-[22px]">
+        <div className="flex w-full max-w-[760px] flex-col gap-[22px]">
           <p className="m-0 text-[16.5px] font-normal leading-[1.75] text-ink/[.82] sm:text-[17.5px]">
             A mid-range budget is where most first-time renovators land. It is
             enough to change how a kitchen works, and not quite enough to change
@@ -219,7 +205,7 @@ export default function GuidePage() {
         </div>
       </article>
 
-      <div className="pb-[34px]" />
+      <Footer />
     </main>
   );
 }
