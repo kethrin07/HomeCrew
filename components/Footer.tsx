@@ -23,9 +23,8 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: "Legal",
     links: [
-      { label: "Legal", href: "/legal" },
-      { label: "Privacy", href: "/legal#privacy" },
-      { label: "Terms", href: "/legal#terms" },
+      { label: "Privacy", href: "/privacy" },
+      { label: "Terms", href: "/terms" },
     ],
   },
 ];
@@ -44,6 +43,12 @@ export function Footer() {
               Tell Nora your project and she&apos;ll set you up with a trusted
               local pro for a personalized quote. No forms, no chasing.
             </p>
+            <a
+              href="mailto:support@myhomequote.com"
+              className="text-[13.5px] font-medium leading-none text-white/70 transition-colors hover:text-accent"
+            >
+              support@myhomequote.com
+            </a>
           </div>
 
           {/* Link columns */}
