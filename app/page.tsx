@@ -385,34 +385,34 @@ export default function HomePage() {
       {/* FAQ */}
       <section id="faq" className="bg-surface px-5 py-14 sm:px-8 sm:py-[66px] lg:px-12">
         <JsonLd data={FAQ_SCHEMA} />
-        <div className="mx-auto flex w-full max-w-[760px] flex-col gap-8">
-          <Reveal className="flex flex-col items-center gap-[10px] text-center">
-            <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.14em] text-accent-link">
-              Questions
-            </div>
+        <div className="mx-auto flex w-full max-w-[1000px] flex-col gap-8">
+          <Reveal className="flex flex-col gap-[10px]">
             <h2 className="m-0 text-[28px] font-bold leading-[1.1] tracking-[-.03em] text-ink sm:text-[34px]">
               Frequently asked
             </h2>
+            <p className="m-0 max-w-[440px] text-[14.5px] font-normal leading-[1.6] text-ink/[.58]">
+              Everything you need to know before you start a project with Nora.
+            </p>
           </Reveal>
 
-          <Reveal className="flex flex-col">
+          <div className="grid grid-cols-1 gap-3">
             {FAQ.map((item) => (
-              <details
-                key={item.q}
-                className="group border-t border-line last:border-b"
-              >
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-[16px] font-semibold leading-[1.4] text-ink [&::-webkit-details-marker]:hidden">
-                  {item.q}
-                  <span className="flex-none text-[22px] font-normal leading-none text-accent-link transition-transform duration-200 group-open:rotate-45">
-                    +
-                  </span>
-                </summary>
-                <p className="m-0 pb-5 pr-8 text-[15px] font-normal leading-[1.7] text-ink/[.66]">
-                  {item.a}
-                </p>
-              </details>
+              <Reveal key={item.q}>
+                <details name="faq" className="group rounded-xl border border-line bg-white px-5 py-[18px] transition-colors">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-semibold leading-[1.4] text-ink [&::-webkit-details-marker]:hidden">
+                    {item.q}
+                    <span className="flex-none text-[20px] font-normal leading-none text-ink/40">
+                      <span className="group-open:hidden">+</span>
+                      <span className="hidden group-open:inline">−</span>
+                    </span>
+                  </summary>
+                  <p className="m-0 pr-6 pt-3 text-[14px] font-normal leading-[1.65] text-ink/[.58]">
+                    {item.a}
+                  </p>
+                </details>
+              </Reveal>
             ))}
-          </Reveal>
+          </div>
         </div>
       </section>
 

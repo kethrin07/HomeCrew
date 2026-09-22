@@ -93,7 +93,7 @@ export function BeforeAfter() {
   };
 
   return (
-    <section id="gallery" ref={sectionRef} className="px-5 pb-14 sm:px-8 sm:pb-[66px] lg:px-12">
+    <section id="gallery" ref={sectionRef} className="bg-surface px-5 pb-14 pt-14 sm:px-8 sm:pb-[66px] sm:pt-[66px] lg:px-12">
       <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-[22px]">
       <Reveal className="flex flex-wrap items-baseline gap-x-[14px] gap-y-1">
         <h2 className="m-0 text-[28px] font-bold leading-[1.1] tracking-[-.03em] text-ink sm:text-[34px] lg:text-[38px]">
