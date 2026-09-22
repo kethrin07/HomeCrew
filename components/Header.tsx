@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { House } from "lucide-react";
+import Image from "next/image";
 import { AskNora } from "@/components/AskNora";
 
 const NAV = [
@@ -22,9 +22,14 @@ export function Header() {
           href="/"
           className="flex flex-none items-center gap-2.5 text-ink hover:text-ink"
         >
-          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-accent text-white">
-            <House size={17} strokeWidth={2} />
-          </span>
+          <Image
+            src="/images/logohome.png"
+            alt="MyHomeQuote logo"
+            width={36}
+            height={36}
+            priority
+            className="h-9 w-9 flex-none object-contain"
+          />
           <span className="text-[18px] font-extrabold leading-none tracking-[-.03em]">
             My<span className="text-accent">Home</span>Quote
           </span>

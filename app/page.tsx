@@ -8,6 +8,7 @@ import { BeforeAfter } from "@/components/BeforeAfter";
 import { AskNora } from "@/components/AskNora";
 import { Testimonials } from "@/components/Testimonials";
 import { Reveal } from "@/components/Reveal";
+import { JsonLd } from "@/components/JsonLd";
 
 const STEPS = [
   {
@@ -78,6 +79,43 @@ const TESTIMONIALS = [
     img: "/images/dana.png",
   },
 ];
+
+const FAQ = [
+  {
+    q: "Is MyHomeQuote free to use?",
+    a: "Yes. Describing your project to Nora and getting matched with a licensed pro is completely free, with no obligation. You only pay a contractor if you choose to hire one.",
+  },
+  {
+    q: "How does it work?",
+    a: "Tell Nora what you have in mind. She scopes the project with you and sets up an appointment with a licensed local pro, who then calls you back with a personalized quote.",
+  },
+  {
+    q: "Who are the pros?",
+    a: "They are independent, licensed local contractors. MyHomeQuote is a matching service, so you always choose whether to work with anyone you are introduced to.",
+  },
+  {
+    q: "Do I have to commit to anything?",
+    a: "No. There is no obligation and no pressure. Nora will help scope and price your project, then leave you be until you are ready.",
+  },
+  {
+    q: "What kinds of projects can Nora help with?",
+    a: "Everything from kitchens, bathrooms and roofing to plumbing, windows, fencing and more. You can browse the full list on the categories page.",
+  },
+  {
+    q: "Is Nora a real person?",
+    a: "Nora is an AI assistant that helps you describe your project and book an appointment. A licensed pro, a real person, handles the actual quote.",
+  },
+];
+
+const FAQ_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ.map(({ q, a }) => ({
+    "@type": "Question",
+    name: q,
+    acceptedAnswer: { "@type": "Answer", text: a },
+  })),
+};
 
 export default function HomePage() {
   return (
@@ -340,6 +378,40 @@ export default function HomePage() {
                 </Link>
               ))}
             </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="bg-surface px-5 py-14 sm:px-8 sm:py-[66px] lg:px-12">
+        <JsonLd data={FAQ_SCHEMA} />
+        <div className="mx-auto flex w-full max-w-[760px] flex-col gap-8">
+          <Reveal className="flex flex-col items-center gap-[10px] text-center">
+            <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.14em] text-accent-link">
+              Questions
+            </div>
+            <h2 className="m-0 text-[28px] font-bold leading-[1.1] tracking-[-.03em] text-ink sm:text-[34px]">
+              Frequently asked
+            </h2>
+          </Reveal>
+
+          <Reveal className="flex flex-col">
+            {FAQ.map((item) => (
+              <details
+                key={item.q}
+                className="group border-t border-line last:border-b"
+              >
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-[16px] font-semibold leading-[1.4] text-ink [&::-webkit-details-marker]:hidden">
+                  {item.q}
+                  <span className="flex-none text-[22px] font-normal leading-none text-accent-link transition-transform duration-200 group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <p className="m-0 pb-5 pr-8 text-[15px] font-normal leading-[1.7] text-ink/[.66]">
+                  {item.a}
+                </p>
+              </details>
+            ))}
           </Reveal>
         </div>
       </section>
