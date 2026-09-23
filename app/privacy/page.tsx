@@ -1,12 +1,29 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { JsonLd } from "@/components/JsonLd";
+
+const SITE_URL = "https://homecrew.com";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
     "How MyHomeQuote collects, uses, shares, and protects your personal information, including cookies, advertising, and your US privacy rights.",
   alternates: { canonical: "/privacy" },
+};
+
+const PRIVACY_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Privacy Policy",
+      item: `${SITE_URL}/privacy`,
+    },
+  ],
 };
 
 // Bracketed items are placeholders to complete before publishing:
@@ -197,6 +214,7 @@ function renderBlock(block: Block, i: number) {
 export default function PrivacyPage() {
   return (
     <main className="w-full bg-white">
+      <JsonLd data={PRIVACY_SCHEMA} />
       <Header />
 
       <section className="px-5 py-12 sm:px-8 sm:py-16 lg:px-12">

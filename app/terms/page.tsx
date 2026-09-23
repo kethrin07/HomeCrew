@@ -1,12 +1,29 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { JsonLd } from "@/components/JsonLd";
+
+const SITE_URL = "https://homecrew.com";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
   description:
     "The terms that govern your use of MyHomeQuote, our AI assistant Nora, and our service that connects homeowners with independent licensed contractors.",
   alternates: { canonical: "/terms" },
+};
+
+const TERMS_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Terms of Service",
+      item: `${SITE_URL}/terms`,
+    },
+  ],
 };
 
 // Bracketed items are placeholders to complete before publishing:
@@ -191,6 +208,7 @@ function renderBlock(block: Block, i: number) {
 export default function TermsPage() {
   return (
     <main className="w-full bg-white">
+      <JsonLd data={TERMS_SCHEMA} />
       <Header />
 
       <section className="px-5 py-12 sm:px-8 sm:py-16 lg:px-12">

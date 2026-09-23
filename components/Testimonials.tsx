@@ -38,7 +38,7 @@ function Card({ t, active }: { t: Testimonial; active: boolean }) {
       <div className="mt-auto flex items-center gap-[10px] pt-1">
         <Image
           src={t.img}
-          alt={t.name}
+          alt={`Photo of ${t.name}, a MyHomeQuote homeowner`}
           width={38}
           height={38}
           className="h-[38px] w-[38px] rounded-full object-cover"

@@ -13,21 +13,21 @@ import { JsonLd } from "@/components/JsonLd";
 const STEPS = [
   {
     n: "01",
-    media: "chat + voice, in the hero",
+    alt: "Homeowner describing a renovation project to Nora by text and voice",
     img: "/images/chat-voice.png",
     title: "Say hello to Nora",
     body: "Type it or say it out loud. Nora gently asks about scope, timing and budget. No 14-field form to slog through.",
   },
   {
     n: "02",
-    media: "expert on a video call",
+    alt: "Licensed contractor meeting a homeowner on a video call to discuss their project",
     img: "/images/expert-video-call.png",
     title: "Meet your expert",
     body: "Nora lines up a licensed pro and finds a time that suits you, on site or on a call. No waiting around, no phone tag.",
   },
   {
     n: "03",
-    media: "itemised quote",
+    alt: "A clear, itemised home renovation quote broken down line by line",
     img: "/images/itemised-quote.png",
     title: "Get a quote made for you",
     body: "Your expert walks the job through with you and hands over a clear, itemised quote built around your home, your ZIP code and your budget.",
@@ -47,10 +47,10 @@ const BLOG_TOPICS = [
 ];
 
 const CATEGORIES = [
-  { name: "Kitchens", img: "/images/kitchen.png" },
-  { name: "Bathrooms", img: "/images/bathroom.png" },
-  { name: "Roof & gutters", img: "/images/roof-and-gutter.png" },
-  { name: "Decks & yards", img: "/images/decks-and-yards.png" },
+  { name: "Kitchens", img: "/images/kitchen.png", alt: "A remodeled modern kitchen with new cabinets and countertops" },
+  { name: "Bathrooms", img: "/images/bathroom.png", alt: "A renovated bathroom with a tiled shower and new vanity" },
+  { name: "Roof & gutters", img: "/images/roof-and-gutter.png", alt: "A house with a newly replaced roof and gutters" },
+  { name: "Decks & yards", img: "/images/decks-and-yards.png", alt: "A finished backyard deck and landscaped yard" },
 ];
 
 const TESTIMONIALS = [
@@ -175,15 +175,15 @@ export default function HomePage() {
                 loop
                 playsInline
                 preload="metadata"
-                aria-label="Finished kitchen walkthrough"
+                aria-label="Video walkthrough of a finished, remodeled kitchen"
                 className="h-full w-full rounded-xl object-cover"
               />
             </Reveal>
             <Reveal delay={460} className="h-full">
-              <Placeholder src="/images/pro-on-site.png" alt="Contractor on site" className="h-full rounded-xl" />
+              <Placeholder src="/images/pro-on-site.png" alt="Licensed contractor working on a home renovation on site" className="h-full rounded-xl" />
             </Reveal>
             <Reveal delay={620} className="h-full">
-              <Placeholder src="/images/bath-detail.png" alt="Renovated bathroom vanity" className="h-full rounded-xl" />
+              <Placeholder src="/images/bath-detail.png" alt="Close-up of a newly renovated bathroom vanity and fixtures" className="h-full rounded-xl" />
             </Reveal>
           </div>
         </div>
@@ -225,7 +225,7 @@ export default function HomePage() {
                   >
                     <Image
                       src={s.img}
-                      alt={s.media}
+                      alt={s.alt}
                       fill
                       sizes="(max-width: 1024px) 50vw, 25vw"
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -236,7 +236,7 @@ export default function HomePage() {
                     </span>
                   </AskNora>
                 ) : (
-                  <Placeholder src={s.img} alt={s.media} className="h-[189px] rounded-xl" />
+                  <Placeholder src={s.img} alt={s.alt} className="h-[189px] rounded-xl" />
                 )}
                 <div className="text-[21px] font-bold leading-[1.25] tracking-[-.022em] text-ink transition-colors peer-hover:text-accent-link">
                   {s.title}
@@ -283,7 +283,7 @@ export default function HomePage() {
                   ariaLabel={`Ask Nora about ${c.name}`}
                   className="block w-full overflow-hidden rounded-xl border border-line text-left transition-shadow hover:shadow-card"
                 >
-                  <Placeholder src={c.img} alt={c.name} className="h-[132px]" />
+                  <Placeholder src={c.img} alt={c.alt} className="h-[132px]" />
                   <div className="px-4 py-[14px]">
                     <div className="text-[15.5px] font-semibold leading-[1.3] text-ink">
                       {c.name}
