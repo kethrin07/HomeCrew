@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ConversationProvider, useConversation } from "@elevenlabs/react";
 import { noraReply, GREETING, OPTIONS } from "@/lib/nora";
-import { streamNora, type ChatMessage } from "@/lib/chat";
 
 type Msg = { role: "nora" | "user"; text: string };
 type Mode = "home" | "chat";
@@ -32,34 +31,54 @@ function PanelShell({ children }: { children: React.ReactNode }) {
  * (Nora's photo plus a prominent Call button) and offers a text-chat
  * alternative underneath.
  *
- * Text chat streams from Google Gemini via /api/chat (falling back to the
- * scripted responder in lib/nora). The Call button starts a live ElevenLabs
- * voice session over WebRTC, using a short-lived token from /api/voice-token.
+ * Both text and voice run on the same ElevenLabs agent. Opening the chat starts
+ * a text-only session (the agent's own first message is the greeting); the Call
+ * button starts a voice session over WebRTC. Both use a short-lived token from
+ * /api/voice-token. If the text session can't connect, it falls back to the
+ * scripted responder in lib/nora.
  */
 function NoraChatPanel() {
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<Mode>("home");
-  const [msgs, setMsgs] = useState<Msg[]>([{ role: "nora", text: GREETING }]);
+  const [msgs, setMsgs] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
   const [connecting, setConnecting] = useState(false);
   const [callError, setCallError] = useState<string | null>(null);
+  // Which kind of ElevenLabs session is active (only one at a time).
+  const [sessionKind, setSessionKind] = useState<"idle" | "voice" | "text">(
+    "idle",
+  );
   const scrollRef = useRef<HTMLDivElement>(null);
   const sendRef = useRef<(t: string) => void>(() => {});
   // True while the user is deliberately hanging up, so the SDK's teardown
   // error ("reading from signal stream") isn't shown as a dropped call.
   const endingRef = useRef(false);
+  // Mirrors sessionKind for use inside session callbacks (which capture stale state).
+  const kindRef = useRef<"idle" | "voice" | "text">("idle");
+  const setKind = (k: "idle" | "voice" | "text") => {
+    kindRef.current = k;
+    setSessionKind(k);
+  };
+  // Set once the text session can't connect; routes chat to the scripted responder.
+  const fallbackRef = useRef(false);
+  // User messages typed before the text session finished connecting.
+  const pendingRef = useRef<string[]>([]);
+  // Guards against starting two text sessions at once.
+  const textStartingRef = useRef(false);
 
-  // ElevenLabs voice agent. The API key never touches the browser: we fetch a
+  // ElevenLabs agent. The API key never touches the browser: we fetch a
   // short-lived conversation token from /api/voice-token, then connect by WebRTC.
   // Requires the <ConversationProvider> wrapper below.
   const conversation = useConversation();
   const callStatus = conversation.status; // "disconnected" | "connecting" | "connected"
   const inCall =
-    connecting || callStatus === "connecting" || callStatus === "connected";
+    sessionKind === "voice" &&
+    (connecting || callStatus === "connecting" || callStatus === "connected");
 
-  // Show the quick-reply options only until the homeowner first responds.
-  const showOptions = msgs.length === 1;
+  // Quick-reply options show once the greeting is in and before the user types.
+  const showOptions =
+    mode === "chat" && msgs.length > 0 && !msgs.some((m) => m.role === "user");
 
   // Keep the transcript pinned to the newest message.
   useEffect(() => {
@@ -92,50 +111,101 @@ function NoraChatPanel() {
     return () => window.removeEventListener("nora:open", openHandler);
   }, []);
 
-  const send = async (text: string) => {
-    const t = text.trim();
-    if (!t || typing) return;
+  // Drop to the offline scripted responder when the agent can't be reached.
+  const fallbackToScripted = () => {
+    fallbackRef.current = true;
+    setKind("idle");
+    setMsgs((prev) =>
+      prev.length === 0 ? [{ role: "nora", text: GREETING }] : prev,
+    );
+    const queued = pendingRef.current;
+    pendingRef.current = [];
+    if (queued.length === 0) {
+      setTyping(false);
+      return;
+    }
+    // Answer anything queued while we were trying to connect.
+    queued.forEach((t, i) => {
+      window.setTimeout(() => {
+        setMsgs((prev) => [...prev, { role: "nora", text: noraReply(t) }]);
+        if (i === queued.length - 1) setTyping(false);
+      }, 400 * (i + 1));
+    });
+  };
 
-    // Snapshot the conversation (with this turn) for the API, mapping our
-    // "nora"/"user" roles to the assistant/user roles the model expects.
-    const history: ChatMessage[] = [
-      ...msgs.map((m) => ({
-        role: m.role === "nora" ? ("assistant" as const) : ("user" as const),
-        content: m.text,
-      })),
-      { role: "user" as const, content: t },
-    ];
+  // Open a text-only session with the same ElevenLabs agent the call uses.
+  const startTextSession = async () => {
+    if (textStartingRef.current || kindRef.current === "text") return;
+    textStartingRef.current = true;
+    setTyping(true); // show dots until the agent's greeting arrives
+    try {
+      const res = await fetch("/api/voice-token");
+      if (!res.ok) {
+        console.error("[nora] /api/voice-token (text) failed:", res.status);
+        fallbackToScripted();
+        return;
+      }
+      const { token } = (await res.json()) as { token: string };
+      setKind("text");
+      conversation.startSession({
+        conversationToken: token,
+        connectionType: "webrtc",
+        textOnly: true,
+        onConnect: () => {
+          const queued = pendingRef.current;
+          pendingRef.current = [];
+          queued.forEach((t) => conversation.sendUserMessage(t));
+        },
+        onMessage: ({ message, role }) => {
+          if (role !== "agent") return; // ignore user-echo events
+          setMsgs((prev) => [...prev, { role: "nora", text: message }]);
+          setTyping(false);
+        },
+        onError: () => {
+          if (endingRef.current) return;
+          fallbackToScripted();
+        },
+        onDisconnect: () => {
+          endingRef.current = false;
+          if (kindRef.current === "text") setKind("idle");
+        },
+      });
+    } catch {
+      fallbackToScripted();
+    } finally {
+      textStartingRef.current = false;
+    }
+  };
+
+  const send = (text: string) => {
+    const t = text.trim();
+    if (!t) return;
+
+    const connected =
+      kindRef.current === "text" && conversation.status === "connected";
+    // Block a second send only while a reply is actually pending (live agent or
+    // scripted). During the initial connect we still queue, so a seeded first
+    // message isn't dropped.
+    if (typing && (connected || fallbackRef.current)) return;
 
     setMsgs((prev) => [...prev, { role: "user", text: t }]);
     setInput("");
     setTyping(true);
 
-    let started = false;
-    try {
-      await streamNora(history, (soFar) => {
-        if (!started) {
-          // First token: drop the typing dots and open the reply bubble.
-          started = true;
-          setTyping(false);
-          setMsgs((prev) => [...prev, { role: "nora", text: soFar }]);
-        } else {
-          setMsgs((prev) => {
-            const copy = prev.slice();
-            copy[copy.length - 1] = { role: "nora", text: soFar };
-            return copy;
-          });
-        }
-      });
-      if (!started) {
-        // Empty stream — fall back to the scripted responder.
+    if (fallbackRef.current) {
+      window.setTimeout(() => {
         setMsgs((prev) => [...prev, { role: "nora", text: noraReply(t) }]);
         setTyping(false);
-      }
-    } catch {
-      if (!started) {
-        setMsgs((prev) => [...prev, { role: "nora", text: noraReply(t) }]);
-      }
-      setTyping(false);
+      }, 500);
+      return;
+    }
+
+    if (connected) {
+      conversation.sendUserMessage(t);
+    } else {
+      // Queue until the text session connects, and make sure one is starting.
+      pendingRef.current.push(t);
+      if (kindRef.current !== "text") void startTextSession();
     }
   };
   sendRef.current = send;
@@ -145,6 +215,11 @@ function NoraChatPanel() {
     setCallError(null);
     setConnecting(true);
     try {
+      // Drop any active text session so only one runs at a time.
+      if (kindRef.current === "text") {
+        endingRef.current = true;
+        conversation.endSession();
+      }
       // Ask for the mic up front so a denial gives a clear, specific message.
       await navigator.mediaDevices.getUserMedia({ audio: true });
       const res = await fetch("/api/voice-token");
@@ -157,6 +232,7 @@ function NoraChatPanel() {
         throw new Error(`token ${res.status}`);
       }
       const { token } = (await res.json()) as { token: string };
+      setKind("voice");
       conversation.startSession({
         conversationToken: token,
         connectionType: "webrtc",
@@ -164,6 +240,7 @@ function NoraChatPanel() {
         onDisconnect: () => {
           setConnecting(false);
           endingRef.current = false;
+          if (kindRef.current === "voice") setKind("idle");
         },
         onError: () => {
           setConnecting(false);
@@ -191,7 +268,8 @@ function NoraChatPanel() {
     }
   };
 
-  // End any live call when the panel is closed so the mic is never left open.
+  // End any live session when the panel is closed (so the mic is never left
+  // open) and reset the chat so reopening starts a fresh conversation.
   useEffect(() => {
     if (!open) {
       endingRef.current = true;
@@ -200,10 +278,23 @@ function NoraChatPanel() {
       } catch {
         /* nothing in progress */
       }
+      setKind("idle");
+      setMsgs([]);
+      setTyping(false);
+      setInput("");
+      setMode("home");
+      fallbackRef.current = false;
+      pendingRef.current = [];
     }
     // conversation identity is stable enough; we only want this on open toggle.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
+
+  // Start a text session with the agent as soon as the chat view is shown.
+  useEffect(() => {
+    if (open && mode === "chat" && !fallbackRef.current) void startTextSession();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, mode]);
 
   const minimizeBtn = (onDark: boolean) => (
     <button
