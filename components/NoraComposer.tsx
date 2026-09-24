@@ -22,7 +22,8 @@ export function NoraComposer() {
     setInput("");
   };
 
-  // TODO(elevenlabs): start the voice agent here instead of opening chat.
+  // Opens Nora's call-first home screen, where the "Call Nora" button starts
+  // the live ElevenLabs voice session.
   const talk = () =>
     window.dispatchEvent(
       new CustomEvent("nora:open", { detail: { mode: "home" } }),

@@ -49,7 +49,7 @@ const GUIDE_SCHEMA = {
 
 const BREAKDOWN = [
   { label: "Cabinets", pct: 31, bar: "oklch(0.52 0.13 165)" },
-  { label: "Labour", pct: 24, bar: "oklch(0.58 0.11 165)" },
+  { label: "Labor", pct: 24, bar: "oklch(0.58 0.11 165)" },
   { label: "Counters", pct: 17, bar: "oklch(0.64 0.09 165)" },
   { label: "Appliances", pct: 14, bar: "oklch(0.70 0.07 165)" },
   { label: "Everything else", pct: 14, bar: "rgba(20,23,26,.25)" },
@@ -122,7 +122,7 @@ export default function GuidePage() {
             Where the money went
           </h2>
           <p className="m-0 text-[16.5px] font-normal leading-[1.75] text-ink/[.82] sm:text-[17.5px]">
-            Cabinets took the largest share at 31%, followed by labour at 24%.
+            Cabinets took the largest share at 31%, followed by labor at 24%.
             Counters, appliances and lighting split most of the rest. Permits and
             disposal are small on paper and reliably forgotten.
           </p>

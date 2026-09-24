@@ -70,7 +70,7 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
-  // Centre the card at `index` inside the viewport.
+  // Center the card at `index` inside the viewport.
   const recalc = useCallback(() => {
     const container = containerRef.current;
     const track = trackRef.current;

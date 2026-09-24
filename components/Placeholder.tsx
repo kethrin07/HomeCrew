@@ -4,7 +4,7 @@ import { clsx } from "@/lib/clsx";
 /**
  * Media slot used throughout the design. Without `src` it renders the hatched
  * placeholder (optionally with a small mono caption). With `src` it renders a
- * real, optimised photo that covers the slot.
+ * real, optimized photo that covers the slot.
  */
 export function Placeholder({
   label,

@@ -6,8 +6,8 @@ import { Reveal } from "@/components/Reveal";
 
 // Automatic reveal played once when the section first scrolls into view. The
 // separation line runs a scripted timeline: from the extreme right across to
-// the extreme left, then back to the centre. `ba` is the width
-// of the "before" overlay, so 96 ≈ extreme right, 4 ≈ extreme left, 50 ≈ centre.
+// the extreme left, then back to the center. `ba` is the width
+// of the "before" overlay, so 96 ≈ extreme right, 4 ≈ extreme left, 50 ≈ center.
 const INTRO_START = 96;
 const easeInOut = (t: number) =>
   t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
@@ -16,7 +16,7 @@ const easeInOut = (t: number) =>
 // `to` holds the current value for `ms` (the pause).
 const INTRO_PHASES: { to?: number; ms: number }[] = [
   { to: 4, ms: 1600 }, // right → extreme left
-  { to: 50, ms: 900 }, // left → centre
+  { to: 50, ms: 900 }, // left → center
 ];
 const INTRO_TO = 50;
 
@@ -106,7 +106,7 @@ export function BeforeAfter() {
       </Reveal>
 
       <div className="relative h-[280px] overflow-hidden rounded-[14px] sm:h-[420px]">
-        {/* Optimised via next/image (AVIF/WebP + resize) instead of a raw CSS
+        {/* Optimized via next/image (AVIF/WebP + resize) instead of a raw CSS
             background, which previously shipped the full-size PNGs. */}
         <Image
           src="/images/after.png"

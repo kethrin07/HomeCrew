@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { ConversationProvider, useConversation } from "@elevenlabs/react";
 import { noraReply, GREETING, OPTIONS } from "@/lib/nora";
 import { streamNora, type ChatMessage } from "@/lib/chat";
 
@@ -31,19 +32,31 @@ function PanelShell({ children }: { children: React.ReactNode }) {
  * (Nora's photo plus a prominent Call button) and offers a text-chat
  * alternative underneath.
  *
- * UI only: chat replies come from the scripted responder in lib/nora and the
- * Call button just shows a hint: no live voice/AI agent is wired up yet.
- * Search `TODO(elevenlabs)` / `TODO(agent)` to connect them.
+ * Text chat streams from Google Gemini via /api/chat (falling back to the
+ * scripted responder in lib/nora). The Call button starts a live ElevenLabs
+ * voice session over WebRTC, using a short-lived token from /api/voice-token.
  */
-export function NoraChat() {
+function NoraChatPanel() {
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<Mode>("home");
   const [msgs, setMsgs] = useState<Msg[]>([{ role: "nora", text: GREETING }]);
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
-  const [voiceHint, setVoiceHint] = useState(false);
+  const [connecting, setConnecting] = useState(false);
+  const [callError, setCallError] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const sendRef = useRef<(t: string) => void>(() => {});
+  // True while the user is deliberately hanging up, so the SDK's teardown
+  // error ("reading from signal stream") isn't shown as a dropped call.
+  const endingRef = useRef(false);
+
+  // ElevenLabs voice agent. The API key never touches the browser: we fetch a
+  // short-lived conversation token from /api/voice-token, then connect by WebRTC.
+  // Requires the <ConversationProvider> wrapper below.
+  const conversation = useConversation();
+  const callStatus = conversation.status; // "disconnected" | "connecting" | "connected"
+  const inCall =
+    connecting || callStatus === "connecting" || callStatus === "connected";
 
   // Show the quick-reply options only until the homeowner first responds.
   const showOptions = msgs.length === 1;
@@ -127,13 +140,75 @@ export function NoraChat() {
   };
   sendRef.current = send;
 
-  // TODO(elevenlabs): start the ElevenLabs voice agent instead of showing a hint.
-  const startCall = () => setVoiceHint(true);
+  const startCall = async () => {
+    if (inCall) return;
+    setCallError(null);
+    setConnecting(true);
+    try {
+      // Ask for the mic up front so a denial gives a clear, specific message.
+      await navigator.mediaDevices.getUserMedia({ audio: true });
+      const res = await fetch("/api/voice-token");
+      if (!res.ok) {
+        console.error(
+          "[nora] /api/voice-token failed:",
+          res.status,
+          await res.text().catch(() => ""),
+        );
+        throw new Error(`token ${res.status}`);
+      }
+      const { token } = (await res.json()) as { token: string };
+      conversation.startSession({
+        conversationToken: token,
+        connectionType: "webrtc",
+        onConnect: () => setConnecting(false),
+        onDisconnect: () => {
+          setConnecting(false);
+          endingRef.current = false;
+        },
+        onError: () => {
+          setConnecting(false);
+          // Ignore the benign stream-teardown error on a deliberate hangup.
+          if (endingRef.current) return;
+          setCallError("The call dropped. Let's keep going by text instead.");
+        },
+      });
+    } catch (err) {
+      setCallError(
+        err instanceof DOMException && err.name === "NotAllowedError"
+          ? "Nora needs microphone access to talk. Turn it on, or chat by text."
+          : "Couldn't start the call right now. Let's chat by text instead.",
+      );
+      setConnecting(false);
+    }
+  };
 
-  const minimiseBtn = (onDark: boolean) => (
+  const endCall = () => {
+    endingRef.current = true;
+    try {
+      conversation.endSession();
+    } catch {
+      /* already ended */
+    }
+  };
+
+  // End any live call when the panel is closed so the mic is never left open.
+  useEffect(() => {
+    if (!open) {
+      endingRef.current = true;
+      try {
+        conversation.endSession();
+      } catch {
+        /* nothing in progress */
+      }
+    }
+    // conversation identity is stable enough; we only want this on open toggle.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+
+  const minimizeBtn = (onDark: boolean) => (
     <button
       onClick={() => setOpen(false)}
-      aria-label="Minimise"
+      aria-label="Minimize"
       className={
         onDark
           ? "flex h-7 w-7 flex-none items-center justify-center rounded-full text-white/70 transition-colors hover:bg-white/10 hover:text-white"
@@ -179,12 +254,15 @@ export function NoraChat() {
         </button>
       ) : mode === "home" ? (
         <PanelShell>
-          <div className="absolute right-3 top-3 z-10">{minimiseBtn(false)}</div>
+          <div className="absolute right-3 top-3 z-10">{minimizeBtn(false)}</div>
 
           <div className="flex flex-1 flex-col items-center justify-center gap-5 bg-surface px-6 py-8 text-center">
-            {/* Nora with a call sign */}
+            {/* Nora avatar. The ring pulses as a call affordance when idle, and
+                only while Nora is actually speaking once a call is live. */}
             <div className="relative">
-              <span className="absolute inset-0 -m-1.5 animate-ping rounded-full bg-accent/25" />
+              {(!inCall || conversation.isSpeaking) && (
+                <span className="absolute inset-0 -m-1.5 animate-ping rounded-full bg-accent/25" />
+              )}
               <Image
                 src="/images/nora.png"
                 alt="Nora"
@@ -197,45 +275,90 @@ export function NoraChat() {
               </span>
             </div>
 
-            <div className="flex flex-col gap-1.5">
-              <div className="text-[19px] font-bold leading-tight tracking-[-.02em] text-ink">
-                Talk to Nora
-              </div>
-              <p className="text-[13.5px] leading-[1.55] text-ink/60">
-                Have a real, friendly chat about your project. Nora scopes it with
-                you and lines up a licensed pro you can trust. No hold music, ever.
-              </p>
-            </div>
+            {inCall ? (
+              /* Live call */
+              <>
+                <div className="flex flex-col gap-1.5">
+                  <div className="text-[19px] font-bold leading-tight tracking-[-.02em] text-ink">
+                    {callStatus === "connected" ? "You're talking to Nora" : "Connecting…"}
+                  </div>
+                  <p className="flex items-center justify-center gap-1.5 text-[13px] leading-[1.55] text-ink/60">
+                    <span
+                      className={
+                        callStatus === "connected"
+                          ? "inline-block h-2 w-2 flex-none rounded-full bg-accent"
+                          : "inline-block h-2 w-2 flex-none animate-pulse rounded-full bg-ink/30"
+                      }
+                    />
+                    {callStatus !== "connected"
+                      ? "Setting up your call"
+                      : conversation.isSpeaking
+                        ? "Nora is speaking"
+                        : "Listening…"}
+                  </p>
+                </div>
 
-            {/* Primary: call */}
-            <button
-              onClick={startCall}
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3.5 text-[15px] font-semibold leading-none text-white shadow-composer transition-transform hover:scale-[1.01]"
-            >
-              {phoneIcon(18)}
-              Call Nora
-            </button>
+                <div className="flex w-full items-center gap-2.5">
+                  <button
+                    onClick={() => conversation.setMuted(!conversation.isMuted)}
+                    disabled={callStatus !== "connected"}
+                    className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-ink/15 bg-white px-4 py-3 text-[14px] font-semibold leading-none text-ink transition-colors hover:border-ink/30 disabled:opacity-40"
+                  >
+                    {conversation.isMuted ? "Unmute" : "Mute"}
+                  </button>
+                  <button
+                    onClick={endCall}
+                    className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#c0392b] px-4 py-3 text-[14px] font-semibold leading-none text-white transition-transform hover:scale-[1.01]"
+                  >
+                    <span className="rotate-[135deg]">{phoneIcon(16)}</span>
+                    End call
+                  </button>
+                </div>
+              </>
+            ) : (
+              /* Idle: choose call or chat */
+              <>
+                <div className="flex flex-col gap-1.5">
+                  <div className="text-[19px] font-bold leading-tight tracking-[-.02em] text-ink">
+                    Talk to Nora
+                  </div>
+                  <p className="text-[13.5px] leading-[1.55] text-ink/60">
+                    Have a real, friendly chat about your project. Nora scopes it with
+                    you and lines up a licensed pro you can trust. No hold music, ever.
+                  </p>
+                </div>
 
-            {/* Alternate: chat */}
-            <button
-              onClick={() => setMode("chat")}
-              className="flex w-full items-center justify-center gap-2 rounded-xl border border-ink/15 bg-white px-5 py-3 text-[14px] font-semibold leading-none text-ink transition-colors hover:border-ink/30"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path
-                  d="M4 5.5A1.5 1.5 0 015.5 4h13A1.5 1.5 0 0120 5.5v8a1.5 1.5 0 01-1.5 1.5H9l-4 4V5.5z"
-                  fill="currentColor"
-                />
-              </svg>
-              Chat by text instead
-            </button>
+                {/* Primary: call */}
+                <button
+                  onClick={startCall}
+                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3.5 text-[15px] font-semibold leading-none text-white shadow-composer transition-transform hover:scale-[1.01]"
+                >
+                  {phoneIcon(18)}
+                  Call Nora
+                </button>
 
-            {voiceHint ? (
-              <div className="flex items-center gap-1.5 font-mono text-[10px] font-medium leading-tight text-accent-link">
-                <span className="inline-block h-1.5 w-1.5 flex-none rounded-full bg-accent" />
-                Voice chats with Nora are coming soon. Let&apos;s talk by text for now.
-              </div>
-            ) : null}
+                {/* Alternate: chat */}
+                <button
+                  onClick={() => setMode("chat")}
+                  className="flex w-full items-center justify-center gap-2 rounded-xl border border-ink/15 bg-white px-5 py-3 text-[14px] font-semibold leading-none text-ink transition-colors hover:border-ink/30"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path
+                      d="M4 5.5A1.5 1.5 0 015.5 4h13A1.5 1.5 0 0120 5.5v8a1.5 1.5 0 01-1.5 1.5H9l-4 4V5.5z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  Chat by text instead
+                </button>
+
+                {callError ? (
+                  <div className="flex items-start gap-1.5 text-[11.5px] font-medium leading-snug text-[#c0392b]">
+                    <span className="mt-1 inline-block h-1.5 w-1.5 flex-none rounded-full bg-[#c0392b]" />
+                    {callError}
+                  </div>
+                ) : null}
+              </>
+            )}
           </div>
         </PanelShell>
       ) : (
@@ -274,7 +397,7 @@ export function NoraChat() {
             >
               {phoneIcon(15)}
             </button>
-            {minimiseBtn(true)}
+            {minimizeBtn(true)}
           </div>
 
           {/* Transcript */}
@@ -341,5 +464,18 @@ export function NoraChat() {
         </PanelShell>
       )}
     </div>
+  );
+}
+
+/**
+ * Provides the ElevenLabs conversation context that NoraChatPanel's
+ * useConversation() hook relies on. The connection itself isn't opened until
+ * the user hits "Call Nora" (startSession supplies the token + agent).
+ */
+export function NoraChat() {
+  return (
+    <ConversationProvider>
+      <NoraChatPanel />
+    </ConversationProvider>
   );
 }

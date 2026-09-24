@@ -27,10 +27,10 @@ const STEPS = [
   },
   {
     n: "03",
-    alt: "A clear, itemised home renovation quote broken down line by line",
+    alt: "A clear, itemized home renovation quote broken down line by line",
     img: "/images/itemised-quote.png",
     title: "Get a quote made for you",
-    body: "Your expert walks the job through with you and hands over a clear, itemised quote built around your home, your ZIP code and your budget.",
+    body: "Your expert walks the job through with you and hands over a clear, itemized quote built around your home, your ZIP code and your budget.",
   },
 ];
 
@@ -95,7 +95,7 @@ const FAQ = [
   },
   {
     q: "Do I have to commit to anything?",
-    a: "No. There is no obligation and no pressure. Nora will help scope and price your project, then leave you be until you are ready.",
+    a: "No. There is no obligation and no pressure. Nora will help scope your project, then leave you be until you are ready.",
   },
   {
     q: "What kinds of projects can Nora help with?",
@@ -150,7 +150,7 @@ export default function HomePage() {
             <Reveal delay={480}>
               <p className="pretty m-0 max-w-[420px] text-[15.5px] font-normal leading-[1.6] text-ink/[.62] sm:text-[16.5px]">
                 Just tell Nora what you have in mind, and she&apos;ll set you up with a
-                trusted local pro for a personalized quote. No forms, no call centre,
+                trusted local pro for a personalized quote. No forms, no call center,
                 no chasing, promise.
               </p>
             </Reveal>
@@ -439,7 +439,7 @@ export default function HomePage() {
                   Still just dreaming about it? Come say hi.
                 </h2>
                 <p className="pretty m-0 max-w-[400px] text-[15px] font-normal leading-[1.6] text-ink/[.62]">
-                  Nora will happily help you scope it and price it, then leave you be
+                  Nora will happily help you scope your project, then leave you be
                   until you&apos;re ready. No pressure, ever.
                 </p>
                 <div className="mt-1 flex flex-col gap-[10px] sm:flex-row">

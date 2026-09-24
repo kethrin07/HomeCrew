@@ -1,5 +1,5 @@
 /**
- * Guide/blog catalogue. `slug` is set once a guide has a real page at
+ * Guide/blog catalog. `slug` is set once a guide has a real page at
  * /guides/<slug>; entries without a slug render as "coming soon" on the index.
  */
 export interface Guide {
