@@ -80,7 +80,7 @@ export function NoraComposer() {
         ))}
       </div>
 
-      <div className="mt-[12px] flex gap-[14px] border-t border-ink/[.07] pt-[12px] text-[11.5px] font-medium leading-none text-ink/50">
+      <div className="mt-[12px] flex gap-[14px] border-t border-ink/[.07] pt-[12px] text-[11.5px] font-medium leading-none text-ink/65">
         <span>Free, no strings</span>
         <span>·</span>
         <span>No rigid appointments, a real expert calls you</span>

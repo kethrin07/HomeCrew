@@ -60,7 +60,7 @@ export default function GuidesIndexPage() {
                     <span aria-hidden="true">·</span>
                     <span>{g.readTime}</span>
                     {!g.slug ? (
-                      <span className="rounded-full bg-surface px-2 py-1 text-[9px] tracking-[.08em] text-ink/45">
+                      <span className="rounded-full bg-surface px-2 py-1 text-[9px] tracking-[.08em] text-ink/65">
                         Coming soon
                       </span>
                     ) : null}

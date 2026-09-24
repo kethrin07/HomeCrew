@@ -85,7 +85,7 @@ export default function GuidePage() {
               <div className="text-[13.5px] font-semibold leading-[1.3] text-ink">
                 Renée Okafor
               </div>
-              <div className="text-[12.5px] font-normal leading-[1.3] text-ink/[.52]">
+              <div className="text-[12.5px] font-normal leading-[1.3] text-ink/[.65]">
                 Estimator, 11 years in residential build
               </div>
             </div>
@@ -93,7 +93,7 @@ export default function GuidePage() {
               {["↗", "✎"].map((g) => (
                 <span
                   key={g}
-                  className="flex h-7 w-7 items-center justify-center rounded-md border border-ink/[.12] font-mono text-[11px] font-medium leading-none text-ink/50"
+                  className="flex h-7 w-7 items-center justify-center rounded-md border border-ink/[.12] font-mono text-[11px] font-medium leading-none text-ink/65"
                 >
                   {g}
                 </span>

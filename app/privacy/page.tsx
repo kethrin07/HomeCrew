@@ -226,7 +226,7 @@ export default function PrivacyPage() {
             <h1 className="balance m-0 text-[32px] font-extrabold leading-[1.1] tracking-tighter2 text-ink sm:text-[42px]">
               Privacy Policy
             </h1>
-            <p className="m-0 text-[13px] font-medium leading-none text-ink/45">
+            <p className="m-0 text-[13px] font-medium leading-none text-ink/65">
               Last updated: [EFFECTIVE DATE]
             </p>
           </div>

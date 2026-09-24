@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { Reveal } from "@/components/Reveal";
 
 // Automatic reveal played once when the section first scrolls into view. The
@@ -99,20 +100,22 @@ export function BeforeAfter() {
         <h2 className="m-0 text-[28px] font-bold leading-[1.1] tracking-[-.03em] text-ink sm:text-[34px] lg:text-[38px]">
           Before, and after
         </h2>
-        <span className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.1em] text-ink/40">
+        <span className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.1em] text-ink/65">
           drag the handle
         </span>
       </Reveal>
 
-      <div
-        className="relative h-[280px] overflow-hidden rounded-[14px] sm:h-[420px]"
-        style={{
-          backgroundImage: "url('/images/after.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <span className="absolute bottom-4 right-4 rounded bg-white/85 px-2 py-[5px] font-mono text-[10px] font-medium uppercase leading-none tracking-[.06em] text-ink/50">
+      <div className="relative h-[280px] overflow-hidden rounded-[14px] sm:h-[420px]">
+        {/* Optimised via next/image (AVIF/WebP + resize) instead of a raw CSS
+            background, which previously shipped the full-size PNGs. */}
+        <Image
+          src="/images/after.png"
+          alt="Finished, remodeled kitchen after renovation"
+          fill
+          sizes="(max-width: 1200px) 100vw, 1200px"
+          className="object-cover"
+        />
+        <span className="absolute bottom-4 right-4 rounded bg-white/85 px-2 py-[5px] font-mono text-[10px] font-medium uppercase leading-none tracking-[.06em] text-ink/65">
           after · 6 weeks
         </span>
 
@@ -123,14 +126,17 @@ export function BeforeAfter() {
           {/* Full-width so the "before" image stays aligned with "after" as the clip shrinks. */}
           <div
             className="absolute inset-y-0 left-0"
-            style={{
-              width: `${(100 / ba) * 100}%`,
-              backgroundImage: "url('/images/before.png')",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          />
-          <span className="absolute left-4 top-4 rounded bg-white/85 px-2 py-[5px] font-mono text-[10px] font-medium uppercase leading-none tracking-[.06em] text-ink/50">
+            style={{ width: `${(100 / ba) * 100}%` }}
+          >
+            <Image
+              src="/images/before.png"
+              alt="Original kitchen before renovation"
+              fill
+              sizes="(max-width: 1200px) 100vw, 1200px"
+              className="object-cover"
+            />
+          </div>
+          <span className="absolute left-4 top-4 rounded bg-white/85 px-2 py-[5px] font-mono text-[10px] font-medium uppercase leading-none tracking-[.06em] text-ink/65">
             before · original kitchen
           </span>
         </div>

@@ -137,7 +137,7 @@ export function NoraChat() {
       className={
         onDark
           ? "flex h-7 w-7 flex-none items-center justify-center rounded-full text-white/70 transition-colors hover:bg-white/10 hover:text-white"
-          : "flex h-7 w-7 flex-none items-center justify-center rounded-full text-ink/40 transition-colors hover:bg-ink/5 hover:text-ink"
+          : "flex h-7 w-7 flex-none items-center justify-center rounded-full text-ink/65 transition-colors hover:bg-ink/5 hover:text-ink"
       }
     >
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -296,7 +296,7 @@ export function NoraChat() {
             ))}
 
             {typing ? (
-              <div className="max-w-[85%] self-start rounded-[14px_14px_14px_4px] bg-white px-3.5 py-2.5 text-[13.5px] leading-[1.5] text-ink/45 shadow-card">
+              <div className="max-w-[85%] self-start rounded-[14px_14px_14px_4px] bg-white px-3.5 py-2.5 text-[13.5px] leading-[1.5] text-ink/65 shadow-card">
                 Nora is typing…
               </div>
             ) : null}

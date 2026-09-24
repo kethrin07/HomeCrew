@@ -117,7 +117,7 @@ export function NoraPopup() {
         <button
           onClick={close}
           aria-label="Dismiss"
-          className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full text-ink/40 transition-colors hover:bg-ink/5 hover:text-ink"
+          className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full text-ink/65 transition-colors hover:bg-ink/5 hover:text-ink"
         >
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
@@ -193,7 +193,7 @@ export function NoraPopup() {
           {/* Call alternative */}
           <button
             onClick={() => openWidget("home")}
-            className="flex items-center justify-center gap-1.5 text-[12.5px] font-medium leading-none text-ink/55 transition-colors hover:text-accent-link"
+            className="flex items-center justify-center gap-1.5 text-[12.5px] font-medium leading-none text-ink/65 transition-colors hover:text-accent-link"
           >
             {phoneIcon(13)}
             or give Nora a call instead

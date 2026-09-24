@@ -55,7 +55,7 @@ export function Footer() {
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-14">
             {COLUMNS.map((col) => (
               <div key={col.title} className="flex flex-col gap-3.5">
-                <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.12em] text-white/40">
+                <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.12em] text-white/60">
                   {col.title}
                 </div>
                 <ul className="flex flex-col gap-2.5">
@@ -85,7 +85,7 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="border-t border-white/10 pt-6">
-          <div className="text-[12.5px] leading-none text-white/45">
+          <div className="text-[12.5px] leading-none text-white/60">
             © 2026 MyHomeQuote. All rights reserved.
           </div>
         </div>

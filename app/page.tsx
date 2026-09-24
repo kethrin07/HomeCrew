@@ -120,6 +120,15 @@ const FAQ_SCHEMA = {
 export default function HomePage() {
   return (
     <main className="w-full overflow-hidden bg-white">
+      {/* Preload the hero video poster (the LCP element) so it's discoverable
+          in the initial HTML and fetched at high priority, rather than only
+          after the browser parses the <video> tag. */}
+      <link
+        rel="preload"
+        as="image"
+        href="/images/after-poster.webp"
+        fetchPriority="high"
+      />
       <Header />
 
       {/* Hero */}
@@ -157,7 +166,7 @@ export default function HomePage() {
                   <div className="-ml-[9px] h-7 w-7 rounded-full border-2 border-surface" style={{ background: "oklch(0.84 0.04 200)" }} />
                   <div className="-ml-[9px] h-7 w-7 rounded-full border-2 border-surface" style={{ background: "oklch(0.86 0.04 60)" }} />
                 </div>
-                <div className="text-[13px] font-normal leading-[1.4] text-ink/[.58]">
+                <div className="text-[13px] font-normal leading-[1.4] text-ink/[.65]">
                   <strong className="font-semibold text-ink">4.8</strong> from 12,400
                   happy homeowners
                 </div>
@@ -169,7 +178,7 @@ export default function HomePage() {
             <Reveal delay={300} className="col-span-2 h-full">
               <video
                 src="/videos/kitchen-walkthrough.mp4"
-                poster="/images/after.png"
+                poster="/images/after-poster.webp"
                 autoPlay
                 muted
                 loop
@@ -202,7 +211,7 @@ export default function HomePage() {
               </h2>
             </Reveal>
             <Reveal delay={160}>
-              <p className="m-0 max-w-[300px] text-[14.5px] font-normal leading-[1.65] text-ink/[.58]">
+              <p className="m-0 max-w-[300px] text-[14.5px] font-normal leading-[1.65] text-ink/[.65]">
                 A few friendly minutes with Nora, an expert booked the same day, and a
                 real quote in your hands. Nothing to fill in twice, ever.
               </p>
@@ -369,7 +378,7 @@ export default function HomePage() {
                   href="/guides/kitchen-30k"
                   className="group flex flex-col gap-[6px] border-t border-ink/[.06] pt-[14px]"
                 >
-                  <span className="font-mono text-[10px] font-medium uppercase leading-none tracking-[.1em] text-ink/40">
+                  <span className="font-mono text-[10px] font-medium uppercase leading-none tracking-[.1em] text-ink/65">
                     {t.tag}
                   </span>
                   <span className="text-[15.5px] font-semibold leading-[1.35] tracking-[-.015em] text-ink transition-colors group-hover:text-accent-link">
@@ -390,7 +399,7 @@ export default function HomePage() {
             <h2 className="m-0 text-[28px] font-bold leading-[1.1] tracking-[-.03em] text-ink sm:text-[34px]">
               Frequently asked
             </h2>
-            <p className="m-0 max-w-[440px] text-[14.5px] font-normal leading-[1.6] text-ink/[.58]">
+            <p className="m-0 max-w-[440px] text-[14.5px] font-normal leading-[1.6] text-ink/[.65]">
               Everything you need to know before you start a project with Nora.
             </p>
           </Reveal>
@@ -401,12 +410,12 @@ export default function HomePage() {
                 <details name="faq" className="group rounded-xl border border-line bg-white px-5 py-[18px] transition-colors">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-semibold leading-[1.4] text-ink [&::-webkit-details-marker]:hidden">
                     {item.q}
-                    <span className="flex-none text-[20px] font-normal leading-none text-ink/40">
+                    <span className="flex-none text-[20px] font-normal leading-none text-ink/65">
                       <span className="group-open:hidden">+</span>
                       <span className="hidden group-open:inline">−</span>
                     </span>
                   </summary>
-                  <p className="m-0 pr-6 pt-3 text-[14px] font-normal leading-[1.65] text-ink/[.58]">
+                  <p className="m-0 pr-6 pt-3 text-[14px] font-normal leading-[1.65] text-ink/[.65]">
                     {item.a}
                   </p>
                 </details>

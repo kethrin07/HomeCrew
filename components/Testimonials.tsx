@@ -47,7 +47,7 @@ function Card({ t, active }: { t: Testimonial; active: boolean }) {
           <div className="text-[13.5px] font-semibold leading-[1.3] text-ink">
             {t.name}
           </div>
-          <div className="text-[12px] font-normal leading-[1.3] text-ink/50">
+          <div className="text-[12px] font-normal leading-[1.3] text-ink/65">
             {t.meta}
           </div>
         </div>

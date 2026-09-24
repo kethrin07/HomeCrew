@@ -42,7 +42,7 @@ export function Placeholder({
       )}
     >
       {label ? (
-        <span className="rounded bg-white/80 px-[7px] py-1 font-mono text-[10px] uppercase leading-none tracking-[.06em] text-ink/45">
+        <span className="rounded bg-white/80 px-[7px] py-1 font-mono text-[10px] uppercase leading-none tracking-[.06em] text-ink/65">
           {label}
         </span>
       ) : null}

@@ -24,11 +24,18 @@ export function Reveal({
   className,
   delay = 0,
   direction = "up",
+  fade = true,
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
   direction?: Direction;
+  /**
+   * When false, animates with transform only (no opacity fade). Use for
+   * above-the-fold LCP elements so they paint immediately, an element that
+   * starts at opacity-0 isn't counted as painted and delays LCP.
+   */
+  fade?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [shown, setShown] = useState(false);
@@ -63,7 +70,7 @@ export function Reveal({
         "transition-all duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[transform,opacity] motion-reduce:transition-none",
         shown
           ? "translate-x-0 translate-y-0 scale-100 opacity-100"
-          : `${HIDDEN[direction]} opacity-0`,
+          : clsx(HIDDEN[direction], fade && "opacity-0"),
         className,
       )}
     >
