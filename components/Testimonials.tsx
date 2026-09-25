@@ -69,27 +69,57 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
 
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  // Cached geometry so advancing the carousel doesn't read the DOM (which would
+  // force a synchronous reflow on every slide). Refreshed on mount + resize only.
+  const metricsRef = useRef({ step: 0, cardW: 0, containerW: 0 });
 
-  // Center the card at `index` inside the viewport.
-  const recalc = useCallback(() => {
+  // Read layout once: card width, the step between cards (width + gap), and the
+  // container width. Cards are equal-width, so positions are arithmetic from here.
+  const measure = useCallback(() => {
     const container = containerRef.current;
     const track = trackRef.current;
-    if (!container || !track) return;
-    const card = track.children[index] as HTMLElement | undefined;
-    if (!card) return;
-    setOffset(
-      container.clientWidth / 2 - (card.offsetLeft + card.offsetWidth / 2),
-    );
+    const c0 = track?.children[0] as HTMLElement | undefined;
+    if (!container || !c0) return;
+    const c1 = track?.children[1] as HTMLElement | undefined;
+    metricsRef.current = {
+      step: c1 ? c1.offsetLeft - c0.offsetLeft : c0.offsetWidth,
+      cardW: c0.offsetWidth,
+      containerW: container.clientWidth,
+    };
+  }, []);
+
+  // Center the card at `index` from cached metrics — no DOM reads, no reflow.
+  const recalc = useCallback(() => {
+    const { step, cardW, containerW } = metricsRef.current;
+    if (step) setOffset(containerW / 2 - (index * step + cardW / 2));
   }, [index]);
 
+  // Measure once on mount (before recalc runs below).
+  useLayoutEffect(() => {
+    measure();
+  }, [measure]);
+
+  // Reposition on mount and whenever the index changes (cheap, cached).
   useLayoutEffect(() => {
     recalc();
   }, [recalc]);
 
+  // Re-measure on resize, batched into a frame to avoid layout thrash.
   useEffect(() => {
-    window.addEventListener("resize", recalc);
-    return () => window.removeEventListener("resize", recalc);
-  }, [recalc]);
+    let raf = 0;
+    const onResize = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        measure();
+        recalc();
+      });
+    };
+    window.addEventListener("resize", onResize);
+    return () => {
+      window.removeEventListener("resize", onResize);
+      cancelAnimationFrame(raf);
+    };
+  }, [measure, recalc]);
 
   // Auto-advance, paused while hovered.
   useEffect(() => {

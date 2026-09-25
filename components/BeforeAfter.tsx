@@ -112,6 +112,7 @@ export function BeforeAfter() {
           src="/images/after.png"
           alt="Finished, remodeled kitchen after renovation"
           fill
+          quality={60}
           sizes="(max-width: 1200px) 100vw, 1200px"
           className="object-cover"
         />
@@ -132,6 +133,7 @@ export function BeforeAfter() {
               src="/images/before.png"
               alt="Original kitchen before renovation"
               fill
+              quality={60}
               sizes="(max-width: 1200px) 100vw, 1200px"
               className="object-cover"
             />
