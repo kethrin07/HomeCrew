@@ -26,6 +26,7 @@ export function NoraPopup() {
   const [mounted, setMounted] = useState(false); // in the DOM
   const [visible, setVisible] = useState(false); // animated in
   const [input, setInput] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
   // Tracks whether the <NoraChat> widget is currently open, so we never pop
   // over an active conversation.
   const chatOpen = useRef(false);
@@ -62,6 +63,14 @@ export function NoraPopup() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
+  }, [mounted]);
+
+  // Autofocus the input only on pointer (desktop) devices, so we don't force the
+  // on-screen keyboard open the moment the popup appears on phones.
+  useEffect(() => {
+    if (mounted && window.matchMedia("(pointer: fine)").matches) {
+      inputRef.current?.focus();
+    }
   }, [mounted]);
 
   const close = () => {
@@ -102,7 +111,7 @@ export function NoraPopup() {
       aria-modal="true"
       aria-label="A message from Nora"
       onClick={close}
-      className={`fixed inset-0 z-[60] flex items-center justify-center p-5 transition-opacity duration-200 ${
+      className={`fixed inset-0 z-[60] flex items-start justify-center overflow-y-auto p-5 pt-[12vh] transition-opacity duration-200 sm:items-center sm:pt-5 ${
         visible ? "opacity-100" : "opacity-0"
       }`}
       style={{ background: "rgba(20,23,26,0.5)" }}
@@ -169,7 +178,7 @@ export function NoraPopup() {
           {/* Composer — typing here carries straight into the chat */}
           <div className="flex items-center gap-2 rounded-xl border border-ink/15 bg-white px-3 py-2 transition-colors focus-within:border-accent">
             <input
-              autoFocus
+              ref={inputRef}
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => {

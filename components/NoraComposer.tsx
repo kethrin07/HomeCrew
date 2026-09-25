@@ -57,13 +57,13 @@ export function NoraComposer() {
       <div className="mt-[10px] flex gap-[9px]">
         <button
           onClick={() => go()}
-          className="flex-[2] rounded-[11px] bg-accent p-4 text-[15.5px] font-bold leading-[1.2] text-white"
+          className="flex-[2] rounded-[11px] bg-accent px-3 py-3.5 text-[15.5px] font-bold leading-[1.2] text-white sm:p-4"
         >
           Ask Nora
         </button>
         <button
           onClick={talk}
-          className="flex-1 whitespace-nowrap rounded-[11px] border border-ink/20 bg-white p-4 text-[14.5px] font-semibold leading-[1.2] text-ink"
+          className="flex-1 whitespace-nowrap rounded-[11px] border border-ink/20 bg-white px-3 py-3.5 text-[14.5px] font-semibold leading-[1.2] text-ink sm:p-4"
         >
           ● Talk
         </button>

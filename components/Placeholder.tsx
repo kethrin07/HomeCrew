@@ -12,12 +12,15 @@ export function Placeholder({
   align = "bottom",
   src,
   alt = "",
+  imgClassName,
 }: {
   label?: string;
   className?: string;
   align?: "bottom" | "none";
   src?: string;
   alt?: string;
+  /** Extra classes for the <Image> itself, e.g. object-position overrides. */
+  imgClassName?: string;
 }) {
   if (src) {
     return (
@@ -26,7 +29,10 @@ export function Placeholder({
           src={src}
           alt={alt}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          className={clsx(
+            "object-cover transition-transform duration-500 group-hover:scale-105",
+            imgClassName,
+          )}
           sizes="(max-width: 1024px) 50vw, 25vw"
         />
       </div>

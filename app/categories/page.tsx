@@ -65,15 +65,15 @@ export default function CategoriesPage() {
                       <AskNora
                         seed={item.name}
                         ariaLabel={`Ask Nora about ${item.name}`}
-                        className="group flex w-full items-center gap-3 rounded-xl border border-line px-4 py-[15px] text-left transition-shadow hover:shadow-card"
+                        className="group flex w-full items-center gap-2.5 rounded-xl border border-line px-3 py-[13px] text-left transition-shadow hover:shadow-card sm:gap-3 sm:px-4 sm:py-[15px]"
                       >
                         <span
                           aria-hidden="true"
-                          className="flex h-9 w-9 flex-none items-center justify-center rounded-lg bg-surface text-accent-link"
+                          className="flex h-8 w-8 flex-none items-center justify-center rounded-lg bg-surface text-accent-link sm:h-9 sm:w-9"
                         >
                           <item.icon size={18} strokeWidth={1.75} />
                         </span>
-                        <span className="flex-1 text-[14.5px] font-semibold leading-[1.3] text-ink">
+                        <span className="flex-1 text-[14px] font-semibold leading-[1.3] text-ink sm:text-[14.5px]">
                           {item.name}
                         </span>
                         <span className="font-mono text-[13px] leading-none text-ink/30 transition-colors group-hover:text-accent-link">

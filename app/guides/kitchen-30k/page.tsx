@@ -131,7 +131,7 @@ export default function GuidePage() {
           <div className="flex flex-col gap-[10px] rounded-xl border border-ink/10 bg-surface p-[22px]">
             {BREAKDOWN.map((row) => (
               <div key={row.label} className="flex items-center gap-3">
-                <span className="w-[120px] flex-none font-mono text-[12px] font-medium leading-none text-ink/60">
+                <span className="w-[88px] flex-none font-mono text-[11px] font-medium leading-none text-ink/60 sm:w-[120px] sm:text-[12px]">
                   {row.label}
                 </span>
                 <span className="relative h-[10px] flex-1 rounded-[5px] bg-ink/[.08]">
@@ -140,7 +140,7 @@ export default function GuidePage() {
                     style={{ width: `${row.pct}%`, background: row.bar }}
                   />
                 </span>
-                <span className="w-[44px] text-right font-mono text-[12px] font-medium leading-none text-ink">
+                <span className="w-[38px] flex-none text-right font-mono text-[12px] font-medium leading-none text-ink sm:w-[44px]">
                   {row.pct}%
                 </span>
               </div>

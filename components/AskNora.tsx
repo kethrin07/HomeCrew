@@ -14,19 +14,24 @@ export function AskNora({
   seed,
   mode = "chat",
   ariaLabel,
+  onClick,
 }: {
   children: ReactNode;
   className?: string;
   seed?: string;
   mode?: "chat" | "home";
   ariaLabel?: string;
+  /** Extra handler run alongside opening the widget (e.g. close a menu). */
+  onClick?: () => void;
 }) {
-  const open = () =>
+  const open = () => {
+    onClick?.();
     window.dispatchEvent(
       new CustomEvent("nora:open", {
         detail: { mode, ...(seed ? { seed } : {}) },
       }),
     );
+  };
 
   return (
     <button type="button" onClick={open} aria-label={ariaLabel} className={className}>

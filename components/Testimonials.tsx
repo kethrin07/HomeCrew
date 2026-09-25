@@ -178,10 +178,16 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
               onClick={() => setIndex((cur) => cur - (((cur % n) + n) % n) + i)}
               aria-label={`Show ${t.name}'s review`}
               aria-current={i === activeItem}
-              className={`h-2 rounded-full transition-all ${
-                i === activeItem ? "w-5 bg-accent" : "w-2 bg-ink/20 hover:bg-ink/40"
-              }`}
-            />
+              className="flex h-9 items-center justify-center px-1"
+            >
+              <span
+                className={`block h-2 rounded-full transition-all ${
+                  i === activeItem
+                    ? "w-5 bg-accent"
+                    : "w-2 bg-ink/20 hover:bg-ink/40"
+                }`}
+              />
+            </button>
           ))}
         </div>
         {arrow(1)}

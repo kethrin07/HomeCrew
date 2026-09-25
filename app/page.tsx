@@ -120,14 +120,16 @@ const FAQ_SCHEMA = {
 export default function HomePage() {
   return (
     <main className="w-full overflow-hidden bg-white">
-      {/* Preload the hero video poster (the LCP element) so it's discoverable
-          in the initial HTML and fetched at high priority, rather than only
-          after the browser parses the <video> tag. */}
+      {/* Preload the hero video poster (the LCP element on desktop) so it's
+          discoverable in the initial HTML and fetched at high priority. Gated to
+          lg+ via `media` since the hero media is hidden below 1024px, so phones
+          never fetch it. */}
       <link
         rel="preload"
         as="image"
         href="/images/after-poster.webp"
         fetchPriority="high"
+        media="(min-width: 1024px)"
       />
       <Header />
 
@@ -143,8 +145,7 @@ export default function HomePage() {
             <Reveal delay={240}>
               <h1 className="balance m-0 text-[34px] font-extrabold leading-[1.05] tracking-tighter2 text-ink sm:text-[44px] lg:text-[58px]">
                 Let&apos;s bring your home
-                <br />
-                project to life.
+                <br className="hidden sm:block" /> project to life.
               </h1>
             </Reveal>
             <Reveal delay={480}>
@@ -174,7 +175,7 @@ export default function HomePage() {
             </Reveal>
           </div>
 
-          <div className="grid h-full min-h-[320px] grid-cols-2 grid-rows-[1.5fr_1fr] gap-3 sm:min-h-[440px] lg:min-h-[520px]">
+          <div className="hidden h-full grid-cols-2 grid-rows-[1.5fr_1fr] gap-3 lg:grid lg:min-h-[520px]">
             <Reveal delay={300} className="col-span-2 h-full">
               <video
                 src="/videos/kitchen-walkthrough.mp4"
@@ -210,7 +211,7 @@ export default function HomePage() {
                 Say hello to Nora, meet your expert, and get a quote made just for your home
               </h2>
             </Reveal>
-            <Reveal delay={160}>
+            <Reveal delay={160} className="hidden sm:block">
               <p className="m-0 max-w-[300px] text-[14.5px] font-normal leading-[1.65] text-ink/[.65]">
                 A few friendly minutes with Nora, an expert booked the same day, and a
                 real quote in your hands. Nothing to fill in twice, ever.
@@ -230,14 +231,14 @@ export default function HomePage() {
                 {s.n === "01" ? (
                   <AskNora
                     ariaLabel="Start chatting with Nora"
-                    className="peer group relative block h-[189px] w-full overflow-hidden rounded-xl ring-1 ring-transparent transition-all duration-200 hover:shadow-composer hover:ring-2 hover:ring-accent/50"
+                    className="peer group relative block h-[150px] w-full overflow-hidden rounded-xl ring-1 ring-transparent transition-all duration-200 hover:shadow-composer hover:ring-2 hover:ring-accent/50 sm:h-[189px]"
                   >
                     <Image
                       src={s.img}
                       alt={s.alt}
                       fill
                       sizes="(max-width: 1024px) 50vw, 25vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="object-cover object-top transition-transform duration-500 group-hover:scale-110 sm:object-center"
                     />
                     <span className="pointer-events-none absolute inset-x-0 bottom-0 flex items-center justify-center gap-1.5 bg-gradient-to-t from-ink/80 via-ink/30 to-transparent px-4 pb-3 pt-10 text-[13.5px] font-semibold text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                       Start chatting
@@ -245,7 +246,12 @@ export default function HomePage() {
                     </span>
                   </AskNora>
                 ) : (
-                  <Placeholder src={s.img} alt={s.alt} className="h-[189px] rounded-xl" />
+                  <Placeholder
+                    src={s.img}
+                    alt={s.alt}
+                    className="h-[150px] rounded-xl sm:h-[189px]"
+                    imgClassName="object-top sm:object-center"
+                  />
                 )}
                 <div className="text-[21px] font-bold leading-[1.25] tracking-[-.022em] text-ink transition-colors peer-hover:text-accent-link">
                   {s.title}
@@ -257,7 +263,7 @@ export default function HomePage() {
             ))}
           </div>
 
-          <Reveal className="flex flex-col items-start justify-between gap-5 rounded-[14px] border border-ink/10 bg-surface px-5 py-5 sm:flex-row sm:items-center sm:gap-8 sm:px-[26px] sm:py-[22px]">
+          <Reveal className="hidden flex-col items-start justify-between gap-5 rounded-[14px] border border-ink/10 bg-surface px-5 py-5 sm:flex sm:flex-row sm:items-center sm:gap-8 sm:px-[26px] sm:py-[22px]">
             <div className="text-[15px] font-medium leading-[1.5] text-ink/[.72]">
               Pick a time that suits you and get a written quote, with zero pressure
               to commit until you&apos;re good and ready.
@@ -333,7 +339,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 gap-[18px] md:grid-cols-[1.6fr_1fr_1fr]">
             <Reveal>
               <Link href="/guides/kitchen-30k" className="flex flex-col gap-[14px]">
-                <Placeholder className="h-[200px] rounded-xl sm:h-[230px]" align="none" />
+                <Placeholder className="h-[170px] rounded-xl sm:h-[230px]" align="none" />
                 <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.1em] text-ink/[.42]">
                   Budgeting · 7 min
                 </div>
@@ -342,7 +348,7 @@ export default function HomePage() {
                 </div>
               </Link>
             </Reveal>
-            <Reveal delay={120}>
+            <Reveal delay={120} className="hidden md:block">
               <div className="flex flex-col gap-3">
                 <Placeholder className="h-[130px] rounded-xl" align="none" />
                 <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.1em] text-ink/[.42]">
@@ -353,7 +359,7 @@ export default function HomePage() {
                 </div>
               </div>
             </Reveal>
-            <Reveal delay={240}>
+            <Reveal delay={240} className="hidden md:block">
               <div className="flex flex-col gap-3">
                 <Placeholder className="h-[130px] rounded-xl" align="none" />
                 <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.1em] text-ink/[.42]">
@@ -372,11 +378,13 @@ export default function HomePage() {
               More on the blog
             </div>
             <div className="grid grid-cols-1 gap-x-8 gap-y-[14px] sm:grid-cols-2 lg:grid-cols-3">
-              {BLOG_TOPICS.map((t) => (
+              {BLOG_TOPICS.map((t, i) => (
                 <Link
                   key={t.title}
                   href="/guides/kitchen-30k"
-                  className="group flex flex-col gap-[6px] border-t border-ink/[.06] pt-[14px]"
+                  className={`group flex-col gap-[6px] border-t border-ink/[.06] pt-[14px] ${
+                    i < 4 ? "flex" : "hidden sm:flex"
+                  }`}
                 >
                   <span className="font-mono text-[10px] font-medium uppercase leading-none tracking-[.1em] text-ink/65">
                     {t.tag}
@@ -457,20 +465,10 @@ export default function HomePage() {
                   </AskNora>
                 </div>
               </div>
-
-              {/* Mobile image: contained inside the card */}
-              <div className="flex justify-center px-7 pb-8 lg:hidden">
-                <Image
-                  src="/images/bottom-cta.png"
-                  alt="Planning a home project with Nora"
-                  width={420}
-                  height={360}
-                  className="h-auto w-full max-w-[260px] object-contain"
-                />
-              </div>
             </div>
 
-            {/* Desktop image: full (uncropped) and rising above the card's top edge */}
+            {/* Image: shown only on wide screens, pinned to the right. Below lg
+                (where it would stack under the text) it's omitted entirely. */}
             <div className="pointer-events-none absolute bottom-0 right-2 hidden h-[calc(100%+40px)] w-[40%] lg:block xl:right-6">
               <Image
                 src="/images/bottom-cta.png"

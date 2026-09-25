@@ -105,7 +105,7 @@ export function BeforeAfter() {
         </span>
       </Reveal>
 
-      <div className="relative h-[280px] overflow-hidden rounded-[14px] sm:h-[420px]">
+      <div className="relative h-[230px] overflow-hidden rounded-[14px] sm:h-[420px]">
         {/* Optimized via next/image (AVIF/WebP + resize) instead of a raw CSS
             background, which previously shipped the full-size PNGs. */}
         <Image
