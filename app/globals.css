@@ -29,6 +29,14 @@ a:hover {
   color: var(--accent-dark);
 }
 
+/* Consistent, visible keyboard-focus ring across all interactive elements.
+   Only shows for keyboard users (:focus-visible), never on mouse click. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 /* Hatched media placeholder used throughout the design */
 .hatch {
   background:

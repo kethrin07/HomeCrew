@@ -1,9 +1,8 @@
-import Link from "next/link";
 import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { Placeholder } from "@/components/Placeholder";
 import { JsonLd } from "@/components/JsonLd";
+import { GuidesIndex } from "@/components/GuidesIndex";
 import { GUIDES } from "@/lib/guides";
 
 const SITE_URL = "https://homecrew.com";
@@ -46,52 +45,7 @@ export default function GuidesIndexPage() {
             </p>
           </div>
 
-          {/* Grid */}
-          <div className="grid grid-cols-1 gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
-            {GUIDES.map((g) => {
-              const meta = (
-                <>
-                  <Placeholder
-                    className="h-[150px] rounded-xl sm:h-[168px]"
-                    align="none"
-                  />
-                  <div className="flex items-center gap-2 font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.1em] text-ink/[.42]">
-                    <span>{g.tag}</span>
-                    <span aria-hidden="true">·</span>
-                    <span>{g.readTime}</span>
-                    {!g.slug ? (
-                      <span className="rounded-full bg-surface px-2 py-1 text-[9px] tracking-[.08em] text-ink/65">
-                        Coming soon
-                      </span>
-                    ) : null}
-                  </div>
-                  <div className="text-[18px] font-bold leading-[1.3] tracking-[-.02em] text-ink">
-                    {g.title}
-                  </div>
-                  <p className="pretty m-0 text-[14px] font-normal leading-[1.6] text-ink/[.6]">
-                    {g.description}
-                  </p>
-                </>
-              );
-
-              return g.slug ? (
-                <Link
-                  key={g.title}
-                  href={`/guides/${g.slug}`}
-                  className="group flex flex-col gap-[10px]"
-                >
-                  {meta}
-                </Link>
-              ) : (
-                <div
-                  key={g.title}
-                  className="flex cursor-default flex-col gap-[10px] opacity-80"
-                >
-                  {meta}
-                </div>
-              );
-            })}
-          </div>
+          <GuidesIndex guides={GUIDES} />
         </div>
       </section>
 

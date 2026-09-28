@@ -121,9 +121,11 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
     };
   }, [measure, recalc]);
 
-  // Auto-advance, paused while hovered.
+  // Auto-advance, paused while hovered/focused and disabled for users who
+  // prefer reduced motion (they can still use the arrows, dots, and keyboard).
   useEffect(() => {
     if (paused) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const id = window.setInterval(() => setIndex((i) => i + 1), INTERVAL_MS);
     return () => window.clearInterval(id);
   }, [paused]);
@@ -171,9 +173,29 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
 
   return (
     <div
-      className="flex flex-col items-center gap-7"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Homeowner testimonials"
+      tabIndex={0}
+      className="flex flex-col items-center gap-7 rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
+      // Pause auto-advance while any control inside has focus; resume when focus leaves.
+      onFocus={() => setPaused(true)}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+          setPaused(false);
+        }
+      }}
+      onKeyDown={(e) => {
+        if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          go(-1);
+        } else if (e.key === "ArrowRight") {
+          e.preventDefault();
+          go(1);
+        }
+      }}
     >
       {/* Sliding track */}
       <div

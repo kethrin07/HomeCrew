@@ -86,7 +86,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="border-t border-white/10 pt-6">
           <div className="text-[12.5px] leading-none text-white/60">
-            © 2026 MyHomeQuote. All rights reserved.
+            © {new Date().getFullYear()} MyHomeQuote. All rights reserved.
           </div>
         </div>
       </div>

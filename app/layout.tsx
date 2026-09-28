@@ -47,11 +47,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
-  // Temporary favicon / touch icon from the uploaded logo.
-  icons: {
-    icon: "/images/logohome.png",
-    apple: "/images/logohome.png",
-  },
+  // Favicon + touch icon are provided by app/icon.png and app/apple-icon.png.
   openGraph: {
     type: "website",
     locale: "en_US",
