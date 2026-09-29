@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
+import { AskNora } from "@/components/AskNora";
 import { GuidesIndex } from "@/components/GuidesIndex";
 import { GUIDES } from "@/lib/guides";
 
@@ -46,6 +47,17 @@ export default function GuidesIndexPage() {
           </div>
 
           <GuidesIndex guides={GUIDES} />
+
+          {/* Consultation CTA */}
+          <div className="flex flex-col items-start justify-between gap-5 rounded-[14px] border border-ink/10 bg-surface px-5 py-5 sm:flex-row sm:items-center sm:gap-8 sm:px-[26px] sm:py-[22px]">
+            <div className="text-[15px] font-medium leading-[1.5] text-ink/[.72]">
+              Not sure where to start? Tell Nora about your project and she&apos;ll
+              point you the right way, no forms, no call list.
+            </div>
+            <AskNora className="w-full flex-none rounded-[10px] bg-accent px-[22px] py-[14px] text-center text-[14.5px] font-semibold leading-[1.2] text-white hover:text-white sm:w-auto">
+              Ask Nora
+            </AskNora>
+          </div>
         </div>
       </section>
 

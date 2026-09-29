@@ -339,9 +339,14 @@ export default function HomePage() {
           <div className="grid grid-cols-1 gap-[18px] md:grid-cols-[1.6fr_1fr_1fr]">
             <Reveal>
               <Link href="/guides/kitchen-30k" className="flex flex-col gap-[14px]">
-                <Placeholder className="h-[170px] rounded-xl sm:h-[230px]" align="none" />
+                <Placeholder
+                  src="/images/kitchen_guide.png"
+                  alt="A finished mid-range kitchen remodel"
+                  sizes="(max-width: 768px) 100vw, 600px"
+                  className="h-[170px] rounded-xl sm:h-[230px]"
+                />
                 <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.1em] text-ink/[.42]">
-                  Budgeting · 7 min
+                  Budgeting · 8 min
                 </div>
                 <div className="max-w-[440px] text-[22px] font-bold leading-[1.22] tracking-[-.025em] text-ink sm:text-[25px]">
                   What a mid-range kitchen actually buys you in 2026
@@ -350,7 +355,12 @@ export default function HomePage() {
             </Reveal>
             <Reveal delay={120} className="hidden md:block">
               <div className="flex flex-col gap-3">
-                <Placeholder className="h-[130px] rounded-xl" align="none" />
+                <Placeholder
+                  src="/images/pro-on-site.png"
+                  alt="A licensed contractor working on site"
+                  sizes="(max-width: 1024px) 40vw, 380px"
+                  className="h-[130px] rounded-xl"
+                />
                 <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.1em] text-ink/[.42]">
                   Hiring · 5 min
                 </div>
@@ -361,7 +371,12 @@ export default function HomePage() {
             </Reveal>
             <Reveal delay={240} className="hidden md:block">
               <div className="flex flex-col gap-3">
-                <Placeholder className="h-[130px] rounded-xl" align="none" />
+                <Placeholder
+                  src="/images/bathroom.png"
+                  alt="A renovated bathroom"
+                  sizes="(max-width: 1024px) 40vw, 380px"
+                  className="h-[130px] rounded-xl"
+                />
                 <div className="font-mono text-[10.5px] font-medium uppercase leading-none tracking-[.1em] text-ink/[.42]">
                   Permits · 4 min
                 </div>

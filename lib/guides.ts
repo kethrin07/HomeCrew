@@ -16,11 +16,11 @@ export const GUIDES: Guide[] = [
   {
     slug: "kitchen-30k",
     tag: "Budgeting",
-    readTime: "7 min",
-    date: "2026-02-18",
+    readTime: "8 min",
+    date: "2026-09-15",
     title: "What a mid-range kitchen actually buys you in 2026",
     description:
-      "Where the money really goes in a mid-range kitchen, broken down line by line from 214 finished projects.",
+      "It averages about $28,000 nationally and can return more than it costs at resale. Where the money goes, and how to keep it from ballooning.",
   },
   {
     tag: "Hiring",

@@ -9,7 +9,7 @@ const NAV = [
   { label: "How it works", href: "/#how" },
   { label: "Gallery", href: "/#gallery" },
   { label: "Categories", href: "/categories" },
-  { label: "Blog", href: "/#blog" },
+  { label: "Blog", href: "/guides" },
 ];
 
 /**

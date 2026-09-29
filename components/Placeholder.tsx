@@ -13,6 +13,7 @@ export function Placeholder({
   src,
   alt = "",
   imgClassName,
+  sizes = "(max-width: 1024px) 50vw, 25vw",
 }: {
   label?: string;
   className?: string;
@@ -21,6 +22,8 @@ export function Placeholder({
   alt?: string;
   /** Extra classes for the <Image> itself, e.g. object-position overrides. */
   imgClassName?: string;
+  /** Responsive sizes hint; default suits small grid thumbnails. */
+  sizes?: string;
 }) {
   if (src) {
     return (
@@ -33,7 +36,7 @@ export function Placeholder({
             "object-cover transition-transform duration-500 group-hover:scale-105",
             imgClassName,
           )}
-          sizes="(max-width: 1024px) 50vw, 25vw"
+          sizes={sizes}
         />
       </div>
     );
